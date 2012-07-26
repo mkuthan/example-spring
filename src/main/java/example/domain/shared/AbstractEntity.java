@@ -11,10 +11,6 @@ public abstract class AbstractEntity<T extends AbstractEntity<T>> implements Ent
     @GeneratedValue
     private Long entityId;
 
-    public AbstractEntity() {
-	super();
-    }
-
     @Override
     public Long getEntityId() {
 	return this.entityId;

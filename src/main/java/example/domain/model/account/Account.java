@@ -3,15 +3,15 @@ package example.domain.model.account;
 import static com.google.common.base.Preconditions.*;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import com.google.common.base.Objects;
 
 import example.domain.service.PasswordEncodingService;
 import example.domain.shared.AbstractAggregateEntity;
+import example.domain.shared.DomainEntity;
 
-@Entity
+@DomainEntity
 public class Account extends AbstractAggregateEntity<Account> {
 
     @Column(nullable = false, unique = true)

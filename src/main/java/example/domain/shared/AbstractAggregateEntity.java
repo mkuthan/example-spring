@@ -10,9 +10,6 @@ public class AbstractAggregateEntity<T extends AbstractAggregateEntity<T>> exten
     @Version
     private Integer entityVersion;
 
-    public AbstractAggregateEntity() {
-    }
-
     @Override
     public Integer getEntityVersion() {
 	return this.entityVersion;

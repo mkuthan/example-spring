@@ -3,7 +3,6 @@ package example.domain.model.blog;
 import static com.google.common.base.Preconditions.*;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,8 +10,9 @@ import javax.persistence.ManyToOne;
 import com.google.common.base.Objects;
 
 import example.domain.model.account.Account;
+import example.domain.shared.DomainValueObject;
 
-@Embeddable
+@DomainValueObject
 public class Blogger {
 
     public static final int FIRST_NAME_MAX_LENGTH = 50;

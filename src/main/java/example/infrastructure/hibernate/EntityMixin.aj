@@ -2,16 +2,9 @@ package example.infrastructure.hibernate;
 
 import example.domain.shared.DomainEntity;
 
-public aspect EntityMixin {
+public privileged aspect EntityMixin {
 
-    private interface Entity {
-    };
+    declare @type : (@DomainEntity *) : @javax.persistence.Entity;
+    declare @type : (@DomainEntity *) : @org.springframework.beans.factory.annotation.Configurable;
 
-    declare parents : (@DomainEntity *) implements Entity;
-
-    // declare @type : Entity1 : @org.springframework.beans.factory.annotation.Configurable;
-
-    // declare @type : VersionedEntity+ : @javax.persistence.Entity;
-    // declare @type : VersionedEntity+ : @org.springframework.beans.factory.annotation.Configurable;
-    
 }

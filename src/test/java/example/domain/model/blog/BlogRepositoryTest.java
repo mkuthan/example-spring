@@ -4,6 +4,7 @@ import static com.googlecode.catchexception.CatchException.*;
 import static org.fest.assertions.Assertions.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
@@ -14,13 +15,12 @@ import org.testng.annotations.Test;
 import com.google.common.base.Strings;
 
 import example.TestGroups;
-import example.domain.DomainConfiguration;
 import example.domain.model.account.Account;
 import example.domain.model.account.AccountRepository;
-import example.infrastructure.InfrastructureConfiguration;
 
 @Test(groups = { TestGroups.DB })
-@ContextConfiguration(classes = { DomainConfiguration.class, InfrastructureConfiguration.class })
+@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jpa.xml")
+@Profile("test")
 public class BlogRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
 
     static final String EXISTING_BLOG_NAME = "EXISTING BLOG";

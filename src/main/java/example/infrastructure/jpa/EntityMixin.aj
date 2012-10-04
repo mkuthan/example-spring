@@ -1,4 +1,4 @@
-package example.infrastructure.hibernate;
+package example.infrastructure.jpa;
 
 import example.domain.shared.DomainEntity;
 

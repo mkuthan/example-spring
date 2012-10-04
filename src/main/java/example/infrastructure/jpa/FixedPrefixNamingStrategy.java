@@ -1,4 +1,4 @@
-package example.infrastructure.hibernate;
+package example.infrastructure.jpa;
 
 import org.hibernate.annotations.common.util.StringHelper;
 import org.hibernate.cfg.ImprovedNamingStrategy;

@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
 	<context:component-scan base-package="example.web" />
 
 	<mvc:annotation-driven />
 
-	<mvc:resources location="/, classpath:/META-INF/web-resources/"
-		mapping="/resources/**" />
+	<mvc:resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**" />
 
 	<mvc:default-servlet-handler />
 
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor" />
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-			p:paramName="lang" />
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang" />
 	</mvc:interceptors>
 
 	<mvc:view-controller path="/" view-name="index" />
@@ -25,24 +21,17 @@
 	<mvc:view-controller path="/resourceNotFound" />
 	<mvc:view-controller path="/dataAccessFailure" />
 
-	<bean
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
-		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
-		p:fallbackToSystemLocale="false" />
+	<bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource"
+		p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application" p:fallbackToSystemLocale="false" />
 
-	<bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
-		id="localeResolver" p:cookieName="locale" />
+	<bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver" id="localeResolver" p:cookieName="locale" />
 
-	<bean
-		class="org.springframework.ui.context.support.ResourceBundleThemeSource"
-		id="themeSource" />
+	<bean class="org.springframework.ui.context.support.ResourceBundleThemeSource" id="themeSource" />
 
-	<bean class="org.springframework.web.servlet.theme.CookieThemeResolver"
-		id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard" />
+	<bean class="org.springframework.web.servlet.theme.CookieThemeResolver" id="themeResolver" p:cookieName="theme"
+		p:defaultThemeName="standard" />
 
-	<bean
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"
-		p:defaultErrorView="uncaughtException">
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:defaultErrorView="uncaughtException">
 		<property name="exceptionMappings">
 			<props>
 				<prop key=".DataAccessException">dataAccessFailure</prop>
@@ -53,7 +42,21 @@
 		</property>
 	</bean>
 
-	<bean
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-		id="multipartResolver" />
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver" />
+
+	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+	</bean>
+
+	<bean id="viewResolver" class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<property name="order" value="1" />
+		<property name="viewNames" value="*.html,*.xhtml" />
+	</bean>
+
+	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
 </beans>

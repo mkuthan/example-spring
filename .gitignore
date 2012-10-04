@@ -2,6 +2,7 @@
 *Db.properties
 *Db.script
 .settings
+.pmd
 stacktrace.log
 /*.zip
 /plugin.xml

@@ -1,9 +1,8 @@
 package example.domain.model.comment;
 
-import javax.persistence.Entity;
-
 import example.domain.shared.AbstractAggregateEntity;
+import example.domain.shared.DomainEntity;
 
-@Entity
+@DomainEntity
 public class Comment extends AbstractAggregateEntity<Comment> {
 }

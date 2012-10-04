@@ -1,10 +1,9 @@
 package example.domain.model.tag;
 
-import javax.persistence.Entity;
-
 import example.domain.shared.AbstractAggregateEntity;
+import example.domain.shared.DomainEntity;
 
-@Entity
+@DomainEntity
 public class Tag extends AbstractAggregateEntity<Tag> {
 
 }

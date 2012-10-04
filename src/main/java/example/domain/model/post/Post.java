@@ -2,14 +2,16 @@ package example.domain.model.post;
 
 import static com.google.common.base.Preconditions.*;
 
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
+import org.joda.time.DateTime;
+
 import example.domain.model.blog.Blog;
 import example.domain.shared.AbstractAggregateEntity;
+import example.domain.shared.DomainEntity;
 
-@Entity
+@DomainEntity
 public class Post extends AbstractAggregateEntity<Post> {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -18,6 +20,8 @@ public class Post extends AbstractAggregateEntity<Post> {
     private String title;
 
     private String content;
+
+    private DateTime created;
 
     protected Post() {
     }
@@ -44,6 +48,10 @@ public class Post extends AbstractAggregateEntity<Post> {
 
     public void setContent(String content) {
 	this.content = content;
+    }
+
+    public DateTime getCreated() {
+	return created;
     }
 
 }

@@ -4,13 +4,13 @@ import static com.google.common.base.Preconditions.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.Entity;
 
 import com.google.common.base.Objects;
 
 import example.domain.shared.AbstractAggregateEntity;
+import example.domain.shared.DomainEntity;
 
-@Entity
+@DomainEntity
 public class Blog extends AbstractAggregateEntity<Blog> {
 
     public static final int NAME_MAX_LENGTH = 50;

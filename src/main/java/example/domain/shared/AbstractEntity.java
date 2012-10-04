@@ -4,16 +4,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import org.springframework.beans.factory.annotation.Configurable;
+
 @MappedSuperclass
+@Configurable
 public abstract class AbstractEntity<T extends AbstractEntity<T>> implements Entity<T> {
 
     @Id
     @GeneratedValue
     private Long entityId;
-
-    public AbstractEntity() {
-	super();
-    }
 
     @Override
     public Long getEntityId() {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="org.jbehave.core.io.LoadFromClasspath">
+		<constructor-arg>
+			<bean class="org.jbehave.core.embedder.EmbedderClassLoader">
+				<constructor-arg>
+					<list>
+						<value>target/classes</value>
+					</list>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean class="org.jbehave.core.parsers.RegexPrefixCapturingPatternParser">
+		<constructor-arg value="$" />
+	</bean>
+
+	<bean class="org.jbehave.core.configuration.spring.SpringStoryControls">
+		<property name="dryRun" value="false" />
+		<property name="skipScenariosAfterFailure" value="false" />
+	</bean>
+
+	<bean class="org.jbehave.core.configuration.spring.SpringStoryReporterBuilder" init-method="withDefaultFormats">
+		<property name="formats">
+			<list>
+				<value>TXT</value>
+				<value>HTML</value>
+				<value>XML</value>
+			</list>
+		</property>
+	</bean>
+</beans>

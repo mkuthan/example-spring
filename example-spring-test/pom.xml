@@ -12,11 +12,88 @@
 	<artifactId>example-spring-test</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<jbehave.version>3.7</jbehave.version>
-	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jbehave</groupId>
+				<artifactId>jbehave-maven-plugin</artifactId>
+				<version>${jbehave.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.jbehave</groupId>
+						<artifactId>jbehave-spring</artifactId>
+						<version>${jbehave.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context</artifactId>
+						<version>${spring.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-test</artifactId>
+						<version>${spring.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>run-stories-with-annotated-embedder</id>
+						<phase>test</phase>
+						<goals>
+							<goal>run-stories-with-annotated-embedder</goal>
+						</goals>
+						<configuration>
+							<annotatedEmbedderRunnerClass>org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
+							<includes>
+								<include>**/stories/*Stories.java</include>
+							</includes>
+							<metaFilters>
+								<metaFilter>+category *</metaFilter>
+								<metaFilter>+color *</metaFilter>
+							</metaFilters>
+						</configuration>
+					</execution>
+					<execution>
+						<id>unpack-view-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack-view-resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 
-	<build></build>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jbehave</groupId>
+										<artifactId>jbehave-maven-plugin</artifactId>
+										<versionRange>[3.7,)</versionRange>
+										<goals>
+											<goal>unpack-view-resources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
 	<dependencies>
 		<dependency>
@@ -30,14 +107,27 @@
 			<groupId>org.jbehave</groupId>
 			<artifactId>jbehave-core</artifactId>
 			<version>${jbehave.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jbehave</groupId>
 			<artifactId>jbehave-spring</artifactId>
 			<version>${jbehave.version}</version>
-			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jbehave.site</groupId>
+			<artifactId>jbehave-site-resources</artifactId>
+			<version>3.1.1</version>
+			<type>zip</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-core</artifactId>
+			<version>${jbehave.version}</version>
+			<classifier>resources</classifier>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 </project>

@@ -16,7 +16,7 @@
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang" />
 	</mvc:interceptors>
 
-	<mvc:view-controller path="/" view-name="index" />
+	<mvc:view-controller path="/" view-name="home" />
 	<mvc:view-controller path="/uncaughtException" />
 	<mvc:view-controller path="/resourceNotFound" />
 	<mvc:view-controller path="/dataAccessFailure" />
@@ -43,4 +43,10 @@
 	</bean>
 
 	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver" />
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 </beans>

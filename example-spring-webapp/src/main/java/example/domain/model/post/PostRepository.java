@@ -9,6 +9,6 @@ import example.domain.shared.DomainRepository;
 
 public interface PostRepository extends DomainRepository<Post> {
 
-    Page<Post> findByBlog(Blog blog, Pageable pageable);
+	Page<Post> findByBlog(Blog blog, Pageable pageable);
 
 }

@@ -49,48 +49,48 @@ import org.testng.annotations.Listeners;
  */
 public class MockitoTestNGListener implements IInvokedMethodListener {
 
-    private MockitoBeforeTestNGMethod beforeTest = new MockitoBeforeTestNGMethod();
-    private MockitoAfterTestNGMethod afterTest = new MockitoAfterTestNGMethod();
+	private MockitoBeforeTestNGMethod beforeTest = new MockitoBeforeTestNGMethod();
+	private MockitoAfterTestNGMethod afterTest = new MockitoAfterTestNGMethod();
 
-    @Override
-    public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-	if (hasMockitoTestNGListenerInTestHierarchy(testResult.getTestClass().getRealClass())) {
-	    this.beforeTest.applyFor(method, testResult);
-	}
-    }
-
-    @Override
-    public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-	if (hasMockitoTestNGListenerInTestHierarchy(testResult.getTestClass().getRealClass())) {
-	    this.afterTest.applyFor(method, testResult);
-	}
-    }
-
-    protected boolean hasMockitoTestNGListenerInTestHierarchy(Class<?> testClass) {
-	for (Class<?> clazz = testClass; clazz != Object.class; clazz = clazz.getSuperclass()) {
-	    if (hasMockitoTestNGListener(clazz)) {
-		return true;
-	    }
-	}
-	return false;
-    }
-
-    protected boolean hasMockitoTestNGListener(Class<?> clazz) {
-	Listeners listeners = clazz.getAnnotation(Listeners.class);
-	if (listeners == null) {
-	    return false;
+	@Override
+	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
+		if (hasMockitoTestNGListenerInTestHierarchy(testResult.getTestClass().getRealClass())) {
+			this.beforeTest.applyFor(method, testResult);
+		}
 	}
 
-	for (Class<? extends ITestNGListener> listenerClass : listeners.value()) {
-	    if (listenerClass() == listenerClass) {
-		return true;
-	    }
+	@Override
+	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
+		if (hasMockitoTestNGListenerInTestHierarchy(testResult.getTestClass().getRealClass())) {
+			this.afterTest.applyFor(method, testResult);
+		}
 	}
-	return false;
-    }
 
-    protected Class<MockitoTestNGListener> listenerClass() {
-	return MockitoTestNGListener.class;
-    }
+	protected boolean hasMockitoTestNGListenerInTestHierarchy(Class<?> testClass) {
+		for (Class<?> clazz = testClass; clazz != Object.class; clazz = clazz.getSuperclass()) {
+			if (hasMockitoTestNGListener(clazz)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean hasMockitoTestNGListener(Class<?> clazz) {
+		Listeners listeners = clazz.getAnnotation(Listeners.class);
+		if (listeners == null) {
+			return false;
+		}
+
+		for (Class<? extends ITestNGListener> listenerClass : listeners.value()) {
+			if (listenerClass() == listenerClass) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected Class<MockitoTestNGListener> listenerClass() {
+		return MockitoTestNGListener.class;
+	}
 
 }

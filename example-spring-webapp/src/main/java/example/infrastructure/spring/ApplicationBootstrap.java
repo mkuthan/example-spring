@@ -18,33 +18,33 @@ import example.domain.model.blog.BloggerBuilder;
 @Component
 public class ApplicationBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    @Autowired
-    private AccountRepository accountRepository;
+	@Autowired
+	private AccountRepository accountRepository;
 
-    @Autowired
-    private BlogRepository blogRepository;
+	@Autowired
+	private BlogRepository blogRepository;
 
-    @Override
-    @Transactional
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-	if (isRootApplicationContext(event)) {
-	    bootstrap();
+	@Override
+	@Transactional
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		if (isRootApplicationContext(event)) {
+			bootstrap();
+		}
 	}
-    }
 
-    private void bootstrap() {
-	Account marcinAccount = new Account("marcin");
-	Account magdaAccount = new Account("magda");
-	this.accountRepository.save(Lists.newArrayList(marcinAccount, magdaAccount));
+	private void bootstrap() {
+		Account marcinAccount = new Account("marcin");
+		Account magdaAccount = new Account("magda");
+		this.accountRepository.save(Lists.newArrayList(marcinAccount, magdaAccount));
 
-	Blog marcinBlog = new BlogBuilder().withName("Software Craftmanship")
-		.withBlogger(new BloggerBuilder().withAccount(marcinAccount).withFirstName("Marcin").build()).build();
-	Blog magdaBlog = new BlogBuilder().withName("Cooking Recipies")
-		.withBlogger(new BloggerBuilder().withAccount(magdaAccount).withFirstName("Magda").build()).build();
-	this.blogRepository.save(Lists.newArrayList(marcinBlog, magdaBlog));
-    }
+		Blog marcinBlog = new BlogBuilder().withName("Software Craftmanship")
+				.withBlogger(new BloggerBuilder().withAccount(marcinAccount).withFirstName("Marcin").build()).build();
+		Blog magdaBlog = new BlogBuilder().withName("Cooking Recipies")
+				.withBlogger(new BloggerBuilder().withAccount(magdaAccount).withFirstName("Magda").build()).build();
+		this.blogRepository.save(Lists.newArrayList(marcinBlog, magdaBlog));
+	}
 
-    private boolean isRootApplicationContext(ContextRefreshedEvent event) {
-	return event.getApplicationContext().getParent() == null;
-    }
+	private boolean isRootApplicationContext(ContextRefreshedEvent event) {
+		return event.getApplicationContext().getParent() == null;
+	}
 }

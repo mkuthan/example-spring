@@ -15,32 +15,32 @@ import example.domain.service.PasswordEncodingService;
 @Listeners(MockitoTestNGListener.class)
 public class AccountTest {
 
-    static final String RAW_PASSWORD = "ANY PASSWORD";
-    static final String PASSWORD_HASH = "ANY PASSWORD HASH";
+	static final String RAW_PASSWORD = "ANY PASSWORD";
+	static final String PASSWORD_HASH = "ANY PASSWORD HASH";
 
-    @Mock
-    PasswordEncodingService passwordEncodingService;
+	@Mock
+	PasswordEncodingService passwordEncodingService;
 
-    @InjectMocks
-    Account account = new Account();
+	@InjectMocks
+	Account account = new Account();
 
-    public void disable() {
-	this.account.disable();
+	public void disable() {
+		this.account.disable();
 
-	assertThat(this.account.isEnabled()).isFalse();
-    }
+		assertThat(this.account.isEnabled()).isFalse();
+	}
 
-    public void enable() {
-	this.account.enable();
+	public void enable() {
+		this.account.enable();
 
-	assertThat(this.account.isEnabled()).isTrue();
-    }
+		assertThat(this.account.isEnabled()).isTrue();
+	}
 
-    public void updatePassword() {
-	when(this.passwordEncodingService.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
+	public void updatePassword() {
+		when(this.passwordEncodingService.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
 
-	this.account.updatePassword(RAW_PASSWORD);
+		this.account.updatePassword(RAW_PASSWORD);
 
-	assertThat(this.account.getPassword()).isEqualTo(PASSWORD_HASH);
-    }
+		assertThat(this.account.getPassword()).isEqualTo(PASSWORD_HASH);
+	}
 }

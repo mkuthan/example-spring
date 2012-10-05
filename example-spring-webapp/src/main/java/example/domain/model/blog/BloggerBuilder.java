@@ -4,34 +4,34 @@ import example.domain.model.account.Account;
 
 public class BloggerBuilder {
 
-    private Account account;
+	private Account account;
 
-    private String firstName;
+	private String firstName;
 
-    private String lastName;
+	private String lastName;
 
-    public BloggerBuilder withAccount(Account account) {
-	this.account = account;
-	return this;
-    }
+	public BloggerBuilder withAccount(Account account) {
+		this.account = account;
+		return this;
+	}
 
-    public BloggerBuilder withFirstName(String firstName) {
-	this.firstName = firstName;
-	return this;
-    }
+	public BloggerBuilder withFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
 
-    public BloggerBuilder withLastName(String lastName) {
-	this.lastName = lastName;
-	return this;
-    }
+	public BloggerBuilder withLastName(String lastName) {
+		this.lastName = lastName;
+		return this;
+	}
 
-    public Blogger build() {
-	Blogger blogger = new Blogger(this.account);
+	public Blogger build() {
+		Blogger blogger = new Blogger(this.account);
 
-	blogger.setFirstName(this.firstName);
-	blogger.setLastName(this.lastName);
+		blogger.setFirstName(this.firstName);
+		blogger.setLastName(this.lastName);
 
-	return blogger;
-    }
+		return blogger;
+	}
 
 }

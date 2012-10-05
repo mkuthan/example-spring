@@ -15,50 +15,50 @@ import org.testng.ITestResult;
 
 public class MockitoBeforeTestNGMethod {
 
-    private WeakHashMap<Object, Boolean> initializedInstances = new WeakHashMap<Object, Boolean>();
+	private WeakHashMap<Object, Boolean> initializedInstances = new WeakHashMap<Object, Boolean>();
 
-    /**
-     * Initialize mocks.
-     * 
-     * @param method
-     *            Invoked method.
-     * @param testResult
-     *            TestNG Test Result
-     */
-    public void applyFor(IInvokedMethod method, ITestResult testResult) {
-	initMocks(testResult);
-	reinitCaptors(method, testResult);
-    }
-
-    private void reinitCaptors(IInvokedMethod method, ITestResult testResult) {
-	if (method.isConfigurationMethod()) {
-	    return;
+	/**
+	 * Initialize mocks.
+	 * 
+	 * @param method
+	 *            Invoked method.
+	 * @param testResult
+	 *            TestNG Test Result
+	 */
+	public void applyFor(IInvokedMethod method, ITestResult testResult) {
+		initMocks(testResult);
+		reinitCaptors(method, testResult);
 	}
-	initializeCaptors(testResult.getInstance());
-    }
 
-    private void initMocks(ITestResult testResult) {
-	if (alreadyInitialized(testResult.getInstance())) {
-	    return;
+	private void reinitCaptors(IInvokedMethod method, ITestResult testResult) {
+		if (method.isConfigurationMethod()) {
+			return;
+		}
+		initializeCaptors(testResult.getInstance());
 	}
-	MockitoAnnotations.initMocks(testResult.getInstance());
-	markAsInitialized(testResult.getInstance());
-    }
 
-    private void initializeCaptors(Object instance) {
-	List<InstanceField> instanceFields = Fields.allDeclaredFieldsOf(instance).filter(annotatedBy(Captor.class))
-		.instanceFields();
-	for (InstanceField instanceField : instanceFields) {
-	    new CaptorAnnotationProcessor().process(instanceField.annotation(Captor.class), instanceField.jdkField());
+	private void initMocks(ITestResult testResult) {
+		if (alreadyInitialized(testResult.getInstance())) {
+			return;
+		}
+		MockitoAnnotations.initMocks(testResult.getInstance());
+		markAsInitialized(testResult.getInstance());
 	}
-    }
 
-    private void markAsInitialized(Object instance) {
-	this.initializedInstances.put(instance, true);
-    }
+	private void initializeCaptors(Object instance) {
+		List<InstanceField> instanceFields = Fields.allDeclaredFieldsOf(instance).filter(annotatedBy(Captor.class))
+				.instanceFields();
+		for (InstanceField instanceField : instanceFields) {
+			new CaptorAnnotationProcessor().process(instanceField.annotation(Captor.class), instanceField.jdkField());
+		}
+	}
 
-    private boolean alreadyInitialized(Object instance) {
-	return this.initializedInstances.containsKey(instance);
-    }
+	private void markAsInitialized(Object instance) {
+		this.initializedInstances.put(instance, true);
+	}
+
+	private boolean alreadyInitialized(Object instance) {
+		return this.initializedInstances.containsKey(instance);
+	}
 
 }

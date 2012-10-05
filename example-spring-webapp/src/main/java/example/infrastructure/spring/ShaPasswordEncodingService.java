@@ -9,18 +9,18 @@ import example.domain.service.PasswordEncodingService;
 @Component
 public class ShaPasswordEncodingService implements PasswordEncodingService {
 
-    private ShaPasswordEncoder encoder;
-    private String passwordSalt;
+	private ShaPasswordEncoder encoder;
+	private String passwordSalt;
 
-    @Autowired
-    public ShaPasswordEncodingService(ShaPasswordEncoder encoder, String passwordSalt) {
-	this.encoder = encoder;
-	this.passwordSalt = passwordSalt;
-    }
+	@Autowired
+	public ShaPasswordEncodingService(ShaPasswordEncoder encoder, String passwordSalt) {
+		this.encoder = encoder;
+		this.passwordSalt = passwordSalt;
+	}
 
-    @Override
-    public String encode(String rawPassword) {
-	return this.encoder.encodePassword(rawPassword, this.passwordSalt);
-    }
+	@Override
+	public String encode(String rawPassword) {
+		return this.encoder.encodePassword(rawPassword, this.passwordSalt);
+	}
 
 }

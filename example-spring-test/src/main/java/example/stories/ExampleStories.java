@@ -18,15 +18,15 @@ import org.junit.runner.RunWith;
 @Configure(parameterConverters = { ParameterConverters.EnumConverter.class, ParameterConverters.DateConverter.class })
 @UsingEmbedder(embedder = Embedder.class, generateViewAfterStories = true, ignoreFailureInStories = false, ignoreFailureInView = false)
 @UsingSpring(resources = { "classpath:/META-INF/spring/jbehaveContext.xml",
-	"classpath:/META-INF/spring/storiesContext.xml" })
+		"classpath:/META-INF/spring/storiesContext.xml" })
 public class ExampleStories extends InjectableEmbedder {
 
-    @Test
-    public void run() throws Throwable {
-	injectedEmbedder().runStoriesAsPaths(storyPaths());
-    }
+	@Test
+	public void run() throws Throwable {
+		injectedEmbedder().runStoriesAsPaths(storyPaths());
+	}
 
-    protected List<String> storyPaths() {
-	return new StoryFinder().findPaths("src/main/resources", Arrays.asList("**/*.story"), Arrays.asList(""));
-    }
+	protected List<String> storyPaths() {
+		return new StoryFinder().findPaths("src/main/resources", Arrays.asList("**/*.story"), Arrays.asList(""));
+	}
 }

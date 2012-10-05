@@ -5,6 +5,6 @@ import example.domain.shared.DomainService;
 @DomainService
 public interface PasswordEncodingService {
 
-    String encode(String rawPassword);
+	String encode(String rawPassword);
 
 }

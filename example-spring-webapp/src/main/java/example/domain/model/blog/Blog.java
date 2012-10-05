@@ -13,33 +13,33 @@ import example.domain.shared.DomainEntity;
 @DomainEntity
 public class Blog extends AbstractAggregateEntity<Blog> {
 
-    public static final int NAME_MAX_LENGTH = 50;
+	public static final int NAME_MAX_LENGTH = 50;
 
-    @Column(nullable = true, unique = true, length = NAME_MAX_LENGTH)
-    private String name;
+	@Column(nullable = true, unique = true, length = NAME_MAX_LENGTH)
+	private String name;
 
-    @Embedded
-    private Blogger blogger;
+	@Embedded
+	private Blogger blogger;
 
-    protected Blog() {
-    }
+	protected Blog() {
+	}
 
-    public Blog(String name, Blogger blogger) {
-	this.name = checkNotNull(name);
-	this.blogger = checkNotNull(blogger);
-    }
+	public Blog(String name, Blogger blogger) {
+		this.name = checkNotNull(name);
+		this.blogger = checkNotNull(blogger);
+	}
 
-    public Blogger getBlogger() {
-	return this.blogger;
-    }
+	public Blogger getBlogger() {
+		return this.blogger;
+	}
 
-    public String getName() {
-	return this.name;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    @Override
-    public String toString() {
-	return Objects.toStringHelper(this).addValue(this.name).addValue(this.blogger).toString();
-    }
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).addValue(this.name).addValue(this.blogger).toString();
+	}
 
 }

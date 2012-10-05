@@ -9,14 +9,14 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 @ComponentScan(basePackageClasses = { SpringConfiguration.class })
 public class SpringConfiguration {
 
-    @Bean
-    public String passwordSalt() {
-	return "example_salt";
-    }
+	@Bean
+	public String passwordSalt() {
+		return "example_salt";
+	}
 
-    @Bean
-    public ShaPasswordEncoder shaPasswordEncoder() {
-	return new ShaPasswordEncoder();
-    }
+	@Bean
+	public ShaPasswordEncoder shaPasswordEncoder() {
+		return new ShaPasswordEncoder();
+	}
 
 }

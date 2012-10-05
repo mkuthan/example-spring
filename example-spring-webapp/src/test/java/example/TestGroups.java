@@ -1,5 +1,5 @@
 package example;
 
 public interface TestGroups {
-    String DB = "db";
+	String DB = "db";
 }

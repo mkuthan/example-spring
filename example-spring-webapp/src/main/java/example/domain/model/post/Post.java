@@ -14,44 +14,44 @@ import example.domain.shared.DomainEntity;
 @DomainEntity
 public class Post extends AbstractAggregateEntity<Post> {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Blog blog;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Blog blog;
 
-    private String title;
+	private String title;
 
-    private String content;
+	private String content;
 
-    private DateTime created;
+	private DateTime created;
 
-    protected Post() {
-    }
+	protected Post() {
+	}
 
-    public Post(Blog blog) {
-	this.blog = checkNotNull(blog);
-    }
+	public Post(Blog blog) {
+		this.blog = checkNotNull(blog);
+	}
 
-    public Blog getBlog() {
-	return this.blog;
-    }
+	public Blog getBlog() {
+		return this.blog;
+	}
 
-    public String getTitle() {
-	return this.title;
-    }
+	public String getTitle() {
+		return this.title;
+	}
 
-    public void setTitle(String title) {
-	this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getContent() {
-	return this.content;
-    }
+	public String getContent() {
+		return this.content;
+	}
 
-    public void setContent(String content) {
-	this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public DateTime getCreated() {
-	return created;
-    }
+	public DateTime getCreated() {
+		return created;
+	}
 
 }

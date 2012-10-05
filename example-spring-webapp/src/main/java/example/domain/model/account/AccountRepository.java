@@ -4,6 +4,6 @@ import example.domain.shared.DomainRepository;
 
 public interface AccountRepository extends DomainRepository<Account> {
 
-    Account findByUsername(String username);
+	Account findByUsername(String username);
 
 }

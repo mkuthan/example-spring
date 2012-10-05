@@ -18,40 +18,40 @@ import org.testng.ITestResult;
 
 public class MockitoAfterTestNGMethod {
 
-    public void applyFor(IInvokedMethod method, ITestResult testResult) {
-	Mockito.validateMockitoUsage();
+	public void applyFor(IInvokedMethod method, ITestResult testResult) {
+		Mockito.validateMockitoUsage();
 
-	if (method.isTestMethod()) {
-	    resetMocks(testResult.getInstance());
-	}
-    }
-
-    private void resetMocks(Object instance) {
-	Mockito.reset(instanceMocksOf(instance).toArray());
-    }
-
-    private Collection<Object> instanceMocksOf(Object instance) {
-	return Fields.allDeclaredFieldsOf(instance)
-		.filter(annotatedBy(Mock.class, Spy.class, MockitoAnnotations.Mock.class)).notNull().assignedValues();
-    }
-
-    private Set<Object> instanceMocksIn(Object instance, Class<?> clazz) {
-	Set<Object> instanceMocks = new HashSet<Object>();
-	Field[] declaredFields = clazz.getDeclaredFields();
-	for (Field declaredField : declaredFields) {
-	    if (declaredField.isAnnotationPresent(Mock.class) || declaredField.isAnnotationPresent(Spy.class)) {
-		declaredField.setAccessible(true);
-		try {
-		    Object fieldValue = declaredField.get(instance);
-		    if (fieldValue != null) {
-			instanceMocks.add(fieldValue);
-		    }
-		} catch (IllegalAccessException e) {
-		    throw new MockitoException("Could not access field " + declaredField.getName());
+		if (method.isTestMethod()) {
+			resetMocks(testResult.getInstance());
 		}
-	    }
 	}
-	return instanceMocks;
-    }
+
+	private void resetMocks(Object instance) {
+		Mockito.reset(instanceMocksOf(instance).toArray());
+	}
+
+	private Collection<Object> instanceMocksOf(Object instance) {
+		return Fields.allDeclaredFieldsOf(instance)
+				.filter(annotatedBy(Mock.class, Spy.class, MockitoAnnotations.Mock.class)).notNull().assignedValues();
+	}
+
+	private Set<Object> instanceMocksIn(Object instance, Class<?> clazz) {
+		Set<Object> instanceMocks = new HashSet<Object>();
+		Field[] declaredFields = clazz.getDeclaredFields();
+		for (Field declaredField : declaredFields) {
+			if (declaredField.isAnnotationPresent(Mock.class) || declaredField.isAnnotationPresent(Spy.class)) {
+				declaredField.setAccessible(true);
+				try {
+					Object fieldValue = declaredField.get(instance);
+					if (fieldValue != null) {
+						instanceMocks.add(fieldValue);
+					}
+				} catch (IllegalAccessException e) {
+					throw new MockitoException("Could not access field " + declaredField.getName());
+				}
+			}
+		}
+		return instanceMocks;
+	}
 
 }

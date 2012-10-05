@@ -14,11 +14,11 @@ import example.TestGroups;
 @Profile("test")
 public class PostRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    @Autowired
-    Post postRepository;
+	@Autowired
+	Post postRepository;
 
-    @BeforeMethod
-    public void setUp() {
-    }
+	@BeforeMethod
+	public void setUp() {
+	}
 
 }

@@ -4,11 +4,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.springframework.beans.factory.annotation.Configurable;
-
 @MappedSuperclass
-@Configurable
-public abstract class AbstractEntity<T extends AbstractEntity<T>> implements Entity<T> {
+public abstract class AbstractEntity<T extends AbstractEntity<T>> implements
+		Entity<T> {
 
 	@Id
 	@GeneratedValue
@@ -21,13 +19,15 @@ public abstract class AbstractEntity<T extends AbstractEntity<T>> implements Ent
 
 	@Override
 	public boolean sameIdentityAs(T entity) {
-		// Access entityId property directly to avoid entity loading from database
+		// Access entityId property directly to avoid entity loading from
+		// database
 		return isManaged() ? this.entityId.equals(entity.entityId) : false;
 	};
 
 	@Override
 	public boolean isManaged() {
-		// Access entityId property directly to avoid entity loading from database
+		// Access entityId property directly to avoid entity loading from
+		// database
 		return this.entityId != null;
 	}
 

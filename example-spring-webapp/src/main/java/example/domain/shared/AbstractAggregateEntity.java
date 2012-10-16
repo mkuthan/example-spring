@@ -4,8 +4,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 @MappedSuperclass
-public class AbstractAggregateEntity<T extends AbstractAggregateEntity<T>> extends AbstractEntity<T> implements
-		AggregateEntity<T> {
+public class AbstractAggregateEntity<T extends AbstractAggregateEntity<T>>
+		extends AbstractEntity<T> implements AggregateEntity<T> {
 
 	@Version
 	private Integer entityVersion;

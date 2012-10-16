@@ -31,11 +31,11 @@ public class Post extends AbstractAggregateEntity<Post> {
 	}
 
 	public Blog getBlog() {
-		return this.blog;
+		return blog;
 	}
 
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
 	public void setTitle(String title) {
@@ -43,7 +43,7 @@ public class Post extends AbstractAggregateEntity<Post> {
 	}
 
 	public String getContent() {
-		return this.content;
+		return content;
 	}
 
 	public void setContent(String content) {

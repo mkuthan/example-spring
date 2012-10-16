@@ -13,14 +13,15 @@ public class ShaPasswordEncodingService implements PasswordEncodingService {
 	private String passwordSalt;
 
 	@Autowired
-	public ShaPasswordEncodingService(ShaPasswordEncoder encoder, String passwordSalt) {
+	public ShaPasswordEncodingService(ShaPasswordEncoder encoder,
+			String passwordSalt) {
 		this.encoder = encoder;
 		this.passwordSalt = passwordSalt;
 	}
 
 	@Override
 	public String encode(String rawPassword) {
-		return this.encoder.encodePassword(rawPassword, this.passwordSalt);
+		return encoder.encodePassword(rawPassword, passwordSalt);
 	}
 
 }

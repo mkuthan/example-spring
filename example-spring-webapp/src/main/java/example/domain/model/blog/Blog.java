@@ -30,16 +30,17 @@ public class Blog extends AbstractAggregateEntity<Blog> {
 	}
 
 	public Blogger getBlogger() {
-		return this.blogger;
+		return blogger;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).addValue(this.name).addValue(this.blogger).toString();
+		return Objects.toStringHelper(this).addValue(name).addValue(blogger)
+				.toString();
 	}
 
 }

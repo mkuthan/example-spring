@@ -46,19 +46,22 @@ public class MockitoBeforeTestNGMethod {
 	}
 
 	private void initializeCaptors(Object instance) {
-		List<InstanceField> instanceFields = Fields.allDeclaredFieldsOf(instance).filter(annotatedBy(Captor.class))
-				.instanceFields();
+		List<InstanceField> instanceFields = Fields
+				.allDeclaredFieldsOf(instance)
+				.filter(annotatedBy(Captor.class)).instanceFields();
 		for (InstanceField instanceField : instanceFields) {
-			new CaptorAnnotationProcessor().process(instanceField.annotation(Captor.class), instanceField.jdkField());
+			new CaptorAnnotationProcessor().process(
+					instanceField.annotation(Captor.class),
+					instanceField.jdkField());
 		}
 	}
 
 	private void markAsInitialized(Object instance) {
-		this.initializedInstances.put(instance, true);
+		initializedInstances.put(instance, true);
 	}
 
 	private boolean alreadyInitialized(Object instance) {
-		return this.initializedInstances.containsKey(instance);
+		return initializedInstances.containsKey(instance);
 	}
 
 }

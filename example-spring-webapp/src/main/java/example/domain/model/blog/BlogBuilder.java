@@ -17,7 +17,7 @@ public class BlogBuilder {
 	}
 
 	public Blog build() {
-		Blog blog = new Blog(this.name, this.blogger);
+		Blog blog = new Blog(name, blogger);
 
 		return blog;
 	}

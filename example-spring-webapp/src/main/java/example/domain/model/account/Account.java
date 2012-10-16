@@ -31,46 +31,47 @@ public class Account extends AbstractAggregateEntity<Account> {
 
 	public Account(String username) {
 		this.username = checkNotNull(username);
-		this.password = "";
-		this.enabled = Boolean.TRUE;
+		password = "";
+		enabled = Boolean.TRUE;
 	}
 
 	public void disable() {
-		this.enabled = Boolean.FALSE;
+		enabled = Boolean.FALSE;
 	}
 
 	public void enable() {
-		this.enabled = Boolean.TRUE;
+		enabled = Boolean.TRUE;
 	}
 
 	public Boolean isEnabled() {
-		return this.enabled;
+		return enabled;
 	}
 
 	public String getUsername() {
-		return this.username;
+		return username;
 	}
 
 	public String getPassword() {
-		return this.password;
+		return password;
 	}
 
 	public void updatePassword(String rawPassword) {
 		checkNotNull(rawPassword);
 
-		this.password = this.passwordEncodingService.encode(rawPassword);
+		password = passwordEncodingService.encode(rawPassword);
 	}
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).addValue(this.username).toString();
+		return Objects.toStringHelper(this).addValue(username).toString();
 	}
 
 	protected PasswordEncodingService getPasswordEncodingService() {
-		return this.passwordEncodingService;
+		return passwordEncodingService;
 	}
 
-	protected void setPasswordEncodingService(PasswordEncodingService passwordEncodingService) {
+	protected void setPasswordEncodingService(
+			PasswordEncodingService passwordEncodingService) {
 		this.passwordEncodingService = passwordEncodingService;
 	}
 

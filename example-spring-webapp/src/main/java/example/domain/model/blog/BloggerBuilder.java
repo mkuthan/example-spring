@@ -26,12 +26,7 @@ public class BloggerBuilder {
 	}
 
 	public Blogger build() {
-		Blogger blogger = new Blogger(this.account);
-
-		blogger.setFirstName(this.firstName);
-		blogger.setLastName(this.lastName);
-
-		return blogger;
+		return new Blogger(account, firstName, lastName);
 	}
 
 }

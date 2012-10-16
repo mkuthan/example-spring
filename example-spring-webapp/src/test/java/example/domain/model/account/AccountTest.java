@@ -25,22 +25,23 @@ public class AccountTest {
 	Account account = new Account();
 
 	public void disable() {
-		this.account.disable();
+		account.disable();
 
-		assertThat(this.account.isEnabled()).isFalse();
+		assertThat(account.isEnabled()).isFalse();
 	}
 
 	public void enable() {
-		this.account.enable();
+		account.enable();
 
-		assertThat(this.account.isEnabled()).isTrue();
+		assertThat(account.isEnabled()).isTrue();
 	}
 
 	public void updatePassword() {
-		when(this.passwordEncodingService.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
+		when(passwordEncodingService.encode(RAW_PASSWORD)).thenReturn(
+				PASSWORD_HASH);
 
-		this.account.updatePassword(RAW_PASSWORD);
+		account.updatePassword(RAW_PASSWORD);
 
-		assertThat(this.account.getPassword()).isEqualTo(PASSWORD_HASH);
+		assertThat(account.getPassword()).isEqualTo(PASSWORD_HASH);
 	}
 }

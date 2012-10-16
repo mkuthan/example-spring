@@ -15,18 +15,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(SpringAnnotatedEmbedderRunner.class)
-@Configure(parameterConverters = { ParameterConverters.EnumConverter.class, ParameterConverters.DateConverter.class })
+@Configure(parameterConverters = { ParameterConverters.EnumConverter.class,
+		ParameterConverters.DateConverter.class })
 @UsingEmbedder(embedder = Embedder.class, generateViewAfterStories = true, ignoreFailureInStories = false, ignoreFailureInView = false)
 @UsingSpring(resources = { "classpath:/META-INF/spring/jbehaveContext.xml",
-		"classpath:/META-INF/spring/storiesContext.xml" })
+"classpath:/META-INF/spring/storiesContext.xml" })
 public class ExampleStories extends InjectableEmbedder {
 
+	@Override
 	@Test
 	public void run() throws Throwable {
 		injectedEmbedder().runStoriesAsPaths(storyPaths());
 	}
 
 	protected List<String> storyPaths() {
-		return new StoryFinder().findPaths("src/main/resources", Arrays.asList("**/*.story"), Arrays.asList(""));
+		return new StoryFinder().findPaths("src/main/resources",
+				Arrays.asList("**/*.story"), Arrays.asList(""));
 	}
 }

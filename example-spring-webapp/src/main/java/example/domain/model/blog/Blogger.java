@@ -31,28 +31,22 @@ public class Blogger {
 	protected Blogger() {
 	}
 
-	public Blogger(Account blogger) {
-		this.account = checkNotNull(blogger);
+	public Blogger(Account blogger, String firstName, String lastName) {
+		account = checkNotNull(blogger);
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public Account getAccount() {
-		return this.account;
+		return account;
 	}
 
 	public String getFirstName() {
-		return this.firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		return firstName;
 	}
 
 	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		return lastName;
 	}
 
 	@Override
@@ -66,19 +60,20 @@ public class Blogger {
 		}
 
 		Blogger other = (Blogger) obj;
-		return Objects.equal(this.account, other.account) && Objects.equal(this.firstName, other.firstName)
-				&& Objects.equal(this.lastName, other.lastName);
+		return Objects.equal(account, other.account)
+				&& Objects.equal(firstName, other.firstName)
+				&& Objects.equal(lastName, other.lastName);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(this.account, this.firstName, this.lastName);
+		return Objects.hashCode(account, firstName, lastName);
 	}
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).addValue(this.account).addValue(this.firstName).addValue(this.lastName)
-				.toString();
+		return Objects.toStringHelper(this).addValue(account)
+				.addValue(firstName).addValue(lastName).toString();
 	}
 
 }

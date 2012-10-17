@@ -70,8 +70,7 @@ public class Account extends AbstractAggregateEntity<Account> {
 		return passwordEncodingService;
 	}
 
-	protected void setPasswordEncodingService(
-			PasswordEncodingService passwordEncodingService) {
+	protected void setPasswordEncodingService(PasswordEncodingService passwordEncodingService) {
 		this.passwordEncodingService = passwordEncodingService;
 	}
 

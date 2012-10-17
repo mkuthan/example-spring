@@ -60,8 +60,7 @@ public class Blogger {
 		}
 
 		Blogger other = (Blogger) obj;
-		return Objects.equal(account, other.account)
-				&& Objects.equal(firstName, other.firstName)
+		return Objects.equal(account, other.account) && Objects.equal(firstName, other.firstName)
 				&& Objects.equal(lastName, other.lastName);
 	}
 
@@ -72,8 +71,7 @@ public class Blogger {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).addValue(account)
-				.addValue(firstName).addValue(lastName).toString();
+		return Objects.toStringHelper(this).addValue(account).addValue(firstName).addValue(lastName).toString();
 	}
 
 }

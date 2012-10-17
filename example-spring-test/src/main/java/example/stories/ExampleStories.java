@@ -22,8 +22,7 @@ import org.junit.runner.RunWith;
 import example.stories.ExampleStories.ExampleReportBuilder;
 
 @RunWith(SpringAnnotatedEmbedderRunner.class)
-@Configure(parameterConverters = { ParameterConverters.EnumConverter.class,
-		ParameterConverters.DateConverter.class }, storyReporterBuilder = ExampleReportBuilder.class)
+@Configure(parameterConverters = { ParameterConverters.EnumConverter.class, ParameterConverters.DateConverter.class }, storyReporterBuilder = ExampleReportBuilder.class)
 @UsingEmbedder(embedder = Embedder.class, generateViewAfterStories = true, ignoreFailureInStories = false, ignoreFailureInView = false)
 @UsingSpring(resources = { "classpath:/META-INF/spring/jbehaveContext.xml",
 		"classpath:/META-INF/spring/storiesContext.xml" })
@@ -39,15 +38,13 @@ public class ExampleStories extends InjectableEmbedder {
 	}
 
 	protected List<String> storyPaths() {
-		return new StoryFinder().findPaths(
-				CodeLocations.codeLocationFromClass(this.getClass()).getFile(),
-				INCLUDES, EXCLUDES);
+		return new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()).getFile(), INCLUDES,
+				EXCLUDES);
 	}
 
 	public static class ExampleReportBuilder extends StoryReporterBuilder {
 		public ExampleReportBuilder() {
-			withCodeLocation(CodeLocations.codeLocationFromClass(this
-					.getClass()));
+			withCodeLocation(CodeLocations.codeLocationFromClass(this.getClass()));
 			withFailureTrace(true).withFailureTraceCompression(true);
 			withDefaultFormats().withFormats(IDE_CONSOLE, XML, HTML);
 		}

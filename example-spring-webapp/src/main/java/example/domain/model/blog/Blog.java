@@ -39,8 +39,7 @@ public class Blog extends AbstractAggregateEntity<Blog> {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).addValue(name).addValue(blogger)
-				.toString();
+		return Objects.toStringHelper(this).addValue(name).addValue(blogger).toString();
 	}
 
 }

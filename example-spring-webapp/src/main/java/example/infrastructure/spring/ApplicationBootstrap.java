@@ -16,8 +16,7 @@ import example.domain.model.blog.BlogRepository;
 import example.domain.model.blog.BloggerBuilder;
 
 @Component
-public class ApplicationBootstrap implements
-		ApplicationListener<ContextRefreshedEvent> {
+public class ApplicationBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
 	private AccountRepository accountRepository;
@@ -38,16 +37,10 @@ public class ApplicationBootstrap implements
 		Account magdaAccount = new Account("magda");
 		accountRepository.save(Lists.newArrayList(marcinAccount, magdaAccount));
 
-		Blog marcinBlog = new BlogBuilder()
-				.withName("Software Craftmanship")
-				.withBlogger(
-						new BloggerBuilder().withAccount(marcinAccount)
-								.withFirstName("Marcin").build()).build();
-		Blog magdaBlog = new BlogBuilder()
-				.withName("Cooking Recipies")
-				.withBlogger(
-						new BloggerBuilder().withAccount(magdaAccount)
-								.withFirstName("Magda").build()).build();
+		Blog marcinBlog = new BlogBuilder().withName("Software Craftmanship")
+				.withBlogger(new BloggerBuilder().withAccount(marcinAccount).withFirstName("Marcin").build()).build();
+		Blog magdaBlog = new BlogBuilder().withName("Cooking Recipies")
+				.withBlogger(new BloggerBuilder().withAccount(magdaAccount).withFirstName("Magda").build()).build();
 		blogRepository.save(Lists.newArrayList(marcinBlog, magdaBlog));
 	}
 

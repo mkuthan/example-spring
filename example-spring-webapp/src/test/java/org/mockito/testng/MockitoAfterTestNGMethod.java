@@ -31,19 +31,15 @@ public class MockitoAfterTestNGMethod {
 	}
 
 	private Collection<Object> instanceMocksOf(Object instance) {
-		return Fields
-				.allDeclaredFieldsOf(instance)
-				.filter(annotatedBy(Mock.class, Spy.class,
-						MockitoAnnotations.Mock.class)).notNull()
-				.assignedValues();
+		return Fields.allDeclaredFieldsOf(instance)
+				.filter(annotatedBy(Mock.class, Spy.class, MockitoAnnotations.Mock.class)).notNull().assignedValues();
 	}
 
 	private Set<Object> instanceMocksIn(Object instance, Class<?> clazz) {
 		Set<Object> instanceMocks = new HashSet<Object>();
 		Field[] declaredFields = clazz.getDeclaredFields();
 		for (Field declaredField : declaredFields) {
-			if (declaredField.isAnnotationPresent(Mock.class)
-					|| declaredField.isAnnotationPresent(Spy.class)) {
+			if (declaredField.isAnnotationPresent(Mock.class) || declaredField.isAnnotationPresent(Spy.class)) {
 				declaredField.setAccessible(true);
 				try {
 					Object fieldValue = declaredField.get(instance);
@@ -51,8 +47,7 @@ public class MockitoAfterTestNGMethod {
 						instanceMocks.add(fieldValue);
 					}
 				} catch (IllegalAccessException e) {
-					throw new MockitoException("Could not access field "
-							+ declaredField.getName());
+					throw new MockitoException("Could not access field " + declaredField.getName());
 				}
 			}
 		}

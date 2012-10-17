@@ -12,8 +12,7 @@ import example.TestGroups;
 @Test(groups = { TestGroups.DB })
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jpa.xml")
 @Profile("test")
-public class PostRepositoryTest extends
-		AbstractTransactionalTestNGSpringContextTests {
+public class PostRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
 
 	@Autowired
 	Post postRepository;

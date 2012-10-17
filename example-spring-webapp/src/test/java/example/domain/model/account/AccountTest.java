@@ -37,8 +37,7 @@ public class AccountTest {
 	}
 
 	public void updatePassword() {
-		when(passwordEncodingService.encode(RAW_PASSWORD)).thenReturn(
-				PASSWORD_HASH);
+		when(passwordEncodingService.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
 
 		account.updatePassword(RAW_PASSWORD);
 

@@ -21,8 +21,7 @@ import example.domain.model.account.AccountRepository;
 @Test(groups = { TestGroups.DB })
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jpa.xml")
 @Profile("test")
-public class BlogRepositoryTest extends
-		AbstractTransactionalTestNGSpringContextTests {
+public class BlogRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
 
 	static final String EXISTING_BLOG_NAME = "EXISTING BLOG";
 	static final String ANY_BLOG_NAME = "ANY BLOG";
@@ -43,41 +42,32 @@ public class BlogRepositoryTest extends
 
 	@DataProvider
 	static final Object[][] validBlogs() {
-		String longBlogName = Strings.padEnd("Long Blog", Blog.NAME_MAX_LENGTH,
-				'.');
+		String longBlogName = Strings.padEnd("Long Blog", Blog.NAME_MAX_LENGTH, '.');
 
 		return new Object[][] { { ANY_BLOG_NAME }, { longBlogName } };
 	}
 
 	@DataProvider
 	static final Object[][] invalidBlogs() {
-		String longBlogName = Strings.padEnd("Long Blog",
-				Blog.NAME_MAX_LENGTH + 1, '.');
+		String longBlogName = Strings.padEnd("Long Blog", Blog.NAME_MAX_LENGTH + 1, '.');
 
 		return new Object[][] { { EXISTING_BLOG_NAME }, { longBlogName } };
 	}
 
 	@DataProvider
 	static final Object[][] validBloggers() {
-		String longFirstName = Strings.padEnd("Blogger First Name",
-				Blogger.FIRST_NAME_MAX_LENGTH, '.');
-		String longLastName = Strings.padEnd("Blogger Last Name",
-				Blogger.LAST_NAME_MAX_LENGTH, '.');
+		String longFirstName = Strings.padEnd("Blogger First Name", Blogger.FIRST_NAME_MAX_LENGTH, '.');
+		String longLastName = Strings.padEnd("Blogger Last Name", Blogger.LAST_NAME_MAX_LENGTH, '.');
 
-		return new Object[][] {
-				{ ANY_BLOGGER_FIRST_NAME, ANY_BLOGGER_LAST_NAME },
-				{ longFirstName, longLastName } };
+		return new Object[][] { { ANY_BLOGGER_FIRST_NAME, ANY_BLOGGER_LAST_NAME }, { longFirstName, longLastName } };
 	}
 
 	@DataProvider
 	static final Object[][] invalidBloggers() {
-		String longFirstName = Strings.padEnd("Blogger First Name",
-				Blogger.FIRST_NAME_MAX_LENGTH + 1, '.');
-		String longLastName = Strings.padEnd("Blogger Last Name",
-				Blogger.LAST_NAME_MAX_LENGTH + 1, '.');
+		String longFirstName = Strings.padEnd("Blogger First Name", Blogger.FIRST_NAME_MAX_LENGTH + 1, '.');
+		String longLastName = Strings.padEnd("Blogger Last Name", Blogger.LAST_NAME_MAX_LENGTH + 1, '.');
 
-		return new Object[][] { { longFirstName, ANY_BLOGGER_LAST_NAME },
-				{ ANY_BLOGGER_FIRST_NAME, longLastName } };
+		return new Object[][] { { longFirstName, ANY_BLOGGER_LAST_NAME }, { ANY_BLOGGER_FIRST_NAME, longLastName } };
 	}
 
 	@BeforeMethod
@@ -85,12 +75,10 @@ public class BlogRepositoryTest extends
 		Account account = new Account("EXISTING ACCOUNT");
 		accountRepository.save(account);
 
-		bloggerBuilder = new BloggerBuilder().withAccount(account)
-				.withFirstName(EXISTING_BLOGGER_FIRST_NAME)
+		bloggerBuilder = new BloggerBuilder().withAccount(account).withFirstName(EXISTING_BLOGGER_FIRST_NAME)
 				.withLastName(EXISTING_BLOGGER_LAST_NAME);
 
-		blogBuilder = new BlogBuilder().withName(EXISTING_BLOG_NAME)
-				.withBlogger(bloggerBuilder.build());
+		blogBuilder = new BlogBuilder().withName(EXISTING_BLOG_NAME).withBlogger(bloggerBuilder.build());
 
 		blogRepository.saveAndFlush(blogBuilder.build());
 	}
@@ -141,17 +129,14 @@ public class BlogRepositoryTest extends
 		catchException(blogRepository).saveAndFlush(blog);
 
 		// then
-		assertThat(caughtException()).isInstanceOf(
-				DataIntegrityViolationException.class);
+		assertThat(caughtException()).isInstanceOf(DataIntegrityViolationException.class);
 	}
 
 	@Test(dataProvider = "validBloggers")
 	public void shouldSaveBlogWithValidBlogger(String firstName, String lastName) {
 		// given
-		Blogger blogger = bloggerBuilder.withFirstName(firstName)
-				.withLastName(lastName).build();
-		Blog blog = blogBuilder.withName(ANY_BLOG_NAME).withBlogger(blogger)
-				.build();
+		Blogger blogger = bloggerBuilder.withFirstName(firstName).withLastName(lastName).build();
+		Blog blog = blogBuilder.withName(ANY_BLOG_NAME).withBlogger(blogger).build();
 
 		// when
 		blogRepository.saveAndFlush(blog);
@@ -164,20 +149,16 @@ public class BlogRepositoryTest extends
 	}
 
 	@Test(dataProvider = "invalidBloggers")
-	public void shouldNotSaveBlogWithInvalidBlogger(String firstName,
-			String lastName) {
+	public void shouldNotSaveBlogWithInvalidBlogger(String firstName, String lastName) {
 		// given
-		Blogger blogger = bloggerBuilder.withFirstName(firstName)
-				.withLastName(lastName).build();
-		Blog blog = blogBuilder.withName(ANY_BLOG_NAME).withBlogger(blogger)
-				.build();
+		Blogger blogger = bloggerBuilder.withFirstName(firstName).withLastName(lastName).build();
+		Blog blog = blogBuilder.withName(ANY_BLOG_NAME).withBlogger(blogger).build();
 
 		// when
 		catchException(blogRepository).saveAndFlush(blog);
 
 		// then
-		assertThat(caughtException()).isInstanceOf(
-				DataIntegrityViolationException.class);
+		assertThat(caughtException()).isInstanceOf(DataIntegrityViolationException.class);
 	}
 
 }

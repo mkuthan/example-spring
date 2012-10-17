@@ -6,7 +6,7 @@
 
 	<context:property-placeholder location="classpath:/test.properties" />
 
-	<import resource="applicationContext-domain.xml" />
-	<import resource="applicationContext-infrastructure-jpa.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-domain.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jpa.xml" />
 
 </beans>

@@ -21,6 +21,7 @@
 		<activemq.version>5.6.0</activemq.version>
 		<aspectj.version>1.7.1</aspectj.version>
 		<catchexception.version>1.0.4</catchexception.version>
+		<cglib.version>2.2.2</cglib.version>
 		<ehcache.version>2.6.0</ehcache.version>
 		<festassert.version>1.4</festassert.version>
 		<guava.version>13.0.1</guava.version>

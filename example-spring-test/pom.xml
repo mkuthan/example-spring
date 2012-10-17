@@ -12,12 +12,38 @@
 	<artifactId>example-spring-test</artifactId>
 	<packaging>jar</packaging>
 
+	<properties>
+		<webClassifier>classes</webClassifier>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
 				<version>${jbehave.version}</version>
+				<configuration>
+					<annotatedEmbedderRunnerClass>org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
+					<includes>
+						<include>**/stories/*Stories.java</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>run-stories-with-annotated-embedder</id>
+						<phase>test</phase>
+						<goals>
+							<goal>run-stories-with-annotated-embedder</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>unpack-view-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack-view-resources</goal>
+						</goals>
+					</execution>
+				</executions>
 				<dependencies>
 					<dependency>
 						<groupId>org.jbehave</groupId>
@@ -34,39 +60,17 @@
 						<artifactId>spring-test</artifactId>
 						<version>${spring.version}</version>
 					</dependency>
+					<dependency>
+						<groupId>cglib</groupId>
+						<artifactId>cglib-nodep</artifactId>
+						<version>${cglib.version}</version>
+					</dependency>
 				</dependencies>
-				<executions>
-					<execution>
-						<id>run-stories-with-annotated-embedder</id>
-						<phase>test</phase>
-						<goals>
-							<goal>run-stories-with-annotated-embedder</goal>
-						</goals>
-						<configuration>
-							<annotatedEmbedderRunnerClass>org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
-							<includes>
-								<include>**/stories/*Stories.java</include>
-							</includes>
-							<metaFilters>
-								<metaFilter>+category *</metaFilter>
-								<metaFilter>+color *</metaFilter>
-							</metaFilters>
-						</configuration>
-					</execution>
-					<execution>
-						<id>unpack-view-resources</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>unpack-view-resources</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -100,7 +104,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>example-spring-webapp</artifactId>
 			<version>${project.version}</version>
-			<classifier>classes</classifier>
+			<classifier>${webClassifier}</classifier>
 		</dependency>
 
 		<dependency>
@@ -121,7 +125,7 @@
 			<version>3.1.1</version>
 			<type>zip</type>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jbehave</groupId>
 			<artifactId>jbehave-core</artifactId>
@@ -130,4 +134,18 @@
 			<type>zip</type>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>m2e</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<properties>
+				<webClassifier></webClassifier>
+			</properties>
+		</profile>
+	</profiles>
 </project>

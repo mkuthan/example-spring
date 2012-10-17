@@ -19,23 +19,23 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12.4</version>
+				<configuration>
+					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
+					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
+					<includes>
+						<include>**/*Story.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
 				<version>${jbehave.version}</version>
-				<configuration>
-					<annotatedEmbedderRunnerClass>org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
-					<includes>
-						<include>**/stories/*Stories.java</include>
-					</includes>
-				</configuration>
 				<executions>
-					<execution>
-						<id>run-stories-with-annotated-embedder</id>
-						<phase>test</phase>
-						<goals>
-							<goal>run-stories-with-annotated-embedder</goal>
-						</goals>
-					</execution>
 					<execution>
 						<id>unpack-view-resources</id>
 						<phase>generate-resources</phase>
@@ -45,26 +45,6 @@
 					</execution>
 				</executions>
 				<dependencies>
-					<dependency>
-						<groupId>org.jbehave</groupId>
-						<artifactId>jbehave-spring</artifactId>
-						<version>${jbehave.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-context</artifactId>
-						<version>${spring.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-test</artifactId>
-						<version>${spring.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>cglib</groupId>
-						<artifactId>cglib-nodep</artifactId>
-						<version>${cglib.version}</version>
-					</dependency>
 				</dependencies>
 			</plugin>
 		</plugins>
@@ -105,6 +85,12 @@
 			<artifactId>example-spring-webapp</artifactId>
 			<version>${project.version}</version>
 			<classifier>${webClassifier}</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>

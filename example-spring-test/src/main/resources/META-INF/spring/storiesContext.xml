@@ -4,10 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:property-placeholder location="classpath:/stories.properties" />
+
 	<context:component-scan base-package="example.stories.steps" />
 
 	<import resource="classpath:/META-INF/spring/applicationContext-domain.xml" />
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jms.xml" />
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jpa.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-service.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-service.xml" />
 </beans>

@@ -14,10 +14,11 @@ import org.jbehave.core.io.StoryLoader;
 import org.jbehave.core.io.StoryPathResolver;
 import org.jbehave.core.io.UnderscoredCamelCaseResolver;
 import org.jbehave.core.junit.JUnitStory;
+import org.jbehave.core.reporters.CrossReference;
+import org.jbehave.core.reporters.FilePrintStreamFactory.ResolveToPackagedName;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.spring.SpringStepsFactory;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -31,15 +32,7 @@ public abstract class AbstractSpringJBehaveStory extends JUnitStory {
 	@Autowired
 	private ApplicationContext applicationContext;
 
-	@Override
-	@Test
-	public void run() {
-		try {
-			super.run();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-	}
+	private CrossReference xref = new CrossReference();
 
 	public AbstractSpringJBehaveStory() {
 		Embedder embedder = new Embedder();
@@ -51,7 +44,7 @@ public abstract class AbstractSpringJBehaveStory extends JUnitStory {
 	@Override
 	public Configuration configuration() {
 		return super.configuration().useStoryPathResolver(storyPathResolver()).useStoryLoader(storyLoader())
-				.useStoryReporterBuilder(storyReporterBuilder());
+				.useStoryReporterBuilder(storyReporterBuilder()).useStepMonitor(xref.getStepMonitor());
 	}
 
 	@Override
@@ -73,8 +66,8 @@ public abstract class AbstractSpringJBehaveStory extends JUnitStory {
 
 	private StoryReporterBuilder storyReporterBuilder() {
 		return new StoryReporterBuilder().withCodeLocation(CodeLocations.codeLocationFromClass(this.getClass()))
-				.withFailureTrace(true).withFailureTraceCompression(true).withDefaultFormats()
-				.withFormats(IDE_CONSOLE, XML, HTML);
+				.withPathResolver(new ResolveToPackagedName()).withFailureTrace(true).withFailureTraceCompression(true)
+				.withDefaultFormats().withFormats(IDE_CONSOLE, TXT, XML, HTML).withCrossReference(xref);
 	}
 
 }

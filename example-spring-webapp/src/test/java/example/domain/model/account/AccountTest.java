@@ -9,9 +9,10 @@ import org.mockito.testng.MockitoTestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import example.TestGroups;
 import example.domain.service.PasswordEncodingService;
 
-@Test
+@Test(groups = TestGroups.UNIT)
 @Listeners(MockitoTestNGListener.class)
 public class AccountTest {
 

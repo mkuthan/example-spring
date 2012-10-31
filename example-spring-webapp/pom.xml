@@ -10,7 +10,13 @@
 	</parent>
 
 	<artifactId>example-spring-webapp</artifactId>
+	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
+
+	<properties>
+		<!-- Only unit tests enabled by default (m-surefire-p) -->
+		<groups>unit</groups>
+	</properties>
 
 	<build>
 		<plugins>
@@ -417,13 +423,6 @@
 					<artifactId>fusemq-leveldb</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-pool</artifactId>
-			<version>${activemq.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>

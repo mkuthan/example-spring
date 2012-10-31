@@ -10,6 +10,7 @@
 	</parent>
 
 	<artifactId>example-spring-test</artifactId>
+	<name>${project.artifactId}</name>
 	<packaging>jar</packaging>
 
 	<properties>

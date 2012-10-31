@@ -4,15 +4,40 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
 	http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
 
-	<amq:broker useJmx="false" persistent="false">
+	<amq:broker id="amqBroker" useJmx="true" useShutdownHook="false" persistent="false">
 		<amq:transportConnectors>
-			<amq:transportConnector uri="tcp://localhost:0" />
+			<amq:transportConnector uri="vm://localhost" />
 		</amq:transportConnectors>
+		<amq:destinationPolicy>
+			<amq:policyMap>
+				<amq:policyEntries>
+					<amq:policyEntry queue=">">
+						<amq:deadLetterStrategy>
+							<amq:individualDeadLetterStrategy queuePrefix="DLQ." useQueueForQueueMessages="true"
+								processNonPersistent="true" />
+						</amq:deadLetterStrategy>
+					</amq:policyEntry>
+				</amq:policyEntries>
+			</amq:policyMap>
+		</amq:destinationPolicy>
 	</amq:broker>
 
-	<amq:connectionFactory id="jmsConnectionFactory" brokerURL="vm://localhost" />
+	<bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="amqBroker">
+		<property name="brokerURL" value="vm://localhost" />
+		<property name="redeliveryPolicy">
+			<bean class="org.apache.activemq.RedeliveryPolicy">
+				<property name="useExponentialBackOff" value="true" />
+				<property name="initialRedeliveryDelay" value="${activemq.initialRedeliveryDelay}" />
+				<property name="backOffMultiplier" value="${activemq.backOffMultiplier}" />
+				<property name="maximumRedeliveries" value="${activemq.maximumRedeliveries}" />
+				<property name="tempQueue" value="true" />
+			</bean>
+		</property>
+	</bean>
 
-	<amq:queue id="exampleDestination" physicalName="example.queue" />
+	<bean id="jmsConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg ref="amqConnectionFactory" />
+	</bean>
 
 	<bean id="abstractJmsTemplate" class="org.springframework.jms.core.JmsTemplate" abstract="true">
 		<constructor-arg ref="jmsConnectionFactory" />

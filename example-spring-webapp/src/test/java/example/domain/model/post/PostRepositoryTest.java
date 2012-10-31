@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@Test(groups = { TestGroups.DB })
+@Test(groups = { TestGroups.JPA })
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jpa.xml")
 @Profile("test")
 public class PostRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {

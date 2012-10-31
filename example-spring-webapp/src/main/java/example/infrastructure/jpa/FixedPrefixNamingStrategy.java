@@ -5,9 +5,11 @@ import org.hibernate.cfg.ImprovedNamingStrategy;
 
 public class FixedPrefixNamingStrategy extends ImprovedNamingStrategy {
 
-	private final static String TABLE_PREFIX = "t_";
+	private static final long serialVersionUID = 1L;
 
-	private final static String COLUMN_PREFIX = "c_";
+	private static final String TABLE_PREFIX = "t_";
+
+	private static final String COLUMN_PREFIX = "c_";
 
 	@Override
 	public String classToTableName(String className) {

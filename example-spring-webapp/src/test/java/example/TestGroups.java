@@ -1,5 +1,7 @@
 package example;
 
 public interface TestGroups {
-	String DB = "db";
+	String UNIT = "unit";
+	String JPA = "jpa";
+	String JMS = "jms";
 }

@@ -18,7 +18,7 @@ import example.TestGroups;
 import example.domain.model.account.Account;
 import example.domain.model.account.AccountRepository;
 
-@Test(groups = { TestGroups.DB })
+@Test(groups = { TestGroups.JPA })
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jpa.xml")
 @Profile("test")
 public class BlogRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {

@@ -43,6 +43,7 @@
 					</aspectLibraries>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
+					<!-- With the flag Java debugger works correctly with around advices -->
 					<XnoInline>true</XnoInline>
 				</configuration>
 				<executions>

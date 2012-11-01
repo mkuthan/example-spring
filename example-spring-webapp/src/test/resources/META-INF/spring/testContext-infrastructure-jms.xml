@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:/test.properties" />
+
+	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jms.xml" />
+
+	<amq:queue id="testQueue" physicalName="example.test" />
+	<amq:queue id="testDlqQueue" physicalName="DLQ.example.test" />
+
+	<bean id="testJmsTemplate" parent="abstractJmsTemplate">
+		<property name="defaultDestination" ref="testQueue" />
+	</bean>
+
+	<bean id="testDlqJmsTemplate" parent="abstractJmsTemplate">
+		<property name="defaultDestination" ref="testDlqQueue" />
+		<property name="receiveTimeout" value="1000" />
+	</bean>
+
+	<bean id="testJmsListenerContainer" parent="abstractJmsListenerContainer">
+		<property name="destination" ref="testQueue" />
+		<property name="messageListener">
+			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+				<property name="delegate" ref="testListenerDelegate" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>

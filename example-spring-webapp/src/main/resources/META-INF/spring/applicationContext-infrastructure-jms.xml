@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:amq="http://activemq.apache.org/schema/core"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
-	http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+	xmlns:amq="http://activemq.apache.org/schema/core" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="example.infrastructure.jms" />
 
 	<amq:broker id="amqBroker" useJmx="true" useShutdownHook="false" persistent="false">
 		<amq:transportConnectors>
@@ -27,9 +30,9 @@
 		<property name="redeliveryPolicy">
 			<bean class="org.apache.activemq.RedeliveryPolicy">
 				<property name="useExponentialBackOff" value="true" />
-				<property name="initialRedeliveryDelay" value="${activemq.initialRedeliveryDelay}" />
-				<property name="backOffMultiplier" value="${activemq.backOffMultiplier}" />
-				<property name="maximumRedeliveries" value="${activemq.maximumRedeliveries}" />
+				<property name="initialRedeliveryDelay" value="${jms.initialRedeliveryDelay}" />
+				<property name="backOffMultiplier" value="${jms.backOffMultiplier}" />
+				<property name="maximumRedeliveries" value="${jms.maximumRedeliveries}" />
 				<property name="tempQueue" value="true" />
 			</bean>
 		</property>

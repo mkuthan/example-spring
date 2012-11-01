@@ -20,7 +20,7 @@
 		<property name="jpaPropertyMap">
 			<map>
 				<entry key="hibernate.ejb.naming_strategy" value="example.infrastructure.jpa.FixedPrefixNamingStrategy" />
-				<entry key="hibernate.cache.region.factory_class" value="net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory" />
+				<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" />
 				<entry key="hibernate.cache.use_second_level_cache" value="true" />
 				<entry key="hibernate.cache.use_query_cache" value="true" />
 			</map>

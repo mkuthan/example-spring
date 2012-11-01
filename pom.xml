@@ -23,12 +23,12 @@
 		<aspectj.version>1.7.1</aspectj.version>
 		<catchexception.version>1.0.4</catchexception.version>
 		<cglib.version>2.2.2</cglib.version>
-		<ehcache.version>2.6.0</ehcache.version>
 		<festassert.version>1.4</festassert.version>
 		<guava.version>13.0.1</guava.version>
 		<h2.version>1.3.164</h2.version>
-		<hibernate.version>3.6.9.Final</hibernate.version>
-		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+		<hibernate.version>4.1.8.Final</hibernate.version>
+		<hibernate-ehcache.version>4.1.8.Final</hibernate-ehcache.version>
+		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
 		<jbehave.version>3.7</jbehave.version>
 		<jodatime.version>1.6</jodatime.version>
 		<jodatime-hibernate.version>1.3</jodatime-hibernate.version>
@@ -44,25 +44,29 @@
 	<repositories>
 		<repository>
 			<id>spring-maven-release</id>
-			<name>Spring Maven Release Repository</name>
 			<url>http://maven.springframework.org/release</url>
 		</repository>
 		<repository>
 			<id>spring-maven-milestone</id>
-			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
+		</repository>
+		<repository>
+			<id>jboss-releases</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-maven-release</id>
-			<name>Spring Maven Release Repository</name>
 			<url>http://maven.springframework.org/release</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>spring-maven-milestone</id>
-			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jboss-releases</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
 		</pluginRepository>
 	</pluginRepositories>
 </project>

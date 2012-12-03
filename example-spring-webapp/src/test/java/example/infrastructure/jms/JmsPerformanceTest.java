@@ -6,10 +6,9 @@ import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class JmsQueuePerformanceTest extends AbstractJmsTest {
+public class JmsPerformanceTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();
 
@@ -18,16 +17,12 @@ public class JmsQueuePerformanceTest extends AbstractJmsTest {
 	private static final int NO_OF_MESSAGES = 1000;
 
 	@Autowired
-	@Qualifier("testPerformanceQueueJmsTemplate")
+	@Qualifier("testPerformanceJmsTemplate")
 	JmsTemplate jmsTemplate;
 
 	@Autowired
+	@Qualifier("testPerformanceListener")
 	JmsTestListener listener;
-
-	@BeforeClass
-	public void resetListener() {
-		reset(listener);
-	}
 
 	@Test(invocationCount = NO_OF_MESSAGES, threadPoolSize = NO_OF_PRODUCERS)
 	public void shouldSendMessages() {

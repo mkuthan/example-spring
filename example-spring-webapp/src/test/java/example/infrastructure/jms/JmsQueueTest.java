@@ -23,6 +23,7 @@ public class JmsQueueTest extends AbstractJmsTest {
 	JmsTemplate dlqJmsTemplate;
 
 	@Autowired
+	@Qualifier("testQueueListener")
 	JmsTestListener listener;
 
 	@BeforeMethod

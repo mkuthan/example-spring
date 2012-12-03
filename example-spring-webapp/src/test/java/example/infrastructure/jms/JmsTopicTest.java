@@ -20,6 +20,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 	JmsTemplate jmsTemplate;
 
 	@Autowired
+	@Qualifier("testTopicListener")
 	JmsTestListener listener;
 
 	@BeforeMethod

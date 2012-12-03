@@ -8,7 +8,17 @@ import org.springframework.context.annotation.Configuration;
 public class JmsTestConfiguration {
 
 	@Bean
-	public JmsTestListener testListener() {
+	public JmsTestListener testQueueListener() {
+		return Mockito.mock(JmsTestListener.class);
+	}
+
+	@Bean
+	public JmsTestListener testTopicListener() {
+		return Mockito.mock(JmsTestListener.class);
+	}
+
+	@Bean
+	public JmsTestListener testPerformanceListener() {
 		return Mockito.mock(JmsTestListener.class);
 	}
 }

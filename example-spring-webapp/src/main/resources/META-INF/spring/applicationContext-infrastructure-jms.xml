@@ -45,6 +45,7 @@
 	<bean id="abstractJmsTemplate" class="org.springframework.jms.core.JmsTemplate" abstract="true">
 		<constructor-arg ref="jmsConnectionFactory" />
 		<property name="sessionTransacted" value="true" />
+		<property name="receiveTimeout" value="${jms.receiveTimeout}" />
 	</bean>
 
 	<bean id="abstractJmsListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"

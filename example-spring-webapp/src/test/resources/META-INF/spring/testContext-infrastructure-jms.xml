@@ -18,7 +18,6 @@
 
 	<bean id="testDlqJmsTemplate" parent="abstractJmsTemplate">
 		<property name="defaultDestination" ref="testDlqQueue" />
-		<property name="receiveTimeout" value="1000" />
 	</bean>
 
 	<bean id="testJmsListenerContainer" parent="abstractJmsListenerContainer">

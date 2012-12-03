@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -23,8 +24,6 @@ import example.TestGroups;
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jms.xml")
 public class JmsInfrastructureTest extends AbstractTestNGSpringContextTests {
 
-	private static final int LISTENER_TIMEOUT = 3000;
-
 	private static final TestMessage ANY_MESSAGE = new TestMessage();
 
 	@Autowired
@@ -38,6 +37,9 @@ public class JmsInfrastructureTest extends AbstractTestNGSpringContextTests {
 	@Autowired
 	TestListenerDelegate testListenerDelegate;
 
+	@Value("${jms.receiveTimeout}")
+	int receiveTimeout;
+
 	@BeforeMethod
 	public void resetListener() {
 		reset(testListenerDelegate);
@@ -49,19 +51,20 @@ public class JmsInfrastructureTest extends AbstractTestNGSpringContextTests {
 		testJmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
 
 		// then
-		verify(testListenerDelegate, timeout(LISTENER_TIMEOUT)).handleMessage(eq(ANY_MESSAGE));
+		verify(testListenerDelegate, timeout(receiveTimeout)).handleMessage(eq(ANY_MESSAGE));
 	}
 
 	@Test
 	public void messageShouldBeRedelivered() {
-		// given (first call: throws exception, second call: handles message)
-		doThrow(new RuntimeException()).doNothing().when(testListenerDelegate).handleMessage(eq(ANY_MESSAGE));
+		// given (first & second calls: throws exception, third call: handles message)
+		doThrow(new RuntimeException("#1")).doThrow(new RuntimeException("#2")).doNothing().when(testListenerDelegate)
+				.handleMessage(eq(ANY_MESSAGE));
 
 		// when
 		testJmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
 
 		// then
-		verify(testListenerDelegate, timeout(LISTENER_TIMEOUT).times(2)).handleMessage(eq(ANY_MESSAGE));
+		verify(testListenerDelegate, timeout(receiveTimeout).times(3)).handleMessage(eq(ANY_MESSAGE));
 	}
 
 	@Test

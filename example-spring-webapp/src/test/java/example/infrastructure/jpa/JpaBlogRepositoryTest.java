@@ -1,27 +1,24 @@
-package example.domain.model.blog;
+package example.infrastructure.jpa;
 
 import static com.googlecode.catchexception.CatchException.*;
 import static org.fest.assertions.Assertions.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.google.common.base.Strings;
 
-import example.TestGroups;
 import example.domain.model.account.Account;
-import example.domain.model.account.AccountRepository;
+import example.domain.model.blog.Blog;
+import example.domain.model.blog.BlogBuilder;
+import example.domain.model.blog.BlogRepository;
+import example.domain.model.blog.Blogger;
+import example.domain.model.blog.BloggerBuilder;
 
-@Test(groups = { TestGroups.JPA })
-@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jpa.xml")
-@Profile("test")
-public class BlogRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
+public class JpaBlogRepositoryTest extends AbstractJpaRepositoryTest {
 
 	static final String EXISTING_BLOG_NAME = "EXISTING BLOG";
 	static final String ANY_BLOG_NAME = "ANY BLOG";
@@ -36,9 +33,6 @@ public class BlogRepositoryTest extends AbstractTransactionalTestNGSpringContext
 
 	BlogBuilder blogBuilder;
 	BloggerBuilder bloggerBuilder;
-
-	@Autowired
-	AccountRepository accountRepository;
 
 	@DataProvider
 	static final Object[][] validBlogs() {
@@ -73,7 +67,7 @@ public class BlogRepositoryTest extends AbstractTransactionalTestNGSpringContext
 	@BeforeMethod
 	void setUp() {
 		Account account = new Account("EXISTING ACCOUNT");
-		accountRepository.save(account);
+		entityManager.persist(account);
 
 		bloggerBuilder = new BloggerBuilder().withAccount(account).withFirstName(EXISTING_BLOGGER_FIRST_NAME)
 				.withLastName(EXISTING_BLOGGER_LAST_NAME);

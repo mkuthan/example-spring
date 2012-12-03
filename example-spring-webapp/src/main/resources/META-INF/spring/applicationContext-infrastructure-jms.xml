@@ -27,6 +27,12 @@
 
 	<bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="amqBroker">
 		<property name="brokerURL" value="vm://localhost" />
+		<property name="alwaysSyncSend" value="false" />
+		<property name="prefetchPolicy">
+			<bean class="org.apache.activemq.ActiveMQPrefetchPolicy">
+				<property name="queuePrefetch" value="10" />
+			</bean>
+		</property>
 		<property name="redeliveryPolicy">
 			<bean class="org.apache.activemq.RedeliveryPolicy">
 				<property name="useExponentialBackOff" value="true" />
@@ -38,9 +44,18 @@
 		</property>
 	</bean>
 
-	<bean id="jmsConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+	<bean id="jmsConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
 		<constructor-arg ref="amqConnectionFactory" />
+		<property name="reconnectOnException" value="true" />
 	</bean>
+
+	<!-- <bean id="jmsConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory"> -->
+	<!-- <constructor-arg ref="amqConnectionFactory" /> -->
+	<!-- <property name="reconnectOnException" value="true" /> -->
+	<!-- <property name="sessionCacheSize" value="10" /> -->
+	<!-- <property name="cacheConsumers" value="false" /> -->
+	<!-- <property name="cacheProducers" value="true" /> -->
+	<!-- </bean> -->
 
 	<bean id="abstractJmsTemplate" class="org.springframework.jms.core.JmsTemplate" abstract="true">
 		<constructor-arg ref="jmsConnectionFactory" />

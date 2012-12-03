@@ -9,21 +9,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
 
 @Test(groups = { TestGroups.JMS })
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jms.xml")
-public class JmsTopicTest extends AbstractTestNGSpringContextTests {
+public class JmsQueuePerformanceTest extends AbstractTestNGSpringContextTests {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();
 
-	private static final int NO_OF_CONSUMERS = 2;
+	private static final int NO_OF_PRODUCERS = 10;
+
+	private static final int NO_OF_MESSAGES = 1000;
 
 	@Autowired
-	@Qualifier("testTopicJmsTemplate")
+	@Qualifier("testPerformanceQueueJmsTemplate")
 	JmsTemplate jmsTemplate;
 
 	@Autowired
@@ -32,31 +34,19 @@ public class JmsTopicTest extends AbstractTestNGSpringContextTests {
 	@Value("${jms.receiveTimeout}")
 	int receiveTimeout;
 
-	@BeforeMethod
+	@BeforeClass
 	public void resetListener() {
 		reset(listener);
 	}
 
-	@Test
-	public void listenerShouldHandleMessage() {
-		// when
+	@Test(invocationCount = NO_OF_MESSAGES, threadPoolSize = NO_OF_PRODUCERS)
+	public void shouldSendMessages() {
 		jmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
-
-		// then
-		verify(listener, timeout(receiveTimeout).times(NO_OF_CONSUMERS)).handleMessage(eq(ANY_MESSAGE));
 	}
 
-	@Test
-	public void messageShouldBeRedelivered() {
-		// given (first & second calls: throws exception, third call: handles message)
-		doThrow(new RuntimeException("#1")).doThrow(new RuntimeException("#2")).doNothing().when(listener)
-				.handleMessage(eq(ANY_MESSAGE));
-
-		// when
-		jmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
-
-		// then
-		verify(listener, timeout(receiveTimeout).times(3)).handleMessage(eq(ANY_MESSAGE));
+	@Test(dependsOnMethods = "shouldSendMessages")
+	public void shouldHandleMessages() {
+		verify(listener, timeout(receiveTimeout).times(NO_OF_MESSAGES)).handleMessage(eq(ANY_MESSAGE));
 	}
 
 }

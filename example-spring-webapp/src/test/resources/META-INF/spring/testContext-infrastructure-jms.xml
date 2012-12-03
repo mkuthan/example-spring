@@ -9,24 +9,49 @@
 
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jms.xml" />
 
-	<amq:queue id="testQueue" physicalName="example.test" />
-	<amq:queue id="testDlqQueue" physicalName="DLQ.example.test" />
+	<!-- queue -->
+	<amq:queue id="testQueue" physicalName="example.testQueue" />
+	<amq:queue id="testDlqQueue" physicalName="DLQ.example.testQueue" />
 
-	<bean id="testJmsTemplate" parent="abstractJmsTemplate">
+	<bean id="testQueueJmsTemplate" parent="abstractJmsTemplate">
 		<property name="defaultDestination" ref="testQueue" />
 	</bean>
 
-	<bean id="testDlqJmsTemplate" parent="abstractJmsTemplate">
+	<bean id="testDlqQueueJmsTemplate" parent="abstractJmsTemplate">
 		<property name="defaultDestination" ref="testDlqQueue" />
 	</bean>
 
-	<bean id="testJmsListenerContainer" parent="abstractJmsListenerContainer">
+	<bean id="testQueueJmsListenerContainer" parent="abstractJmsListenerContainer">
 		<property name="destination" ref="testQueue" />
 		<property name="messageListener">
 			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-				<property name="delegate" ref="testListenerDelegate" />
+				<property name="delegate" ref="testListener" />
 			</bean>
 		</property>
 	</bean>
 
+	<!-- topic -->
+	<amq:topic id="testTopic" physicalName="example.testTopic" />
+
+	<bean id="testTopicJmsTemplate" parent="abstractJmsTemplate">
+		<property name="defaultDestination" ref="testTopic" />
+	</bean>
+
+	<bean id="testTopic1JmsListenerContainer" parent="abstractJmsListenerContainer">
+		<property name="destination" ref="testTopic" />
+		<property name="messageListener">
+			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+				<property name="delegate" ref="testListener" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="testTopic2JmsListenerContainer" parent="abstractJmsListenerContainer">
+		<property name="destination" ref="testTopic" />
+		<property name="messageListener">
+			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+				<property name="delegate" ref="testListener" />
+			</bean>
+		</property>
+	</bean>
 </beans>

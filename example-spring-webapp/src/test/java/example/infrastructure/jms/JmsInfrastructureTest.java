@@ -39,7 +39,7 @@ public class JmsInfrastructureTest extends AbstractTestNGSpringContextTests {
 	TestListenerDelegate testListenerDelegate;
 
 	@BeforeMethod
-	public void restetListener() {
+	public void resetListener() {
 		reset(testListenerDelegate);
 	}
 

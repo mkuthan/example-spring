@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JmsInfrastructureTestConfiguration {
+public class JmsTestConfiguration {
 
 	@Bean
 	public JmsTestListener testListener() {

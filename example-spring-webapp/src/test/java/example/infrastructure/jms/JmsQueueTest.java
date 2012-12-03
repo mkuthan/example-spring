@@ -6,18 +6,11 @@ import static org.mockito.Mockito.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import example.TestGroups;
-
-@Test(groups = { TestGroups.JMS })
-@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jms.xml")
-public class JmsQueueTest extends AbstractTestNGSpringContextTests {
+public class JmsQueueTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();
 
@@ -31,9 +24,6 @@ public class JmsQueueTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
 	JmsTestListener listener;
-
-	@Value("${jms.receiveTimeout}")
-	int receiveTimeout;
 
 	@BeforeMethod
 	public void resetListener() {

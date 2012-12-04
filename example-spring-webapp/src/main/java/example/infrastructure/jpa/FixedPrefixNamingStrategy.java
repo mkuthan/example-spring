@@ -1,6 +1,5 @@
 package example.infrastructure.jpa;
 
-import org.hibernate.annotations.common.util.StringHelper;
 import org.hibernate.cfg.ImprovedNamingStrategy;
 
 public class FixedPrefixNamingStrategy extends ImprovedNamingStrategy {
@@ -13,11 +12,21 @@ public class FixedPrefixNamingStrategy extends ImprovedNamingStrategy {
 
 	@Override
 	public String classToTableName(String className) {
-		return TABLE_PREFIX + StringHelper.unqualify(className);
+		return TABLE_PREFIX + super.classToTableName(className);
 	}
 
 	@Override
 	public String propertyToColumnName(String propertyName) {
-		return COLUMN_PREFIX + StringHelper.unqualify(propertyName);
+		return COLUMN_PREFIX + super.propertyToColumnName(propertyName);
+	}
+
+	@Override
+	public String joinKeyColumnName(String joinedColumn, String joinedTable) {
+		return COLUMN_PREFIX + super.joinKeyColumnName(joinedColumn, joinedTable);
+	}
+
+	@Override
+	public String columnName(String columnName) {
+		return COLUMN_PREFIX + super.columnName(columnName);
 	}
 }

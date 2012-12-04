@@ -20,6 +20,12 @@
 								processNonPersistent="true" />
 						</amq:deadLetterStrategy>
 					</amq:policyEntry>
+					<amq:policyEntry topic=">">
+						<amq:deadLetterStrategy>
+							<amq:individualDeadLetterStrategy topicPrefix="DLQ." useQueueForTopicMessages="true"
+								processNonPersistent="true" />
+						</amq:deadLetterStrategy>
+					</amq:policyEntry>
 				</amq:policyEntries>
 			</amq:policyMap>
 		</amq:destinationPolicy>
@@ -30,15 +36,15 @@
 		<property name="alwaysSyncSend" value="false" />
 		<property name="prefetchPolicy">
 			<bean class="org.apache.activemq.ActiveMQPrefetchPolicy">
-				<property name="queuePrefetch" value="10" />
+				<property name="queuePrefetch" value="1" />
 			</bean>
 		</property>
 		<property name="redeliveryPolicy">
 			<bean class="org.apache.activemq.RedeliveryPolicy">
-				<property name="useExponentialBackOff" value="true" />
 				<property name="initialRedeliveryDelay" value="${jms.initialRedeliveryDelay}" />
 				<property name="backOffMultiplier" value="${jms.backOffMultiplier}" />
 				<property name="maximumRedeliveries" value="${jms.maximumRedeliveries}" />
+				<property name="useExponentialBackOff" value="true" />
 				<property name="tempQueue" value="true" />
 			</bean>
 		</property>
@@ -53,20 +59,16 @@
 	<!-- <constructor-arg ref="amqConnectionFactory" /> -->
 	<!-- <property name="reconnectOnException" value="true" /> -->
 	<!-- <property name="sessionCacheSize" value="10" /> -->
-	<!-- <property name="cacheConsumers" value="false" /> -->
-	<!-- <property name="cacheProducers" value="true" /> -->
 	<!-- </bean> -->
 
 	<bean id="abstractJmsTemplate" class="org.springframework.jms.core.JmsTemplate" abstract="true">
 		<constructor-arg ref="jmsConnectionFactory" />
 		<property name="sessionTransacted" value="true" />
-		<property name="receiveTimeout" value="${jms.receiveTimeout}" />
 	</bean>
 
-	<bean id="abstractJmsListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+	<bean id="abstractJmsListenerContainer" class="org.springframework.jms.listener.SimpleMessageListenerContainer"
 		abstract="true">
 		<property name="connectionFactory" ref="jmsConnectionFactory" />
-		<property name="cacheLevelName" value="CACHE_NONE" />
 		<property name="sessionTransacted" value="true" />
 	</bean>
 </beans>

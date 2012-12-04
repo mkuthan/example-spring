@@ -13,10 +13,15 @@ public class JmsTestConfiguration {
 	}
 
 	@Bean
-	public JmsTestListener testTopicListener() {
+	public JmsTestListener testTopicListener1() {
 		return Mockito.mock(JmsTestListener.class);
 	}
 
+	@Bean
+	public JmsTestListener testTopicListener2() {
+		return Mockito.mock(JmsTestListener.class);
+	}
+	
 	@Bean
 	public JmsTestListener testPerformanceListener() {
 		return Mockito.mock(JmsTestListener.class);

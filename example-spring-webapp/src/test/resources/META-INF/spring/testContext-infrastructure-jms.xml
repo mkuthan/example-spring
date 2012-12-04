@@ -5,7 +5,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="classpath:/test.properties" />
+	<context:property-placeholder location="classpath:/test-jms.properties" />
 
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jms.xml" />
 
@@ -32,25 +32,30 @@
 
 	<!-- topic -->
 	<amq:topic id="testTopic" physicalName="example.testTopic" />
+	<amq:queue id="testDlqTopic" physicalName="example.testDlqTopic" />
 
 	<bean id="testTopicJmsTemplate" parent="abstractJmsTemplate">
 		<property name="defaultDestination" ref="testTopic" />
 	</bean>
 
-	<bean id="testTopic1JmsListenerContainer" parent="abstractJmsListenerContainer">
+	<bean id="testDlqTopicJmsTemplate" parent="abstractJmsTemplate">
+		<property name="defaultDestination" ref="testDlqTopic" />
+	</bean>
+
+	<bean id="testTopicJmsListenerContainer1" parent="abstractJmsListenerContainer">
 		<property name="destination" ref="testTopic" />
 		<property name="messageListener">
 			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-				<property name="delegate" ref="testTopicListener" />
+				<property name="delegate" ref="testTopicListener1" />
 			</bean>
 		</property>
 	</bean>
 
-	<bean id="testTopic2JmsListenerContainer" parent="abstractJmsListenerContainer">
+	<bean id="testTopicJmsListenerContainer2" parent="abstractJmsListenerContainer">
 		<property name="destination" ref="testTopic" />
 		<property name="messageListener">
 			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-				<property name="delegate" ref="testTopicListener" />
+				<property name="delegate" ref="testTopicListener2" />
 			</bean>
 		</property>
 	</bean>

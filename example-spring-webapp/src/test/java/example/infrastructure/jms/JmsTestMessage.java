@@ -1,15 +1,20 @@
 package example.infrastructure.jms;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 import com.google.common.base.Objects;
 
-public class JmsTestMessage implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class JmsTestMessage {
 
 	private UUID uuid = UUID.randomUUID();
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -61,9 +61,15 @@
 	<!-- <property name="sessionCacheSize" value="10" /> -->
 	<!-- </bean> -->
 
+	<bean id="messageConverter" class="org.springframework.jms.support.converter.MappingJacksonMessageConverter">
+		<property name="targetType" value="TEXT" />
+		<property name="typeIdPropertyName" value="type" />
+	</bean>
+
 	<bean id="abstractJmsTemplate" class="org.springframework.jms.core.JmsTemplate" abstract="true">
 		<constructor-arg ref="jmsConnectionFactory" />
 		<property name="sessionTransacted" value="true" />
+		<property name="messageConverter" ref="messageConverter" />
 	</bean>
 
 	<bean id="abstractJmsListenerContainer" class="org.springframework.jms.listener.SimpleMessageListenerContainer"
@@ -71,4 +77,9 @@
 		<property name="connectionFactory" ref="jmsConnectionFactory" />
 		<property name="sessionTransacted" value="true" />
 	</bean>
+
+	<bean id="abstractMessageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="messageConverter" ref="messageConverter" />
+	</bean>
+
 </beans>

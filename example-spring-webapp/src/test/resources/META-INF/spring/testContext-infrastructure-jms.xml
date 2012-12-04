@@ -24,7 +24,7 @@
 	<bean id="testQueueJmsListenerContainer" parent="abstractJmsListenerContainer">
 		<property name="destination" ref="testQueue" />
 		<property name="messageListener">
-			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+			<bean parent="abstractMessageListenerAdapter">
 				<property name="delegate" ref="testQueueListener" />
 			</bean>
 		</property>
@@ -45,7 +45,7 @@
 	<bean id="testTopicJmsListenerContainer1" parent="abstractJmsListenerContainer">
 		<property name="destination" ref="testTopic" />
 		<property name="messageListener">
-			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+			<bean parent="abstractMessageListenerAdapter">
 				<property name="delegate" ref="testTopicListener1" />
 			</bean>
 		</property>
@@ -54,7 +54,7 @@
 	<bean id="testTopicJmsListenerContainer2" parent="abstractJmsListenerContainer">
 		<property name="destination" ref="testTopic" />
 		<property name="messageListener">
-			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+			<bean parent="abstractMessageListenerAdapter">
 				<property name="delegate" ref="testTopicListener2" />
 			</bean>
 		</property>
@@ -71,7 +71,7 @@
 		<property name="destination" ref="testPerformance" />
 		<property name="concurrentConsumers" value="10" />
 		<property name="messageListener">
-			<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+			<bean parent="abstractMessageListenerAdapter">
 				<property name="delegate" ref="testPerformanceListener" />
 			</bean>
 		</property>

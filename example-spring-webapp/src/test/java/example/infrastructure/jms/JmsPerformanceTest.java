@@ -28,7 +28,7 @@ public class JmsPerformanceTest extends AbstractJmsTest {
 
 	@Test(invocationCount = NO_OF_MESSAGES, threadPoolSize = NO_OF_PRODUCERS, timeOut = 10000)
 	public void shouldSendMessages() {
-		jmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
+		jmsTemplate.convertAndSend(ANY_MESSAGE);
 	}
 
 	@Test(dependsOnMethods = "shouldSendMessages")

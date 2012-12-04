@@ -29,6 +29,7 @@
 		<hibernate.version>4.1.8.Final</hibernate.version>
 		<hibernate-ehcache.version>4.1.8.Final</hibernate-ehcache.version>
 		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
+		<jackson1.version>1.9.9</jackson1.version>
 		<jbehave.version>3.7</jbehave.version>
 		<jodatime.version>1.6</jodatime.version>
 		<jodatime-hibernate.version>1.3</jodatime-hibernate.version>

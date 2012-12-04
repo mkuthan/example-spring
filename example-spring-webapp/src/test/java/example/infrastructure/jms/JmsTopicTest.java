@@ -50,7 +50,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 	@Test
 	public void listenersShouldHandleMessage() {
 		// when
-		jmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
+		jmsTemplate.convertAndSend(ANY_MESSAGE);
 
 		// then
 		verify(listener1, timeout(RECEIVE_TIMEOUT).times(1)).handleMessage(eq(ANY_MESSAGE));
@@ -68,7 +68,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 		Stopwatch stopwatch = new Stopwatch().start();
 
 		// when
-		jmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
+		jmsTemplate.convertAndSend(ANY_MESSAGE);
 
 		// then
 		verify(listener1, timeout(RECEIVE_TIMEOUT).times(3)).handleMessage(eq(ANY_MESSAGE));
@@ -87,7 +87,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 		Stopwatch stopwatch = new Stopwatch().start();
 
 		// when
-		jmsTemplate.send(new ObjectMessageCreator(ANY_MESSAGE));
+		jmsTemplate.convertAndSend(ANY_MESSAGE);
 
 		JmsTestMessage testMessage1 = (JmsTestMessage) dlqJmsTemplate.receiveAndConvert();
 		assertThat(testMessage1).isEqualTo(ANY_MESSAGE);

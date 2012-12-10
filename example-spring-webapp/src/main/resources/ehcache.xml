@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false">
+	<diskStore path="java.io.tmpdir" /> 
+	
+	<defaultCache
+    	maxElementsInMemory="50000"
+    	overflowToDisk="false"
+    	statistics="true"
+  	/>
+  	
+  	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+		maxElementsInMemory="5000" 
+		eternal="true" 
+		overflowToDisk="true" 
+		statistics="true" 
+	/>
+		
+	<cache name="org.hibernate.cache.StandardQueryCache"
+		maxElementsInMemory="5000" 
+		eternal="false" 
+		timeToLiveSeconds="600"
+		overflowToDisk="true"
+		statistics="true" 
+	/>
+	
+	<cache name="example"
+		maxElementsInMemory="1000" 
+		eternal="false" 
+		overflowToDisk="false" 
+		statistics="true"
+		timeToLiveSeconds="3600"
+	/>
+</ehcache>

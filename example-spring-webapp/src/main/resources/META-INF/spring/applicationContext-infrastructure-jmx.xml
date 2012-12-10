@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:amq="http://activemq.apache.org/schema/core" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="jmxAttributeSource" class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
+
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+		<property name="locateExistingServerIfPossible" value="true" />
+	</bean>
+
+	<bean class="org.springframework.jmx.export.MBeanExporter">
+		<property name="server" ref="mbeanServer" />
+		<property name="autodetect" value="true" />
+		<property name="assembler">
+			<bean class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+				<property name="attributeSource" ref="jmxAttributeSource" />
+			</bean>
+		</property>
+		<property name="namingStrategy">
+			<bean class="org.springframework.jmx.export.naming.MetadataNamingStrategy">
+				<property name="attributeSource" ref="jmxAttributeSource" />
+			</bean>
+		</property>
+		<property name="beans">
+			<map>
+				<entry key="org.hibernate:type=Statistics,application=example">
+					<bean class="org.hibernate.jmx.StatisticsService">
+						<property name="sessionFactory">
+							<util:property-path path="entityManagerFactory.sessionFactory" />
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ehCacheMbeanRegistration" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod" value="net.sf.ehcache.management.ManagementService.registerMBeans" />
+		<property name="arguments">
+			<list>
+				<ref bean="ehcache" />
+				<ref bean="mbeanServer" />
+				<value type="boolean">true</value>
+				<value type="boolean">true</value>
+				<value type="boolean">true</value>
+				<value type="boolean">true</value>
+			</list>
+		</property>
+	</bean>
+</beans>

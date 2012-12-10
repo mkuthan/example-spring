@@ -12,8 +12,10 @@
 	<import resource="applicationContext-domain.xml" />
 	<import resource="applicationContext-service.xml" />
 
+	<import resource="applicationContext-infrastructure-cache.xml" />
 	<import resource="applicationContext-infrastructure-jpa.xml" />
 	<import resource="applicationContext-infrastructure-jms.xml" />
+	<import resource="applicationContext-infrastructure-jmx.xml" />
 
 	<import resource="applicationContext-security.xml" />
 </beans>

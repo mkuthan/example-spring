@@ -1,8 +1,11 @@
 package example.infrastructure.jms;
 
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +23,6 @@ public class JmsTopicTest extends AbstractJmsTest {
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();
 
 	private static final int RECEIVE_TIMEOUT = 10000;
-
-	private static final int NO_OF_CONSUMERS = 2;
 
 	@Autowired
 	@Qualifier("testTopicJmsTemplate")

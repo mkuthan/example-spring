@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<insertFromJNDI env-entry-name="java:comp/env/spring.profiles.active" as="profile" />
-
-	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
-		<resetJUL>true</resetJUL>
-	</contextListener>
-
-	<jmxConfigurator />
-	
-	<contextName>example</contextName>
-
-	<include resource="logback-${profile}.xml" />
-
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>

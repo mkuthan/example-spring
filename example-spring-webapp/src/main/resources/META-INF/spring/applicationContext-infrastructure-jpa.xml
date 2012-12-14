@@ -12,7 +12,7 @@
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="example.domain.model" />
+		<property name="packagesToScan" value="example.domain" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:generateDdl="${jpa.generateDdl}"
 				p:showSql="${jpa.showSql}" />
@@ -32,7 +32,7 @@
 	</bean>
 
 	<tx:annotation-driven mode="aspectj" />
-	<jpa:repositories base-package="example.domain.model" />
+	<jpa:repositories base-package="example.domain" />
 
 	<jdbc:embedded-database id="dataSource" type="H2" />
 

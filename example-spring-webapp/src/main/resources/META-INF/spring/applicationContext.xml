@@ -6,16 +6,8 @@
 
 	<context:property-placeholder location="classpath:/application.properties" />
 
-	<bean id="slf4JBridgeHandler" class="org.slf4j.bridge.SLF4JBridgeHandler" init-method="uninstall" />
-	<bean class="org.slf4j.bridge.SLF4JBridgeHandler" init-method="install" depends-on="slf4JBridgeHandler" />
-
 	<import resource="applicationContext-domain.xml" />
-	<import resource="applicationContext-service.xml" />
-
-	<import resource="applicationContext-infrastructure-cache.xml" />
-	<import resource="applicationContext-infrastructure-jpa.xml" />
-	<import resource="applicationContext-infrastructure-jms.xml" />
-	<import resource="applicationContext-infrastructure-jmx.xml" />
-
+	<import resource="applicationContext-infrastructure.xml" />
 	<import resource="applicationContext-security.xml" />
+	
 </beans>

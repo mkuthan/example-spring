@@ -9,7 +9,6 @@
 	<context:component-scan base-package="example.stories.steps" />
 
 	<import resource="classpath:/META-INF/spring/applicationContext-domain.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jms.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jpa.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-service.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure.xml" />
+
 </beans>

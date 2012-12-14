@@ -114,6 +114,12 @@
 						<artifactId>logback-access</artifactId>
 						<version>${logback.version}</version>
 					</dependency>
+					<!-- Tomcat 6 does not ship with JSTL implementation -->
+					<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>jstl</artifactId>
+						<version>1.2</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 		</plugins>
@@ -146,7 +152,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-			<!-- Tomcat 6 does not ship with JSTL implementation -->
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

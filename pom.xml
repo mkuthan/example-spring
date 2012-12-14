@@ -69,5 +69,9 @@
 			<id>jboss-releases</id>
 			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
 		</pluginRepository>
+		<pluginRepository>
+			<id>cloudbees-public-release</id>
+			<url>http://repository-cloudbees.forge.cloudbees.com/public-release</url>
+		</pluginRepository>
 	</pluginRepositories>
 </project>

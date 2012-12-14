@@ -5,7 +5,7 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import example.domain.model.blog.BlogRepository;
+import example.domain.blog.BlogRepository;
 
 @Steps
 public class ExampleSteps {

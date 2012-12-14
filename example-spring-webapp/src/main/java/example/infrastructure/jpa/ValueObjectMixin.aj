@@ -1,6 +1,6 @@
 package example.infrastructure.jpa;
 
-import example.domain.shared.DomainValueObject;
+import example.domain.shared.ddd.DomainValueObject;
 
 public privileged aspect ValueObjectMixin {
 

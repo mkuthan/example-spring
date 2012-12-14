@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
 
 import com.google.common.base.Strings;
 
-import example.domain.model.account.Account;
-import example.domain.model.blog.Blog;
-import example.domain.model.blog.BlogBuilder;
-import example.domain.model.blog.BlogRepository;
-import example.domain.model.blog.Blogger;
-import example.domain.model.blog.BloggerBuilder;
+import example.domain.blog.Blog;
+import example.domain.blog.BlogBuilder;
+import example.domain.blog.BlogRepository;
+import example.domain.blog.Blogger;
+import example.domain.blog.BloggerBuilder;
+import example.domain.security.Account;
 
 public class JpaBlogRepositoryTest extends AbstractJpaRepositoryTest {
 

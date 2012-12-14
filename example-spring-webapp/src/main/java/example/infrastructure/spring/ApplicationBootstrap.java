@@ -8,12 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
-import example.domain.model.account.Account;
-import example.domain.model.account.AccountRepository;
-import example.domain.model.blog.Blog;
-import example.domain.model.blog.BlogBuilder;
-import example.domain.model.blog.BlogRepository;
-import example.domain.model.blog.BloggerBuilder;
+import example.domain.blog.Blog;
+import example.domain.blog.BlogBuilder;
+import example.domain.blog.BlogRepository;
+import example.domain.blog.BloggerBuilder;
+import example.domain.security.Account;
+import example.domain.security.AccountRepository;
 
 @Component
 public class ApplicationBootstrap implements ApplicationListener<ContextRefreshedEvent> {

@@ -4,5 +4,5 @@ import example.domain.shared.AbstractAggregateEntity;
 import example.domain.shared.DomainEntity;
 
 @DomainEntity
-public class Comment extends AbstractAggregateEntity<Comment> {
+public class Comment extends AbstractAggregateEntity {
 }

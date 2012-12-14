@@ -12,7 +12,7 @@ import example.domain.shared.AbstractAggregateEntity;
 import example.domain.shared.DomainEntity;
 
 @DomainEntity
-public class Account extends AbstractAggregateEntity<Account> {
+public class Account extends AbstractAggregateEntity {
 
 	@Column(nullable = false, unique = true)
 	private String username;

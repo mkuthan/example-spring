@@ -1,6 +1,6 @@
 package example.domain.shared;
 
-public interface AggregateEntity<T extends AggregateEntity<T>> extends Entity<T> {
+public interface AggregateEntity extends Entity {
 
 	Integer getEntityVersion();
 

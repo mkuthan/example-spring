@@ -15,11 +15,20 @@
 
 	<properties>
 		<!-- Only unit tests enabled by default (m-surefire-p) -->
-		<groups>unit</groups>
+		<example.testGroups>unit</example.testGroups>
 	</properties>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12.4</version>
+				<configuration>
+					<groups>${example.testGroups}</groups>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>

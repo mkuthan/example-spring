@@ -10,6 +10,6 @@ import example.domain.shared.DomainEntity;
 @DomainEntity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Tag extends AbstractAggregateEntity<Tag> {
+public class Tag extends AbstractAggregateEntity {
 
 }

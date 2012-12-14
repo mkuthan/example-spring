@@ -1,10 +1,8 @@
 package example.domain.shared;
 
-public interface Entity<T extends Entity<T>> {
+public interface Entity {
 
 	Long getEntityId();
-
-	boolean sameIdentityAs(T entity);
 
 	boolean isManaged();
 

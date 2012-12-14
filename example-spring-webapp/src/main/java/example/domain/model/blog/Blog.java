@@ -11,7 +11,7 @@ import example.domain.shared.AbstractAggregateEntity;
 import example.domain.shared.DomainEntity;
 
 @DomainEntity
-public class Blog extends AbstractAggregateEntity<Blog> {
+public class Blog extends AbstractAggregateEntity {
 
 	public static final int NAME_MAX_LENGTH = 50;
 

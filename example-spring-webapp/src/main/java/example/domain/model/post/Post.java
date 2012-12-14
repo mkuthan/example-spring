@@ -12,7 +12,7 @@ import example.domain.shared.AbstractAggregateEntity;
 import example.domain.shared.DomainEntity;
 
 @DomainEntity
-public class Post extends AbstractAggregateEntity<Post> {
+public class Post extends AbstractAggregateEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Blog blog;

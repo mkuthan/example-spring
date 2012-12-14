@@ -10,6 +10,7 @@
 	<modules>
 		<module>example-spring-webapp</module>
 		<module>example-spring-test</module>
+		<module>example-spring-deploy</module>
 	</modules>
 
 	<properties>

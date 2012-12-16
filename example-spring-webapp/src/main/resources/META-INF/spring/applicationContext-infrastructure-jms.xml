@@ -61,7 +61,7 @@
 	<!-- <property name="sessionCacheSize" value="10" /> -->
 	<!-- </bean> -->
 
-	<bean id="messageConverter" class="org.springframework.jms.support.converter.MappingJacksonMessageConverter">
+	<bean id="messageConverter" class="org.springframework.jms.support.converter.MappingJackson2MessageConverter">
 		<property name="targetType" value="TEXT" />
 		<property name="typeIdPropertyName" value="type" />
 	</bean>

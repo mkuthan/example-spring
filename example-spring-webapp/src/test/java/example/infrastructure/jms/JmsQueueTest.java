@@ -15,6 +15,9 @@ import org.testng.annotations.Test;
 
 import com.google.common.base.Stopwatch;
 
+import example.TestGroups;
+
+@Test(groups = { TestGroups.INTEGRATION })
 public class JmsQueueTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();

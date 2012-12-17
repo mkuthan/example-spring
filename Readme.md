@@ -4,45 +4,38 @@ Collects best practices of the JEE applications based on Springframework.
 The showcase borrows also many concepts from another platforms and languages. 
 Focuses on developer productivity, even if Java and JEE are not well suited for rapid development.
 
-The example application is deployed at:
+The application is deployed on CloudBees platform:
 
-(http://example-spring.mkuthan.cloudbees.net/)
+http://example-spring.mkuthan.cloudbees.net/
 
 # Key Acronyms
 
-* DDD - project structure and setup aligned to Domain Driven Design mothodology
-* BDD - separate module for acceptance tests
-* TDD - everything must be testable
+## DDD
+
+Project structure and setup aligned with Domain Driven Design methodology. Package structure reflects domain concepts not technical details. This is only a top of iceberg in DDD, for more details see: [Domain-Driven Design: Tackling Complexity in the Heart of Software](http://www.goodreads.com/book/show/179133.Domain_Driven_Design).
+
+## BDD
+
+The technical infrastructure and configuration for Behavior Driven Development with JBehave. Please remember that the most important part of BDD is communication not tools and automation, for more details see: [Specification by Example](http://www.goodreads.com/book/show/10288718-specification-by-example).
+
+## TDD
+
+The best of the beast tools for testing: TestNG, Mockito and FestAssert are the key players. They make the tests first class citizen in your projects. For more details see: [Practical Unit Testing With TestNG and Mockito](http://www.goodreads.com/book/show/15737558-practical-unit-testing-with-testng-and-mockito).
 
 # Key Frameworks, Libraries and Runtimes
 
-* Spring
-* Spring MVC
-* Spring Security
-* Spring Data
-
-* Hibernate
-
-* CloudBees
-* MySQL
-* ActiveMQ
-* H2
-
-* Aspectj
-* Guava
-* JodaTime
-
-* SLF4j
-* Logback
-
-* JQuery
-* TwitterBootstrap
-* more soon ...
-
-* JBehave
-* TestNG
-* Mockito
-* Fest Assert
-* Catch Exception
-
-* Maven
+* Spring, Spring MVC, Spring Security, Spring Data together with AspectJ compile time weaving are the backbone of the showcase.
+* Hibernate as a persistence. I have plans to integrate NoSQL storages as well.
+* Guava as a swiss army knife, if you like functional programming, you are impatiently waiting for closures in Java, you will love this library.
+* JodaTime where SDK sucks.
+* SLF4J + Logback where SDK sucks.
+* JBehave for doing BDD not test scripts.
+* TestNG for testing on steroids, no more JUnit. 
+* Mockito the best library for mocking, developed by Polish guy!
+* FestAssert to address a little bit not so flexible Java syntax.
+* CatchException to be more explicit in exception handling testing.
+* JQuery + TwitterBootstrap give a good support for developer with strong server side background (me). You could expect more JS stuff soon, I'm learning heavily ...
+* ActiveMQ for asynchronous processing, integration with WebSockets is comming ...
+* CloudBees as a awesome runtime platform and continuous delivery automation tool (Jenkins).
+* MySql as a default database, but in memory H2 for integration tests. 
+* And last but not least: old good Maven. I will migrate project to Gradle eventually ...

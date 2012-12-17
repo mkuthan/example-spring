@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cloudbees-web-app xmlns="http://www.cloudbees.com/xml/webapp/1">
+	<environment name="dev">
+		<appid>mkuthan/example-spring-dev</appid>
+
+		<resource name="spring.profiles.active" value="remote" type="jndi-env" />
+
+		<resource name="jdbc/dataSource" auth="Container" type="javax.sql.DataSource">
+			<param name="username" value="mkuthan" />
+			<param name="password" value="pAssword" />
+			<param name="url" value="jdbc:cloudbees://example-spring" />
+		</resource>
+	</environment>
+</cloudbees-web-app>

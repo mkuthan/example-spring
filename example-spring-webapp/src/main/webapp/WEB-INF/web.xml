@@ -13,16 +13,6 @@
 	</context-param>
 
 	<filter>
-		<filter-name>TeeFilter</filter-name>
-		<filter-class>ch.qos.logback.access.servlet.TeeFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>TeeFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
@@ -91,31 +81,6 @@
 	<servlet-mapping>
 		<servlet-name>example-spring</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>db</servlet-name>
-		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
-		<init-param>
-			<param-name>-webAllowOthers</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>db</servlet-name>
-		<url-pattern>/db/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>log</servlet-name>
-		<servlet-class>ch.qos.logback.classic.ViewStatusMessagesServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>log</servlet-name>
-		<url-pattern>/log</url-pattern>
 	</servlet-mapping>
 
 	<session-config>

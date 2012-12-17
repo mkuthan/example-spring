@@ -114,11 +114,6 @@
 						<artifactId>logback-classic</artifactId>
 						<version>${logback.version}</version>
 					</dependency>
-					<dependency>
-						<groupId>ch.qos.logback</groupId>
-						<artifactId>logback-access</artifactId>
-						<version>${logback.version}</version>
-					</dependency>
 					<!-- Tomcat 6 does not ship with JSTL implementation -->
 					<dependency>
 						<groupId>javax.servlet</groupId>
@@ -403,14 +398,6 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
-		<!-- H2 -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-
 		<!-- ActiveMQ -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -486,6 +473,13 @@
 		</dependency>
 
 		<!-- Tests -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>

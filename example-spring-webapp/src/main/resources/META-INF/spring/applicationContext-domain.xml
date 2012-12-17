@@ -6,6 +6,4 @@
 
 	<context:component-scan base-package="example.domain" />
 	
-	<context:spring-configured />
-	
 </beans>

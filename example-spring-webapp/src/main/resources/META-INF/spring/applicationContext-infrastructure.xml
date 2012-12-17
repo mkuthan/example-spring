@@ -4,8 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="slf4JBridgeHandler" class="org.slf4j.bridge.SLF4JBridgeHandler" init-method="uninstall" />
-	<bean class="org.slf4j.bridge.SLF4JBridgeHandler" init-method="install" depends-on="slf4JBridgeHandler" />
+	<import resource="applicationContext-infrastructure-common.xml" />
 
 	<import resource="applicationContext-infrastructure-cache.xml" />
 	<import resource="applicationContext-infrastructure-jpa.xml" />

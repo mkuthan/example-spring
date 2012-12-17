@@ -12,11 +12,6 @@
 		<param-value>classpath:/META-INF/spring/applicationContext.xml</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>spring.profiles.active</param-name>
-		<param-value>dev</param-value>
-	</context-param>
-
 	<filter>
 		<filter-name>TeeFilter</filter-name>
 		<filter-class>ch.qos.logback.access.servlet.TeeFilter</filter-class>

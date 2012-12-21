@@ -13,16 +13,11 @@
 	<name>${project.artifactId}</name>
 	<packaging>jar</packaging>
 
-	<properties>
-		<webClassifier>classes</webClassifier>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12.4</version>
 				<configuration>
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
@@ -35,7 +30,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
 				<executions>
 					<execution>
 						<id>copy-navigator-resources</id>
@@ -58,7 +52,6 @@
 			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
-				<version>${jbehave.version}</version>
 				<executions>
 					<execution>
 						<id>unpack-view-resources</id>
@@ -72,35 +65,6 @@
 				</dependencies>
 			</plugin>
 		</plugins>
-
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.jbehave</groupId>
-										<artifactId>jbehave-maven-plugin</artifactId>
-										<versionRange>[3.7,)</versionRange>
-										<goals>
-											<goal>unpack-view-resources</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<dependencies>
@@ -108,7 +72,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>example-spring-webapp</artifactId>
 			<version>${project.version}</version>
-			<classifier>${webClassifier}</classifier>
+			<classifier>${example.webClassifier}</classifier>
 		</dependency>
 
 		<dependency>
@@ -144,18 +108,4 @@
 			<type>zip</type>
 		</dependency>
 	</dependencies>
-
-	<profiles>
-		<profile>
-			<id>m2e</id>
-			<activation>
-				<property>
-					<name>m2e.version</name>
-				</property>
-			</activation>
-			<properties>
-				<webClassifier></webClassifier>
-			</properties>
-		</profile>
-	</profiles>
 </project>

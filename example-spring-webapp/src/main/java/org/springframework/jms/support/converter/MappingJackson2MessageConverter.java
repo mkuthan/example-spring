@@ -393,6 +393,7 @@ public class MappingJackson2MessageConverter implements MessageConverter {
 		if (typeId == null) {
 			throw new MessageConversionException("Could not find type id property [" + this.typeIdPropertyName + "]");
 		}
+		@SuppressWarnings("rawtypes")
 		Class mappedClass = this.idClassMappings.get(typeId);
 		if (mappedClass != null) {
 			return objectMapper.constructType(mappedClass);

@@ -1,6 +1,6 @@
 package org.mockito.testng;
 
-import static org.mockito.internal.util.reflection.Fields.*;
+import static org.mockito.internal.util.reflection.Fields.annotatedBy;
 
 import java.util.List;
 import java.util.WeakHashMap;
@@ -45,6 +45,7 @@ public class MockitoBeforeTestNGMethod {
 		markAsInitialized(testResult.getInstance());
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initializeCaptors(Object instance) {
 		List<InstanceField> instanceFields = Fields.allDeclaredFieldsOf(instance).filter(annotatedBy(Captor.class))
 				.instanceFields();

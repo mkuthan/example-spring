@@ -1,16 +1,19 @@
 package example.infrastructure.jms;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@Test(groups = { TestGroups.PERFORMANCE })
+@Test(groups = { TestGroups.INTEGRATION, TestGroups.PERFORMANCE })
+@ActiveProfiles("test")
 public class JmsPerformanceTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();

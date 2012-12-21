@@ -1,8 +1,11 @@
 package example.infrastructure.jms;
 
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,9 +18,6 @@ import org.testng.annotations.Test;
 
 import com.google.common.base.Stopwatch;
 
-import example.TestGroups;
-
-@Test(groups = { TestGroups.INTEGRATION })
 public class JmsQueueTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();

@@ -30,11 +30,13 @@ public class MockitoAfterTestNGMethod {
 		Mockito.reset(instanceMocksOf(instance).toArray());
 	}
 
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	private Collection<Object> instanceMocksOf(Object instance) {
 		return Fields.allDeclaredFieldsOf(instance)
 				.filter(annotatedBy(Mock.class, Spy.class, MockitoAnnotations.Mock.class)).notNull().assignedValues();
 	}
 
+	@SuppressWarnings("unused")
 	private Set<Object> instanceMocksIn(Object instance, Class<?> clazz) {
 		Set<Object> instanceMocks = new HashSet<Object>();
 		Field[] declaredFields = clazz.getDeclaredFields();

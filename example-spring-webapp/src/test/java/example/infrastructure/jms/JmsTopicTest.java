@@ -1,8 +1,11 @@
 package example.infrastructure.jms;
 
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.google.common.base.Stopwatch;
 
-import example.TestGroups;
-
-@Test(groups = { TestGroups.INTEGRATION })
+@ActiveProfiles("test")
 public class JmsTopicTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();

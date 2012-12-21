@@ -28,28 +28,6 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-navigator-resources</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/jbehave/view</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/jbehave-navigator</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
 				<executions>
@@ -61,8 +39,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<dependencies>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

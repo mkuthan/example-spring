@@ -4,7 +4,7 @@ Meta:
 @author Marcin Kuthan 
  
 Narrative:
-In order 		to communicate effectively to the business some functionality
+In order to		to communicate effectively to the business some functionality
 As a 			development team
 I want to 		use Behaviour-Driven Development
      

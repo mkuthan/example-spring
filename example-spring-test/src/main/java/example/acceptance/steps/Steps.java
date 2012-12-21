@@ -1,4 +1,4 @@
-package example.stories.steps;
+package example.acceptance.steps;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -6,7 +6,7 @@
 
 	<context:property-placeholder location="classpath:/application.properties" />
 
-	<context:component-scan base-package="example.stories.steps" />
+	<context:component-scan base-package="example.acceptance.steps" />
 
 	<import resource="classpath:/META-INF/spring/applicationContext-domain.xml" />
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure.xml" />

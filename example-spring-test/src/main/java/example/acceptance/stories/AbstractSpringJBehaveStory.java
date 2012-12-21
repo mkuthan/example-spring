@@ -1,6 +1,9 @@
-package example.stories;
+package example.acceptance.stories;
 
-import static org.jbehave.core.reporters.Format.*;
+import static org.jbehave.core.reporters.Format.HTML;
+import static org.jbehave.core.reporters.Format.IDE_CONSOLE;
+import static org.jbehave.core.reporters.Format.TXT;
+import static org.jbehave.core.reporters.Format.XML;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,11 +25,13 @@ import org.jbehave.core.steps.spring.SpringStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/META-INF/spring/storiesContext.xml" })
+@ActiveProfiles("test")
 public abstract class AbstractSpringJBehaveStory extends JUnitStory {
 
 	@Autowired

@@ -7,7 +7,11 @@
 
 	<context:component-scan base-package="example.web" />
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="org.springframework.data.web.PageableArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 
 	<mvc:resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**" cache-period="${mvc.resourcesCachePeriod}" />
 

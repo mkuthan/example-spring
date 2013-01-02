@@ -9,4 +9,6 @@
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jpa.xml" />
 
+	<context:spring-configured />
+	
 </beans>

@@ -18,8 +18,8 @@
 
 	<context:spring-configured />
 
+	<import resource="applicationContext-bootstrap.xml" />
 	<import resource="applicationContext-domain.xml" />
 	<import resource="applicationContext-infrastructure.xml" />
-	<import resource="applicationContext-security.xml" />
 
 </beans>

@@ -1,15 +1,14 @@
 package example.domain.example;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import javax.persistence.Column;
 
-import com.google.common.base.Objects;
-
+import example.domain.shared.ddd.AbstractValueObject;
 import example.domain.shared.ddd.DomainValueObject;
 
 @DomainValueObject
-public class ExampleValueObject {
+public class ExampleValueObject extends AbstractValueObject {
 
 	public static final int FIELD_MAX_LENGTH = 100;
 
@@ -33,30 +32,6 @@ public class ExampleValueObject {
 
 	public String getFieldB() {
 		return fieldB;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-
-		ExampleValueObject other = (ExampleValueObject) obj;
-		return Objects.equal(fieldA, other.fieldA) && Objects.equal(fieldB, other.fieldB);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(fieldA, fieldB);
-	}
-
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).addValue(fieldA).addValue(fieldB).toString();
 	}
 
 	public static class Builder {

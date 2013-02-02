@@ -10,7 +10,7 @@
 <title>${title}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/resources/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
 	padding-top: 60px;
@@ -67,8 +67,8 @@ body {
 	</div>
 
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="${contextPath}/resources/js/jquery.min.js"></script>
-	<script type="text/javascript" src="${contextPath}/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/assets/scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/assets/scripts/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -1,57 +1,58 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<jsp:directive.attribute name="title" />
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<jsp:directive.attribute name="title" description="Page title" />
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>${title}</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="${contextPath}/resources/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-body {
-	padding-top: 60px;
-	padding-bottom: 40px;
-}
-</style>
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+	<meta http-equiv="X-UA-Compatible" content="IE=8" >
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title><spring:message code="application_name" /> - ${title}</title>
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<link href="${pageContext.request.contextPath}/resources/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/resources/styles/example-spring.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="${contextPath}">Blogger</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#about">About</a></li>
-						<li><a href="#contact">Contact</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li class="nav-header">Nav header</li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul></li>
-					</ul>
-					<form class="navbar-form pull-right">
-						<input class="span2" type="text" placeholder="Email" /> <input class="span2" type="password"
-							placeholder="Password" />
-						<button type="submit" class="btn">Sign in</button>
-					</form>
-				</div>
-				<!--/.nav-collapse -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> 
+				<a class="brand" href="${pageContext.request.contextPath}">
+					<spring:message code="application_name" />
+				</a>
+				
+				<sec:authorize access="isAuthenticated()">				
+					<div class="nav-collapse">
+						<ul class="nav pull-right">
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="icon-user icon-white"></i>
+									<sec:authentication property="principal.username" />
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="${pageContext.request.contextPath}/resources/j_spring_security_logout">
+											<i class="icon-off"></i>
+											<spring:message code="security_logout" />
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>				
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
@@ -59,16 +60,28 @@ body {
 	<div class="container">
 		<jsp:doBody />
 
-		<hr>
-
-		<footer>
-			<p>&copy; Marcin Kuthan 2012</p>
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="span4">
+						<spring:message code="application_copyright" htmlEscape="false"></spring:message>
+					</div>
+					<div class="span4">
+						<i class="icon-envelope"></i> 
+						marcin.kuthan@gmail.com
+					</div>
+					<div class="span4">
+						<i class="icon-info-sign"></i> 
+						Version: <spring:message code="application_version" />, Build: <spring:message code="application_buildDdate" />
+					</div>
+				</div>		
+			</div>				
 		</footer>
 	</div>
 
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="${contextPath}/resources/assets/scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="${contextPath}/resources/assets/scripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/bootstrap.min.js"></script>
 </body>
 
 </html>

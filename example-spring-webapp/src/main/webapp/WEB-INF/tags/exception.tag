@@ -2,8 +2,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="example" tagdir="/WEB-INF/tags"%>
 
-<jsp:directive.attribute name="error_title" required="true"/>
-<jsp:directive.attribute name="error_description" required="true"/>
+<jsp:directive.attribute name="error_title" required="true" description="Error title" />
+<jsp:directive.attribute name="error_description" required="true" description="Error description" />
 
 <example:layout>
 	<jsp:attribute name="title">

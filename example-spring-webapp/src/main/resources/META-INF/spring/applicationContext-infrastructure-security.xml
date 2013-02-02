@@ -7,18 +7,23 @@
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"
 		mode="aspectj" />
 
-	<security:http pattern="/assets/*" security="none" />
-	<security:http pattern="/login*" security="none" />
-
 	<security:http entry-point-ref="authenticationEntryPoint" auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<security:intercept-url pattern="/login*" access="permitAll" />
+		<security:intercept-url pattern="/loggedOut" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+
+		<security:form-login login-processing-url="/resources/j_spring_security_check"
+			authentication-failure-url="/login?login_error=t" />
+		<security:logout logout-url="/resources/j_spring_security_logout" logout-success-url="/loggedOut" />
+
 		<security:request-cache ref="authenticationRequestCache" />
 	</security:http>
 
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user name="admin" password="password" authorities="ROLE_ADMIN, ROLE_USER" />
+				<security:user name="admin" password="password" authorities="ROLE_ADMIN,ROLE_USER" />
 				<security:user name="user" password="password" authorities="ROLE_USER" />
 			</security:user-service>
 		</security:authentication-provider>

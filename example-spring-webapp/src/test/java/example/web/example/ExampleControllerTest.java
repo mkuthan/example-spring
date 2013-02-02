@@ -58,7 +58,7 @@ public class ExampleControllerTest extends AbstractContollerTest {
 		when(exampleRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<ExampleEntity>(content));
 
 		// when & then
-		perform(get(RequestMappings.EXAMPLES).accept(MediaType.APPLICATION_JSON))
+		perform(get(RequestMappings.EXAMPLES_REST).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8"))
 				.andExpect(jsonPath("$.content").value(hasSize(content.size())))

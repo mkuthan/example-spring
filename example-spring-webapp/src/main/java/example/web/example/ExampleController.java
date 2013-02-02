@@ -24,8 +24,18 @@ public class ExampleController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
+	public String examples() {
+		return RequestMappings.EXAMPLES;
+	}
+	
+	@RequestMapping(value = RequestMappings.EXAMPLES_REST, method = RequestMethod.GET)
 	@ResponseBody
 	public Page<ExampleEntity> list(Pageable page) {
 		return exampleRepository.findAll(page);
+	}
+
+	@RequestMapping(value = RequestMappings.EXAMPLES_UNCAUGHT_EXCEPTION, method = RequestMethod.GET)
+	public String throwRuntimeException() {
+		throw new RuntimeException("Sample error");
 	}
 }

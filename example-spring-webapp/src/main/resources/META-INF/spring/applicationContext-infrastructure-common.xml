@@ -9,4 +9,10 @@
 	<bean id="slf4JBridgeHandler" class="org.slf4j.bridge.SLF4JBridgeHandler" init-method="uninstall" />
 	<bean class="org.slf4j.bridge.SLF4JBridgeHandler" init-method="install" depends-on="slf4JBridgeHandler" />
 
+	<bean id="passwordSalt" class="java.lang.String">
+		<constructor-arg value="example_salt" />
+	</bean>
+
+	<bean id="shaPasswordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
+
 </beans>

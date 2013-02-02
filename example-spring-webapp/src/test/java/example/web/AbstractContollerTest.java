@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@ContextConfiguration("classpath:/META-INF/spring/applicationContext-web.xml")
+@ContextConfiguration("classpath:/META-INF/spring/testContext-web.xml")
 @Test(groups = { TestGroups.INTEGRATION })
 @ActiveProfiles("test")
 @WebAppConfiguration

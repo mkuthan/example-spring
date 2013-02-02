@@ -23,7 +23,7 @@ public class ExampleBootstrapListener implements ApplicationListener<BootstrapEv
 	@Transactional
 	public void onApplicationEvent(BootstrapEvent event) {
 		if (!examplesExist()) {
-			Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("any value A").withFieldA(
+			Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("any value A").withFieldB(
 					"any value B");
 
 			for (int i = 0; i < 100; i++) {

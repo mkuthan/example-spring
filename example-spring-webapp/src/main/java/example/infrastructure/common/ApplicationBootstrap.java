@@ -1,4 +1,4 @@
-package example.infrastructure.spring;
+package example.infrastructure.common;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;

@@ -1,4 +1,4 @@
-package example.infrastructure.spring;
+package example.infrastructure.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;

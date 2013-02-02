@@ -59,25 +59,26 @@
 
 	<div class="container">
 		<jsp:doBody />
-
-		<footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="span4">
-						<spring:message code="application_copyright" htmlEscape="false"></spring:message>
-					</div>
-					<div class="span4">
-						<i class="icon-envelope"></i> 
-						marcin.kuthan@gmail.com
-					</div>
-					<div class="span4">
-						<i class="icon-info-sign"></i> 
-						Version: <spring:message code="application_version" />, Build: <spring:message code="application_buildDdate" />
-					</div>
-				</div>		
-			</div>				
-		</footer>
 	</div>
+	
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="span4">
+					<spring:message code="application_copyright" htmlEscape="false"></spring:message>
+				</div>
+				<div class="span4">
+					<i class="icon-envelope"></i> 
+					marcin.kuthan@gmail.com
+				</div>
+				<div class="span4">
+					<i class="icon-info-sign"></i> 
+					Version: <spring:message code="application_version" />, Build: <spring:message code="application_buildDdate" />
+				</div>
+			</div>		
+		</div>				
+	</footer>
+	
 
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery.min.js"></script>

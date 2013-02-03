@@ -7,6 +7,13 @@ body {
 	padding: 9px 0;
 }
 
+.modal {
+	width: 90%;
+	left: 5%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .footer {
 	padding: 10px 0;
 	margin-top: 30px;

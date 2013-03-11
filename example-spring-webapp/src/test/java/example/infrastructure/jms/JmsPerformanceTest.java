@@ -20,7 +20,7 @@ public class JmsPerformanceTest extends AbstractJmsTest {
 
 	private static final int NO_OF_PRODUCERS = 10;
 
-	private static final int NO_OF_MESSAGES = 1000;
+	private static final int NO_OF_MESSAGES = 5000;
 
 	private static final int RECEIVE_TIMEOUT = 500;
 
@@ -32,7 +32,7 @@ public class JmsPerformanceTest extends AbstractJmsTest {
 	@Qualifier("testPerformanceListener")
 	private JmsTestListener listener;
 
-	@Test(invocationCount = NO_OF_MESSAGES, threadPoolSize = NO_OF_PRODUCERS, timeOut = 10000)
+	@Test(invocationCount = NO_OF_MESSAGES, threadPoolSize = NO_OF_PRODUCERS)
 	public void shouldSendMessages() {
 		jmsTemplate.convertAndSend(ANY_MESSAGE);
 	}

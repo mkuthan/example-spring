@@ -1,20 +1,21 @@
-package example.bootstrap.listeners;
+package example.domain.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
 import example.bootstrap.BootstrapEvent;
-import example.domain.blog.Blog;
-import example.domain.blog.BlogBuilder;
-import example.domain.blog.BlogRepository;
-import example.domain.blog.BloggerBuilder;
+import example.bootstrap.BootstrapOrder;
 import example.domain.security.Account;
+import example.domain.security.AccountBootstrapListener;
 import example.domain.security.AccountRepository;
 
-public class BlogBootstrapListener implements ApplicationListener<BootstrapEvent> {
+@Component
+public class BlogBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {
 
 	@Autowired
 	private BlogRepository blogRepository;
@@ -38,6 +39,11 @@ public class BlogBootstrapListener implements ApplicationListener<BootstrapEvent
 		}
 	}
 
+	@Override
+	public int getOrder() {
+		return BootstrapOrder.BLOG;
+	}
+	
 	private boolean blogsExist() {
 		return blogRepository.count() > 0;
 	}

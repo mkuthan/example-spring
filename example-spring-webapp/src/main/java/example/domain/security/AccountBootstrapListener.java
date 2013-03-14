@@ -1,16 +1,16 @@
-package example.bootstrap.listeners;
+package example.domain.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
 
 import example.bootstrap.BootstrapEvent;
 import example.bootstrap.BootstrapOrder;
-import example.domain.security.Account;
-import example.domain.security.AccountRepository;
 
+@Component
 public class AccountBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {
 
 	public static final String MARCIN = "marcin";

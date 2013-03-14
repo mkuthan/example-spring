@@ -1,4 +1,4 @@
-package example.bootstrap.listeners;
+package example.domain.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -8,10 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import example.bootstrap.BootstrapEvent;
 import example.bootstrap.BootstrapOrder;
-import example.domain.example.ExampleEntity;
-import example.domain.example.ExampleRepository;
-import example.domain.example.ExampleValueObject;
-import example.domain.example.ExampleValueObject.Builder;
 
 @Component
 public class ExampleBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {
@@ -23,7 +19,7 @@ public class ExampleBootstrapListener implements ApplicationListener<BootstrapEv
 	@Transactional
 	public void onApplicationEvent(BootstrapEvent event) {
 		if (!examplesExist()) {
-			Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("any value A").withFieldB(
+			ExampleValueObject.Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("any value A").withFieldB(
 					"any value B");
 
 			for (int i = 0; i < 100; i++) {

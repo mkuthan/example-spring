@@ -45,16 +45,6 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
@@ -79,7 +69,8 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				classpath:/META-INF/spring/applicationContext-properties.xml, 
-				classpath:/META-INF/spring/applicationContext-web.xml
+				classpath:/META-INF/spring/applicationContext-web.xml,
+				classpath:/META-INF/spring/applicationContext-infrastructure-web.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

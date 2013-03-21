@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="example.infrastructure.web" />
+
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="org.springframework.data.web.PageableArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
+	<mvc:resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**" cache-period="${mvc.resourcesCachePeriod}" />
+
+	<mvc:default-servlet-handler />
+
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor" />
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang" />
+		<bean class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
+			<property name="entityManagerFactory" ref="entityManagerFactory" />
+		</bean>
+	</mvc:interceptors>
+
+	<mvc:view-controller path="/" view-name="index" />
+	<mvc:view-controller path="/login" />
+	<mvc:view-controller path="/loggedOut" />
+	<mvc:view-controller path="/uncaughtException" />
+	<mvc:view-controller path="/resourceNotFound" />
+	<mvc:view-controller path="/dataAccessFailure" />
+
+	<bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource"
+		p:basenames="classpath:/messages" p:fallbackToSystemLocale="false" p:cacheSeconds="${mvc.resourcesCachePeriod}" />
+
+	<bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver" id="localeResolver" p:cookieName="locale" />
+
+	<bean class="org.springframework.ui.context.support.ResourceBundleThemeSource" id="themeSource" />
+
+	<bean class="org.springframework.web.servlet.theme.CookieThemeResolver" id="themeResolver" p:cookieName="theme"
+		p:defaultThemeName="standard" />
+
+	<!--
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:defaultErrorView="uncaughtException">
+		<property name="exceptionMappings">
+			<props>
+				<prop key=".DataAccessException">dataAccessFailure</prop>
+				<prop key=".NoSuchRequestHandlingMethodException">resourceNotFound</prop>
+				<prop key=".TypeMismatchException">resourceNotFound</prop>
+				<prop key=".MissingServletRequestParameterException">resourceNotFound</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>

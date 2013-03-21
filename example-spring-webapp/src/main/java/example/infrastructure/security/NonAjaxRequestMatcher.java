@@ -2,17 +2,24 @@ package example.infrastructure.security;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.util.RequestMatcher;
+import org.springframework.stereotype.Component;
 
+import example.infrastructure.common.AjaxHeaderMatcher;
+
+@Component
 public class NonAjaxRequestMatcher implements RequestMatcher {
 
-	private static final String HEADER_NAME = "X-Requested-With";
+	private AjaxHeaderMatcher ajaxHeaderMatcher;
 
-	private static final String HEADER_VALUE = "XmlHttpRequest";
+	@Autowired
+	public NonAjaxRequestMatcher(AjaxHeaderMatcher ajaxHeaderMatcher) {
+		this.ajaxHeaderMatcher = ajaxHeaderMatcher;
+	}
 
 	@Override
 	public boolean matches(HttpServletRequest request) {
-		return !HEADER_VALUE.equalsIgnoreCase(request.getHeader(HEADER_NAME));
+		return !ajaxHeaderMatcher.isAjaxRequest(request);
 	}
-
 }

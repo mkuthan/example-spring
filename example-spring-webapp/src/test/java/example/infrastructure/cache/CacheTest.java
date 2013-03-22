@@ -1,11 +1,7 @@
 package example.infrastructure.cache;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,7 +14,7 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-cache.xml")
+@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-cache.xml")
 @Test(groups = { TestGroups.INTEGRATION })
 @ActiveProfiles("test")
 public class CacheTest extends AbstractTestNGSpringContextTests {

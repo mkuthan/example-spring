@@ -1,4 +1,4 @@
-package example.domain.blog;
+package example.bootstrap.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -10,8 +10,11 @@ import com.google.common.collect.Lists;
 
 import example.bootstrap.BootstrapEvent;
 import example.bootstrap.BootstrapOrder;
+import example.domain.blog.Blog;
+import example.domain.blog.BlogBuilder;
+import example.domain.blog.BlogRepository;
+import example.domain.blog.BloggerBuilder;
 import example.domain.security.Account;
-import example.domain.security.AccountBootstrapListener;
 import example.domain.security.AccountRepository;
 
 @Component

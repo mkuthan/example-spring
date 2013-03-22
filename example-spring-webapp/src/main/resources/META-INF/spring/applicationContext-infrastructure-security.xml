@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="example.infrastructure.security" />
 
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"
 		mode="aspectj" />
@@ -28,8 +32,6 @@
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
-
-	<bean id="nonAjaxRequestMatcher" class="example.infrastructure.security.NonAjaxRequestMatcher" />
 
 	<!-- Authentication entry points -->
 	<bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">

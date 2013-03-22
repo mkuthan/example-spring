@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jms.xml")
+@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jms.xml")
 @Test(groups = { TestGroups.INTEGRATION })
 @ActiveProfiles("test")
 public class AbstractJmsTest extends AbstractTestNGSpringContextTests {

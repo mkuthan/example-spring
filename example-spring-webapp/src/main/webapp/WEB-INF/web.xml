@@ -10,7 +10,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:/META-INF/spring/applicationContext-properties.xml, 
+			classpath:/META-INF/spring/applicationContext-properties.xml,
+			classpath:/META-INF/spring/applicationContext-bootstrap.xml,  
 			classpath:/META-INF/spring/applicationContext-domain.xml,
 			classpath:/META-INF/spring/applicationContext-infrastructure.xml						
 		</param-value>
@@ -69,8 +70,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				classpath:/META-INF/spring/applicationContext-properties.xml, 
-				classpath:/META-INF/spring/applicationContext-web.xml,
-				classpath:/META-INF/spring/applicationContext-infrastructure-web.xml
+				classpath:/META-INF/spring/applicationContext-web.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

@@ -11,5 +11,6 @@
 	<import resource="applicationContext-infrastructure-jms.xml" />
 	<import resource="applicationContext-infrastructure-jmx.xml" />
 	<import resource="applicationContext-infrastructure-security.xml" />
+	<import resource="applicationContext-infrastructure-web.xml" />
 	
 </beans>

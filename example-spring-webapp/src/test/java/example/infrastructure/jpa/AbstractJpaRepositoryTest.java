@@ -18,4 +18,9 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 	@PersistenceContext
 	protected EntityManager entityManager;
 
+	protected void flushAndClear() {
+		entityManager.flush();
+		entityManager.clear();
+	}
+
 }

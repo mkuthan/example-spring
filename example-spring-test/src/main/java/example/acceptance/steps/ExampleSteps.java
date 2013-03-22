@@ -5,13 +5,13 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import example.domain.blog.BlogRepository;
+import example.domain.example.ExampleRepository;
 
 @Steps
 public class ExampleSteps {
 
 	@Autowired
-	private BlogRepository blogRepository;
+	private ExampleRepository exampleRepository;
 
 	@Given("a stock of symbol $symbol and a threshold of $threshold")
 	public void aStock(String symbol, double threshold) {

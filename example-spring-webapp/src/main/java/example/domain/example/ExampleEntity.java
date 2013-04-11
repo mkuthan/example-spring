@@ -15,7 +15,7 @@ public class ExampleEntity extends AbstractAggregateEntity {
 
 	public static final int NAME_MAX_LENGTH = 100;
 
-	@Column(length = NAME_MAX_LENGTH)
+	@Column(nullable = true, unique = true, length = NAME_MAX_LENGTH)
 	private String name;
 
 	@Embedded

@@ -9,6 +9,7 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
 import org.testng.annotations.Test;
 
 import example.TestGroups;
+import example.domain.shared.ddd.Entity;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jpa.xml")
 @Test(groups = { TestGroups.INTEGRATION })
@@ -17,6 +18,13 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	@PersistenceContext
 	protected EntityManager entityManager;
+
+	protected <T extends Entity> T saveFlushAndClear(T entity) {
+		entityManager.persist(entity);
+		flushAndClear();
+
+		return entity;
+	}
 
 	protected void flushAndClear() {
 		entityManager.flush();

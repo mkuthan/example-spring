@@ -62,6 +62,7 @@
 	<!-- </bean> -->
 
 	<bean id="messageConverter" class="org.springframework.jms.support.converter.MappingJackson2MessageConverter">
+		<property name="objectMapper" ref="jackson2ObjectMapperFactoryBean" />
 		<property name="targetType" value="TEXT" />
 		<property name="typeIdPropertyName" value="type" />
 	</bean>

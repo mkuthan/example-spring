@@ -1,12 +1,13 @@
 package example.infrastructure.jpa;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.googlecode.catchexception.CatchException.catchException;
-import static com.googlecode.catchexception.CatchException.caughtException;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.List;
 
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.testng.annotations.DataProvider;
@@ -14,6 +15,7 @@ import org.testng.annotations.Test;
 
 import example.assertions.Assertions;
 import example.domain.example.ExampleEntity;
+import example.domain.example.ExampleEntity.Builder;
 import example.domain.example.ExampleRepository;
 import example.domain.example.ExampleValueObject;
 
@@ -21,18 +23,26 @@ public class JpaExampleRepositoryTest extends AbstractJpaRepositoryTest {
 
 	private static final String ANY_NAME = "any name";
 
+	private static final ExampleValueObject ANY_VALUE_OBJECT = new ExampleValueObject("fieldA", "fieldB", "fieldC");
+
+	private static final DateTime ANY_DATE_TIME = new DateTime();
+
+	private static final Money ANY_MONEY = Money.of(CurrencyUnit.EUR, 10);
+
 	@Autowired
 	private ExampleRepository exampleRepository;
 
 	@DataProvider
 	public Object[][] valueObjects() {
-		return new Object[][] { { new ExampleValueObject("fieldA", "fieldB") },
-				{ new ExampleValueObject("fieldA", "fieldB", "fieldC") } };
+		return new Object[][] { { new ExampleValueObject("fieldA", "fieldB", "fieldC") }
+		// https://hibernate.atlassian.net/browse/HHH-8172
+		// { new ExampleValueObject("fieldA", "fieldB") }
+		};
 	}
 
 	public void shouldSaveExample() {
 		// given
-		ExampleEntity example = new ExampleEntity(ANY_NAME);
+		ExampleEntity example = createBuilder().build();
 
 		// when
 		ExampleEntity savedExample = exampleRepository.save(example);
@@ -41,27 +51,28 @@ public class JpaExampleRepositoryTest extends AbstractJpaRepositoryTest {
 		// then
 		assertThat(savedExample.isManaged()).isTrue();
 		assertThat(savedExample.getName()).isEqualTo(ANY_NAME);
+		assertThat(savedExample.getValue()).isEqualTo(ANY_VALUE_OBJECT);
+		assertThat(savedExample.getJson()).isEqualTo(ANY_VALUE_OBJECT);
+		assertThat(savedExample.getDateTime()).isEqualTo(ANY_DATE_TIME);
+		assertThat(savedExample.getMoney()).isEqualTo(ANY_MONEY);
 	}
 
-	@Test
+	@Test(expectedExceptions = DataIntegrityViolationException.class)
 	public void shouldNotSaveExampleDuplicates() {
 		// given
-		ExampleEntity exampleA = new ExampleEntity(ANY_NAME);
-		ExampleEntity exampleB = new ExampleEntity(ANY_NAME);
+		String name = "duplicate";
+
+		ExampleEntity exampleA = createBuilder().withName(name).build();
+		ExampleEntity exampleB = createBuilder().withName(name).build();
 
 		// when
-		catchException(exampleRepository).save(newArrayList(exampleA, exampleB));
-
-		// then
-		assertThat(caughtException()).isInstanceOf(DataIntegrityViolationException.class);
+		exampleRepository.save(newArrayList(exampleA, exampleB));
 	}
 
 	public void shouldFindByName() {
 		// given
 		String name = "name";
-
-		ExampleEntity expectedExample = exampleRepository.save(new ExampleEntity(name));
-		flushAndClear();
+		ExampleEntity expectedExample = saveFlushAndClear(createBuilder().withName(name).build());
 
 		// when
 		List<ExampleEntity> examples = exampleRepository.findByName(name);
@@ -73,17 +84,18 @@ public class JpaExampleRepositoryTest extends AbstractJpaRepositoryTest {
 	@Test(dataProvider = "valueObjects")
 	public void shouldFindByValueObject(ExampleValueObject exampleValueObject) {
 		// given
-		ExampleEntity example = new ExampleEntity(ANY_NAME);
-		example.setValue(exampleValueObject);
-
-		ExampleEntity expectedExample = saveFlushAndClear(example);
-		flushAndClear();
+		ExampleEntity expectedExample = saveFlushAndClear(createBuilder().withEmbeddedValueObject(exampleValueObject).build());
 
 		// when
-		List<ExampleEntity> examples = exampleRepository.findByValue(exampleValueObject);
+		List<ExampleEntity> examples = exampleRepository.findByEmbeddedValueObject(exampleValueObject);
 
 		// then
 		Assertions.assertThat(examples).containsWithSameIdentity(expectedExample);
+	}
+
+	private Builder createBuilder() {
+		return new Builder().withName(ANY_NAME).withEmbeddedValueObject(ANY_VALUE_OBJECT)
+				.withJsonValueObject(ANY_VALUE_OBJECT).withDateTime(ANY_DATE_TIME).withMoney(ANY_MONEY);
 	}
 
 }

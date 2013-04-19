@@ -1,6 +1,6 @@
 package example.domain.security;
 
-import example.domain.shared.ddd.DomainRepository;
+import example.ddd.DomainRepository;
 
 public interface AccountRepository extends DomainRepository<Account> {
 

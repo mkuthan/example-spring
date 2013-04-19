@@ -1,6 +1,6 @@
 package example.infrastructure.jpa;
 
-import example.domain.shared.ddd.DomainEntity;
+import example.ddd.DomainEntity;
 
 public privileged aspect EntityMixin {
 

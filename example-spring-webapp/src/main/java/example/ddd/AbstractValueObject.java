@@ -1,4 +1,4 @@
-package example.domain.shared.ddd;
+package example.ddd;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

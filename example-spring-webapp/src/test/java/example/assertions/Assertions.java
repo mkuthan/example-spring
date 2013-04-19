@@ -1,6 +1,6 @@
 package example.assertions;
 
-import example.domain.shared.ddd.Entity;
+import example.ddd.Entity;
 
 public class Assertions {
 

@@ -5,10 +5,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 
-import com.google.common.base.Objects;
+import org.hibernate.annotations.Columns;
+import org.joda.money.Money;
+import org.joda.time.DateTime;
 
-import example.domain.shared.ddd.AbstractAggregateEntity;
-import example.domain.shared.ddd.DomainEntity;
+import example.ddd.AbstractAggregateEntity;
+import example.ddd.DomainEntity;
+import example.domain.shared.json.JsonHolder;
 
 @DomainEntity
 public class ExampleEntity extends AbstractAggregateEntity {
@@ -19,7 +22,16 @@ public class ExampleEntity extends AbstractAggregateEntity {
 	private String name;
 
 	@Embedded
-	private ExampleValueObject value;
+	private ExampleValueObject embeddedValueObject;
+
+	@Columns(columns = { @Column(name = "json_type"), @Column(name = "json_value") })
+	private JsonHolder<ExampleValueObject> jsonValueObject = new JsonHolder<ExampleValueObject>();
+
+	@Column
+	private DateTime dateTime;
+
+	@Columns(columns = { @Column(name = "amount"), @Column(name = "currency") })
+	private Money money;
 
 	protected ExampleEntity() {
 	}
@@ -33,37 +45,81 @@ public class ExampleEntity extends AbstractAggregateEntity {
 	}
 
 	public ExampleValueObject getValue() {
-		return value;
+		return embeddedValueObject;
 	}
 
-	public void setValue(ExampleValueObject value) {
-		this.value = value;
+	public void setEmbeddedValueObject(ExampleValueObject embeddedValueObject) {
+		this.embeddedValueObject = embeddedValueObject;
 	}
 
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).addValue(name).addValue(value).toString();
+	public ExampleValueObject getJson() {
+		return jsonValueObject.getValue();
+	}
+
+	public void setJsonValueObject(ExampleValueObject jsonValueObject) {
+		this.jsonValueObject.setValue(jsonValueObject);
+	}
+
+	public DateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(DateTime dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	public Money getMoney() {
+		return money;
+	}
+
+	public void setMoney(Money money) {
+		this.money = money;
 	}
 
 	public static class Builder {
 
 		private String name;
 
-		private ExampleValueObject value;
+		private ExampleValueObject embeddedValueObject;
+
+		private ExampleValueObject jsonValueObject;
+
+		private DateTime dateTime;
+
+		private Money money;
 
 		public Builder withName(String name) {
 			this.name = name;
 			return this;
 		}
 
-		public Builder withValue(ExampleValueObject value) {
-			this.value = value;
+		public Builder withEmbeddedValueObject(ExampleValueObject embeddedValueObject) {
+			this.embeddedValueObject = embeddedValueObject;
+			return this;
+		}
+
+		public Builder withJsonValueObject(ExampleValueObject jsonValueObject) {
+			this.jsonValueObject = jsonValueObject;
+			return this;
+		}
+
+		public Builder withDateTime(DateTime dateTime) {
+			this.dateTime = dateTime;
+			return this;
+		}
+
+		public Builder withMoney(Money money) {
+			this.money = money;
 			return this;
 		}
 
 		public ExampleEntity build() {
 			ExampleEntity exampleEntity = new ExampleEntity(name);
-			exampleEntity.setValue(value);
+
+			exampleEntity.setEmbeddedValueObject(embeddedValueObject);
+			exampleEntity.setJsonValueObject(jsonValueObject);
+			exampleEntity.setDateTime(dateTime);
+			exampleEntity.setMoney(money);
 
 			return exampleEntity;
 		}

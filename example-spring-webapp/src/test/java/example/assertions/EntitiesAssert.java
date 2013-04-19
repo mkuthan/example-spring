@@ -6,8 +6,8 @@ import org.fest.assertions.GenericAssert;
 
 import com.google.common.collect.Iterables;
 
-import example.domain.shared.ddd.Entity;
-import example.domain.shared.ddd.EntityFunctions;
+import example.ddd.Entity;
+import example.ddd.EntityFunctions;
 
 public class EntitiesAssert extends GenericAssert<EntitiesAssert, Iterable<? extends Entity>> {
 

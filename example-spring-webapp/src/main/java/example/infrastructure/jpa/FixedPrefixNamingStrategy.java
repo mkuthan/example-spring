@@ -16,6 +16,14 @@ public class FixedPrefixNamingStrategy extends ImprovedNamingStrategy {
 	}
 
 	@Override
+	public String collectionTableName(String ownerEntity, String ownerEntityTable, String associatedEntity,
+			String associatedEntityTable, String propertyName) {
+		return TABLE_PREFIX
+				+ super.collectionTableName(ownerEntity, ownerEntityTable, associatedEntity, associatedEntityTable,
+						propertyName);
+	}
+
+	@Override
 	public String propertyToColumnName(String propertyName) {
 		return COLUMN_PREFIX + super.propertyToColumnName(propertyName);
 	}

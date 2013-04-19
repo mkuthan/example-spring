@@ -333,9 +333,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time-hibernate</artifactId>
-			<version>${jodatime-hibernate.version}</version>
+			<groupId>org.joda</groupId>
+			<artifactId>joda-money</artifactId>
+			<version>${jodamoney.version}</version>
 		</dependency>
 
 		<dependency>
@@ -481,7 +481,7 @@
 			<version>${hamcrest.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-library</artifactId>
@@ -493,13 +493,6 @@
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert</artifactId>
 			<version>${festassert.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.googlecode.catch-exception</groupId>
-			<artifactId>catch-exception</artifactId>
-			<version>${catchexception.version}</version>
 			<scope>test</scope>
 		</dependency>
 

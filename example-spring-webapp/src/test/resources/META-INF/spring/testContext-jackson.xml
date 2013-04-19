@@ -4,14 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="classpath:/test-jpa.properties" />
-
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jpa.xml" />
-	
-	<!-- JPA JsonHolder requires JSON serialization -->
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jackson.xml" />
 
-	<context:spring-configured />
-	
 </beans>

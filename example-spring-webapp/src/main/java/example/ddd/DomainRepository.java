@@ -1,4 +1,4 @@
-package example.domain.shared.ddd;
+package example.ddd;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

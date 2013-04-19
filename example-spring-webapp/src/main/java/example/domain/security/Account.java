@@ -7,8 +7,8 @@ import javax.persistence.Transient;
 
 import com.google.common.base.Objects;
 
-import example.domain.shared.ddd.AbstractAggregateEntity;
-import example.domain.shared.ddd.DomainEntity;
+import example.ddd.AbstractAggregateEntity;
+import example.ddd.DomainEntity;
 
 @DomainEntity
 public class Account extends AbstractAggregateEntity {

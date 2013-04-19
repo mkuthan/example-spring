@@ -29,7 +29,7 @@ public class ExampleBootstrapListener implements ApplicationListener<BootstrapEv
 
 			for (int i = 0; i < 100; i++) {
 				ExampleEntity exampleEntity = new ExampleEntity("Example #" + i);
-				exampleEntity.setValue(exampleValueObjectBuilder.build());
+				exampleEntity.setEmbeddedValueObject(exampleValueObjectBuilder.build());
 
 				exampleRepository.save(exampleEntity);
 			}

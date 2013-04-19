@@ -1,4 +1,4 @@
-package example.domain.shared.ddd;
+package example.ddd;
 
 public @interface DomainValueObject {
 }

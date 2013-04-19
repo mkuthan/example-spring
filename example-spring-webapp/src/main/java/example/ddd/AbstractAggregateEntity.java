@@ -1,4 +1,4 @@
-package example.domain.shared.ddd;
+package example.ddd;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;

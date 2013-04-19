@@ -4,12 +4,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.Column;
 
-import example.domain.shared.ddd.AbstractValueObject;
-import example.domain.shared.ddd.DomainValueObject;
+import example.ddd.AbstractValueObject;
+import example.ddd.DomainValueObject;
 
 @DomainValueObject
 public class ExampleValueObject extends AbstractValueObject {
-
+	
 	public static final int FIELD_MAX_LENGTH = 100;
 
 	@Column(length = FIELD_MAX_LENGTH)

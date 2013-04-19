@@ -9,7 +9,7 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.domain.shared.ddd.Entity;
+import example.ddd.Entity;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jpa.xml")
 @Test(groups = { TestGroups.INTEGRATION })

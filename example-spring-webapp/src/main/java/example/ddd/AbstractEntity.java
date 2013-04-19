@@ -1,4 +1,4 @@
-package example.domain.shared.ddd;
+package example.ddd;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

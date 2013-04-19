@@ -1,6 +1,6 @@
 package example.domain.security;
 
-import example.domain.shared.ddd.DomainService;
+import example.ddd.DomainService;
 
 @DomainService
 public interface PasswordEncodeService {

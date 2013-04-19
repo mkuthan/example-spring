@@ -2,12 +2,12 @@ package example.domain.example;
 
 import java.util.List;
 
-import example.domain.shared.ddd.DomainRepository;
+import example.ddd.DomainRepository;
 
 public interface ExampleRepository extends DomainRepository<ExampleEntity> {
 
 	List<ExampleEntity> findByName(String name);
 
-	List<ExampleEntity> findByValue(ExampleValueObject exampleValueObject);
+	List<ExampleEntity> findByEmbeddedValueObject(ExampleValueObject exampleValueObject);
 
 }

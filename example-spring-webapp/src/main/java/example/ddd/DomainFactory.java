@@ -1,4 +1,4 @@
-package example.domain.shared.ddd;
+package example.ddd;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

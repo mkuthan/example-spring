@@ -4,7 +4,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import org.fest.assertions.GenericAssert;
 
-import example.domain.shared.ddd.Entity;
+import example.ddd.Entity;
 
 public class EntityAssert extends GenericAssert<EntityAssert, Entity> {
 

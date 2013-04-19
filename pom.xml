@@ -33,8 +33,8 @@
 		<hibernate.version>4.1.8.Final</hibernate.version>
 		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
 		<jackson.version>2.1.0</jackson.version>
-		<jodatime.version>1.6</jodatime.version>
-		<jodatime-hibernate.version>1.3</jodatime-hibernate.version>
+		<jodamoney.version>0.8</jodamoney.version>
+		<jodatime.version>2.2</jodatime.version>
 		<logback.version>1.0.7</logback.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<spring.version>3.2.1.RELEASE</spring.version>
@@ -42,10 +42,9 @@
 		<spring-security.version>3.1.3.RELEASE</spring-security.version>
 
 		<!-- essential tests dependencies -->
-		<catchexception.version>1.0.4</catchexception.version>
 		<festassert.version>1.4</festassert.version>
 		<hamcrest.version>1.3</hamcrest.version>
-		<jbehave.version>3.7</jbehave.version>
+		<jbehave.version>3.7.5</jbehave.version>
 		<mockito.version>1.9.5</mockito.version>
 		<testng.version>6.8</testng.version>
 	</properties>

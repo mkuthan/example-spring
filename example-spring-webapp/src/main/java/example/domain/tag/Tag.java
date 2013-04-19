@@ -4,8 +4,8 @@ import javax.persistence.Cacheable;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import example.domain.shared.ddd.AbstractAggregateEntity;
-import example.domain.shared.ddd.DomainEntity;
+import example.ddd.AbstractAggregateEntity;
+import example.ddd.DomainEntity;
 
 @DomainEntity
 @Cacheable

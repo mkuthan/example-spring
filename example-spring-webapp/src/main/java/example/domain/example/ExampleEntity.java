@@ -25,7 +25,7 @@ public class ExampleEntity extends AbstractAggregateEntity {
 	private ExampleValueObject embeddedValueObject;
 
 	@Columns(columns = { @Column(name = "json_type"), @Column(name = "json_value") })
-	private JsonHolder<ExampleValueObject> jsonValueObject = JsonHolder.nullHolder();
+	private JsonHolder<ExampleValueObject> jsonValueObject = JsonHolder.absent();
 
 	@Column
 	private DateTime dateTime;

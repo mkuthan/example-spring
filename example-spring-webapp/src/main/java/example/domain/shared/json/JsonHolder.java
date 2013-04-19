@@ -19,7 +19,7 @@ public class JsonHolder<T> implements Serializable {
 		return jsonHolder;
 	}
 
-	public static <T> JsonHolder<T> nullHolder() {
+	public static <T> JsonHolder<T> absent() {
 		return new JsonHolder<T>();
 	}
 

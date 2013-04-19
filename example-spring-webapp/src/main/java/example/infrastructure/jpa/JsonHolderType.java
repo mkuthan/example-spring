@@ -51,13 +51,13 @@ public class JsonHolderType implements CompositeUserType {
 		}
 
 		JsonHolder jsonHolder = (JsonHolder) component;
-		if (jsonHolder.hasValue()) {
+		if (!jsonHolder.hasValue()) {
 			return null;
 		}
 
 		switch (propertyIndex) {
 		case 0:
-			return jsonHolder.getValueType();
+			return jsonHolder.getValue().getClass().getName();
 		case 1:
 			return jsonSerializationService.toJson(jsonHolder.getValue());
 		default:
@@ -70,7 +70,6 @@ public class JsonHolderType implements CompositeUserType {
 		throw new HibernateException("Called setPropertyValue on an immutable type {" + component.getClass() + "}");
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
 			throws HibernateException, SQLException {
@@ -82,7 +81,7 @@ public class JsonHolderType implements CompositeUserType {
 			return null;
 		} else {
 			Object json = jsonSerializationService.fromJson(data, type);
-			return new JsonHolder(json);
+			return JsonHolder.of(json);
 		}
 	}
 
@@ -95,7 +94,7 @@ public class JsonHolderType implements CompositeUserType {
 			TextType.INSTANCE.set(st, null, index + 1, session);
 		} else {
 			JsonHolder jsonHolder = (JsonHolder) value;
-			StringType.INSTANCE.set(st, jsonHolder.getValueType(), index, session);
+			StringType.INSTANCE.set(st, jsonHolder.getValue().getClass().getName(), index, session);
 			TextType.INSTANCE.set(st, jsonSerializationService.toJson(jsonHolder.getValue()), index + 1, session);
 		}
 	}

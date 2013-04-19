@@ -15,6 +15,7 @@ public class ExampleSteps {
 
 	@Given("a stock of symbol $symbol and a threshold of $threshold")
 	public void aStock(String symbol, double threshold) {
+		exampleRepository.findOne(-1L);
 	}
 
 	@When("the stock is traded at $price")

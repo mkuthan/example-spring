@@ -79,6 +79,7 @@ public class MoneyType implements CompositeUserType {
 		return Money.class;
 	}
 
+	@SuppressWarnings("PMD.SuspiciousEqualsMethodName")
 	@Override
 	public boolean equals(Object x, Object y) throws HibernateException {
 		return Objects.equal(x, y);

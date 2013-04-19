@@ -16,12 +16,8 @@ import com.google.common.base.Objects;
 
 public class DateTimeType implements UserType {
 
-	public static final DateTimeType INSTANCE = new DateTimeType();
-
-	private static final int[] SQL_TYPES = new int[] { Types.TIMESTAMP, };
-
 	public int[] sqlTypes() {
-		return SQL_TYPES;
+		return new int[] { Types.TIMESTAMP };
 	}
 
 	@Override
@@ -51,6 +47,7 @@ public class DateTimeType implements UserType {
 		return DateTime.class;
 	}
 
+	@SuppressWarnings("PMD.SuspiciousEqualsMethodName")
 	@Override
 	public boolean equals(Object x, Object y) throws HibernateException {
 		return Objects.equal(x, y);

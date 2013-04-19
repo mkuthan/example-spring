@@ -2,7 +2,7 @@ package example.ddd;
 
 import com.google.common.base.Function;
 
-public class EntityFunctions {
+public final class EntityFunctions {
 
 	private EntityFunctions() {
 	}

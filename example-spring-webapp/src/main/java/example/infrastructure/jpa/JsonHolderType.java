@@ -28,6 +28,7 @@ public class JsonHolderType implements CompositeUserType {
 	 */
 	private static JsonSerializationService jsonSerializationService;
 
+	@edu.umd.cs.findbugs.annotations.SuppressWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
 	@Autowired
 	void setJsonSerializationService(JsonSerializationService jsonSerializationService) {
 		JsonHolderType.jsonSerializationService = jsonSerializationService;
@@ -105,6 +106,7 @@ public class JsonHolderType implements CompositeUserType {
 		return JsonHolder.class;
 	}
 
+	@SuppressWarnings("PMD.SuspiciousEqualsMethodName")
 	@Override
 	public boolean equals(Object x, Object y) throws HibernateException {
 		return Objects.equal(x, y);

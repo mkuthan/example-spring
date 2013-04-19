@@ -1,6 +1,5 @@
 package example.infrastructure.jpa;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,13 +13,11 @@ import org.hibernate.usertype.CompositeUserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.base.Objects;
-
 import example.domain.shared.json.JsonHolder;
 import example.domain.shared.json.JsonSerializationService;
 
 @Component
-public class JsonHolderType implements CompositeUserType {
+public class JsonHolderType extends AbstractCustomType implements CompositeUserType {
 
 	/**
 	 * JSON serialization service is injected to the static field, Hibernate instantiates the instance when Spring
@@ -46,6 +43,12 @@ public class JsonHolderType implements CompositeUserType {
 
 	@SuppressWarnings("rawtypes")
 	@Override
+	public Class<JsonHolder> returnedClass() {
+		return JsonHolder.class;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
 	public Object getPropertyValue(Object component, int propertyIndex) throws HibernateException {
 		if (component == null) {
 			return null;
@@ -64,11 +67,6 @@ public class JsonHolderType implements CompositeUserType {
 		default:
 			throw new HibernateException("Invalid property index [" + propertyIndex + "]");
 		}
-	}
-
-	@Override
-	public void setPropertyValue(Object component, int propertyIndex, Object value) throws HibernateException {
-		throw new HibernateException("Called setPropertyValue on an immutable type {" + component.getClass() + "}");
 	}
 
 	@Override
@@ -98,49 +96,6 @@ public class JsonHolderType implements CompositeUserType {
 			StringType.INSTANCE.set(st, jsonHolder.getValue().getClass().getName(), index, session);
 			TextType.INSTANCE.set(st, jsonSerializationService.toJson(jsonHolder.getValue()), index + 1, session);
 		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Class<JsonHolder> returnedClass() {
-		return JsonHolder.class;
-	}
-
-	@SuppressWarnings("PMD.SuspiciousEqualsMethodName")
-	@Override
-	public boolean equals(Object x, Object y) throws HibernateException {
-		return Objects.equal(x, y);
-	}
-
-	@Override
-	public int hashCode(Object x) throws HibernateException {
-		return Objects.hashCode(x);
-	}
-
-	@Override
-	public Object deepCopy(Object value) throws HibernateException {
-		return value;
-	}
-
-	@Override
-	public boolean isMutable() {
-		return false;
-	}
-
-	@Override
-	public Serializable disassemble(Object value, SessionImplementor session) throws HibernateException {
-		return (Serializable) value;
-	}
-
-	@Override
-	public Object assemble(Serializable cached, SessionImplementor session, Object owner) throws HibernateException {
-		return cached;
-	}
-
-	@Override
-	public Object replace(Object original, Object target, SessionImplementor session, Object owner)
-			throws HibernateException {
-		return original;
 	}
 
 }

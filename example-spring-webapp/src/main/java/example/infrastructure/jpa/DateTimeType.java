@@ -1,6 +1,5 @@
 package example.infrastructure.jpa;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,12 +11,15 @@ import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.usertype.UserType;
 import org.joda.time.DateTime;
 
-import com.google.common.base.Objects;
-
-public class DateTimeType implements UserType {
+public class DateTimeType extends AbstractCustomType implements UserType {
 
 	public int[] sqlTypes() {
 		return new int[] { Types.TIMESTAMP };
+	}
+
+	@Override
+	public Class<DateTime> returnedClass() {
+		return DateTime.class;
 	}
 
 	@Override
@@ -40,47 +42,6 @@ public class DateTimeType implements UserType {
 			StandardBasicTypes.TIMESTAMP.nullSafeSet(preparedStatement, ((DateTime) value).toDate(), index, session);
 		}
 
-	}
-
-	@Override
-	public Class<DateTime> returnedClass() {
-		return DateTime.class;
-	}
-
-	@SuppressWarnings("PMD.SuspiciousEqualsMethodName")
-	@Override
-	public boolean equals(Object x, Object y) throws HibernateException {
-		return Objects.equal(x, y);
-	}
-
-	@Override
-	public int hashCode(Object x) throws HibernateException {
-		return Objects.hashCode(x);
-	}
-
-	@Override
-	public Object deepCopy(Object value) throws HibernateException {
-		return value;
-	}
-
-	@Override
-	public boolean isMutable() {
-		return false;
-	}
-
-	@Override
-	public Serializable disassemble(Object value) throws HibernateException {
-		return (Serializable) value;
-	}
-
-	@Override
-	public Object assemble(Serializable cached, Object value) throws HibernateException {
-		return cached;
-	}
-
-	@Override
-	public Object replace(Object original, Object target, Object owner) throws HibernateException {
-		return original;
 	}
 
 }

@@ -48,22 +48,7 @@ public class MoneyType implements CompositeUserType {
 
 	@Override
 	public void setPropertyValue(Object component, int propertyIndex, Object value) throws HibernateException {
-		if (component == null) {
-			return;
-		}
-
-		Money money = (Money) component;
-
-		switch (propertyIndex) {
-		case 0:
-			money = money.withAmount((BigDecimal) value);
-			break;
-		case 1:
-			money = money.withCurrencyUnit(CurrencyUnit.getInstance((String) value));
-			break;
-		default:
-			throw new HibernateException("Invalid property index [" + propertyIndex + "]");
-		}
+		throw new HibernateException("Called setPropertyValue on an immutable type {" + component.getClass() + "}");
 	}
 
 	@Override

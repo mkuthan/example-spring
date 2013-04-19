@@ -65,25 +65,9 @@ public class JsonHolderType implements CompositeUserType {
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void setPropertyValue(Object component, int propertyIndex, Object value) throws HibernateException {
-		if (component == null) {
-			return;
-		}
-
-		JsonHolder json = (JsonHolder) component;
-
-		switch (propertyIndex) {
-		case 0:
-			json.setType((String) value);
-			break;
-		case 1:
-			json.setValue(jsonSerializationService.fromJson((String) value, json.getType()));
-			break;
-		default:
-			throw new HibernateException("Invalid property index [" + propertyIndex + "]");
-		}
+		throw new HibernateException("Called setPropertyValue on an immutable type {" + component.getClass() + "}");
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

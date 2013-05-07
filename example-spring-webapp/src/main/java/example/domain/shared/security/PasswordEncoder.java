@@ -1,9 +1,9 @@
-package example.domain.security;
+package example.domain.shared.security;
 
 import example.ddd.DomainService;
 
 @DomainService
-public interface PasswordEncodeService {
+public interface PasswordEncoder {
 
 	String encode(String rawPassword);
 

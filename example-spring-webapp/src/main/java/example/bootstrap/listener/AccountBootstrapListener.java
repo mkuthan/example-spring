@@ -9,8 +9,8 @@ import com.google.common.collect.Lists;
 
 import example.bootstrap.BootstrapEvent;
 import example.bootstrap.BootstrapOrder;
-import example.domain.security.Account;
-import example.domain.security.AccountRepository;
+import example.domain.shared.security.Account;
+import example.domain.shared.security.AccountRepository;
 
 @Component
 public class AccountBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {

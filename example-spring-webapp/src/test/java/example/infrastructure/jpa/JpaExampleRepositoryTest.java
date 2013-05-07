@@ -50,6 +50,8 @@ public class JpaExampleRepositoryTest extends AbstractJpaRepositoryTest {
 
 		// then
 		assertThat(savedExample.isManaged()).isTrue();
+		assertThat(savedExample.getAudit()).isEqualTo(EXPECTED_AUDIT);
+
 		assertThat(savedExample.getName()).isEqualTo(ANY_NAME);
 		assertThat(savedExample.getValue()).isEqualTo(ANY_VALUE_OBJECT);
 		assertThat(savedExample.getJson()).isEqualTo(ANY_VALUE_OBJECT);
@@ -84,7 +86,8 @@ public class JpaExampleRepositoryTest extends AbstractJpaRepositoryTest {
 	@Test(dataProvider = "valueObjects")
 	public void shouldFindByValueObject(ExampleValueObject exampleValueObject) {
 		// given
-		ExampleEntity expectedExample = saveFlushAndClear(createBuilder().withEmbeddedValueObject(exampleValueObject).build());
+		ExampleEntity expectedExample = saveFlushAndClear(createBuilder().withEmbeddedValueObject(exampleValueObject)
+				.build());
 
 		// when
 		List<ExampleEntity> examples = exampleRepository.findByEmbeddedValueObject(exampleValueObject);

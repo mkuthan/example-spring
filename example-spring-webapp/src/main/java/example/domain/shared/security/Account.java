@@ -1,9 +1,13 @@
-package example.domain.security;
+package example.domain.shared.security;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.base.Objects;
 
@@ -11,6 +15,8 @@ import example.ddd.AbstractAggregateEntity;
 import example.ddd.DomainEntity;
 
 @DomainEntity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Account extends AbstractAggregateEntity {
 
 	@Column(nullable = false, unique = true)
@@ -23,7 +29,8 @@ public class Account extends AbstractAggregateEntity {
 	private Boolean enabled;
 
 	@Transient
-	private PasswordEncodeService passwordEncodeService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	protected Account() {
 	}
@@ -57,20 +64,12 @@ public class Account extends AbstractAggregateEntity {
 	public void updatePassword(String rawPassword) {
 		checkNotNull(rawPassword);
 
-		password = passwordEncodeService.encode(rawPassword);
+		password = passwordEncoder.encode(rawPassword);
 	}
 
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).addValue(username).toString();
-	}
-
-	protected PasswordEncodeService getPasswordEncodingService() {
-		return passwordEncodeService;
-	}
-
-	protected void setPasswordEncodingService(PasswordEncodeService passwordEncodeService) {
-		this.passwordEncodeService = passwordEncodeService;
 	}
 
 }

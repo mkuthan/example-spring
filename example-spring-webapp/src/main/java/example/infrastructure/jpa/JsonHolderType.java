@@ -19,10 +19,6 @@ import example.domain.shared.json.JsonSerializationService;
 @Component
 public class JsonHolderType extends AbstractCustomType implements CompositeUserType {
 
-	/**
-	 * JSON serialization service is injected to the static field, Hibernate instantiates the instance when Spring
-	 * context is not ready yet. As long as the component is a singleton, Spring is able to inject the dependency later.
-	 */
 	private static JsonSerializationService jsonSerializationService;
 
 	@edu.umd.cs.findbugs.annotations.SuppressWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")

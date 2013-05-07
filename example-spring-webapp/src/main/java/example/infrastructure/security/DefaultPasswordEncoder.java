@@ -1,22 +1,19 @@
-package example.infrastructure.common;
+package example.infrastructure.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import example.domain.security.PasswordEncodeService;
+import example.domain.shared.security.PasswordEncoder;
 
 @Component
-public class ShaPasswordEncodeService implements PasswordEncodeService {
-
-	private ShaPasswordEncoder encoder;
-	private String passwordSalt;
+public class DefaultPasswordEncoder implements PasswordEncoder {
 
 	@Autowired
-	public ShaPasswordEncodeService(ShaPasswordEncoder encoder, String passwordSalt) {
-		this.encoder = encoder;
-		this.passwordSalt = passwordSalt;
-	}
+	private ShaPasswordEncoder encoder;
+
+	@Autowired
+	private String passwordSalt;
 
 	@Override
 	public String encode(String rawPassword) {

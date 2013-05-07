@@ -2,6 +2,13 @@ package example.infrastructure.jackson;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.math.BigDecimal;
+
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,7 +30,9 @@ public class JacksonJsonSerializationServiceTest extends AbstractTestNGSpringCon
 	@DataProvider
 	static final Object[][] objects() {
 		return new Object[][] { { new ExampleValueObject("FieldA", "FieldB") },
-				{ new ExampleValueObject("FieldA", "FieldB", "FieldC") } };
+				{ new ExampleValueObject("FieldA", "FieldB", "FieldC") },
+				{ Money.of(CurrencyUnit.EUR, BigDecimal.ZERO) }, { new DateTime(DateTimeZone.UTC) },
+				{ new LocalDate() } };
 	}
 
 	@Test(dataProvider = "objects")

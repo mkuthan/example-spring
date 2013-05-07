@@ -11,10 +11,12 @@ import org.joda.time.DateTime;
 
 import example.ddd.AbstractAggregateEntity;
 import example.ddd.DomainEntity;
+import example.domain.shared.audit.Audit;
+import example.domain.shared.audit.Auditable;
 import example.domain.shared.json.JsonHolder;
 
 @DomainEntity
-public class ExampleEntity extends AbstractAggregateEntity {
+public class ExampleEntity extends AbstractAggregateEntity implements Auditable {
 
 	public static final int NAME_MAX_LENGTH = 100;
 
@@ -32,6 +34,9 @@ public class ExampleEntity extends AbstractAggregateEntity {
 
 	@Columns(columns = { @Column(name = "amount"), @Column(name = "currency") })
 	private Money money;
+	
+	@Embedded
+	private Audit audit = Audit.DEFAULT;
 
 	protected ExampleEntity() {
 	}
@@ -74,6 +79,16 @@ public class ExampleEntity extends AbstractAggregateEntity {
 
 	public void setMoney(Money money) {
 		this.money = money;
+	}
+
+	@Override
+	public Audit getAudit() {
+		return audit;
+	}
+
+	@Override
+	public void updateAudit(DateTime now, String modifier) {
+		audit = audit.update(now, modifier);
 	}
 
 	public static class Builder {

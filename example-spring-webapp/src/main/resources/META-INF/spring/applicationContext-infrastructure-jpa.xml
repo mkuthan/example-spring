@@ -33,6 +33,7 @@
 		<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 			<property name="dataSource" ref="dataSource" />
 			<property name="packagesToScan" value="example" />
+			<property name="mappingResources" value="orm.xml" />
 			<property name="jpaVendorAdapter">
 				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:generateDdl="${jpa.generateDdl}"
 					p:showSql="${jpa.showSql}" p:database="${jpa.database}" />

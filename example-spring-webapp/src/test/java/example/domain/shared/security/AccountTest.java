@@ -1,4 +1,4 @@
-package example.domain.security;
+package example.domain.shared.security;
 
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -10,19 +10,23 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
+import example.domain.shared.security.Account;
+import example.domain.shared.security.PasswordEncoder;
 
 @Test(groups = TestGroups.UNIT)
 @Listeners(MockitoTestNGListener.class)
 public class AccountTest {
 
+	private static final String ANY_USERNAME = "ANY USERNAME";
+	
 	private static final String RAW_PASSWORD = "ANY PASSWORD";
 	private static final String PASSWORD_HASH = "ANY PASSWORD HASH";
 
 	@Mock
-	private PasswordEncodeService passwordEncodeService;
+	private PasswordEncoder passwordEncoder;
 
 	@InjectMocks
-	private Account account = new Account();
+	private Account account = new Account(ANY_USERNAME);
 
 	public void disable() {
 		// when
@@ -42,7 +46,7 @@ public class AccountTest {
 
 	public void updatePassword() {
 		// given
-		when(passwordEncodeService.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
+		when(passwordEncoder.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
 
 		// when
 		account.updatePassword(RAW_PASSWORD);

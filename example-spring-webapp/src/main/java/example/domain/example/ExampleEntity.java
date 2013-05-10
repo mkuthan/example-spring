@@ -34,15 +34,20 @@ public class ExampleEntity extends AbstractAggregateEntity implements Auditable 
 
 	@Columns(columns = { @Column(name = "amount"), @Column(name = "currency") })
 	private Money money;
-	
+
 	@Embedded
 	private Audit audit = Audit.DEFAULT;
 
 	protected ExampleEntity() {
 	}
 
-	public ExampleEntity(String name) {
-		this.name = checkNotNull(name);
+	public ExampleEntity(Builder builder) {
+		this.name = checkNotNull(builder.name);
+
+		setEmbeddedValueObject(builder.embeddedValueObject);
+		setJsonValueObject(builder.jsonValueObject);
+		setDateTime(builder.dateTime);
+		setMoney(builder.money);
 	}
 
 	public String getName() {
@@ -129,14 +134,7 @@ public class ExampleEntity extends AbstractAggregateEntity implements Auditable 
 		}
 
 		public ExampleEntity build() {
-			ExampleEntity exampleEntity = new ExampleEntity(name);
-
-			exampleEntity.setEmbeddedValueObject(embeddedValueObject);
-			exampleEntity.setJsonValueObject(jsonValueObject);
-			exampleEntity.setDateTime(dateTime);
-			exampleEntity.setMoney(money);
-
-			return exampleEntity;
+			return new ExampleEntity(this);
 		}
 	}
 

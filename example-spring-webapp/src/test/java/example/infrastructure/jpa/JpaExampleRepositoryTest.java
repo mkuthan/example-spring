@@ -23,7 +23,8 @@ public class JpaExampleRepositoryTest extends AbstractJpaRepositoryTest {
 
 	private static final String ANY_NAME = "any name";
 
-	private static final ExampleValueObject ANY_VALUE_OBJECT = new ExampleValueObject("fieldA", "fieldB", "fieldC");
+	private static final ExampleValueObject ANY_VALUE_OBJECT = new ExampleValueObject.Builder().withFieldA("FieldA")
+			.withFieldB("FieldB").withFieldC("FieldC").build();
 
 	private static final DateTime ANY_DATE_TIME = new DateTime();
 
@@ -34,9 +35,12 @@ public class JpaExampleRepositoryTest extends AbstractJpaRepositoryTest {
 
 	@DataProvider
 	public Object[][] valueObjects() {
-		return new Object[][] { { new ExampleValueObject("fieldA", "fieldB", "fieldC") }
+		ExampleValueObject.Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("FieldA")
+				.withFieldB("FieldB").withFieldC("FieldC");
+
+		return new Object[][] { { exampleValueObjectBuilder.build() }
 		// https://hibernate.atlassian.net/browse/HHH-8172
-		// { new ExampleValueObject("fieldA", "fieldB") }
+		// { exampleValueObjectBuilder.withFieldC(null).build() }
 		};
 	}
 

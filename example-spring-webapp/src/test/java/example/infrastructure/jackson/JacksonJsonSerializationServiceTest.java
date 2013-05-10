@@ -29,8 +29,11 @@ public class JacksonJsonSerializationServiceTest extends AbstractTestNGSpringCon
 
 	@DataProvider
 	static final Object[][] objects() {
-		return new Object[][] { { new ExampleValueObject("FieldA", "FieldB") },
-				{ new ExampleValueObject("FieldA", "FieldB", "FieldC") },
+		ExampleValueObject.Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("FieldA")
+				.withFieldB("FieldB").withFieldC("FieldC");
+
+		return new Object[][] { { exampleValueObjectBuilder.build() },
+				{ exampleValueObjectBuilder.withFieldC(null).build() },
 				{ Money.of(CurrencyUnit.EUR, BigDecimal.ZERO) }, { new DateTime(DateTimeZone.UTC) },
 				{ new LocalDate() } };
 	}

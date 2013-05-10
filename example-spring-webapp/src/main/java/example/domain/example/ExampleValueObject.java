@@ -9,7 +9,7 @@ import example.ddd.DomainValueObject;
 
 @DomainValueObject
 public class ExampleValueObject extends AbstractValueObject {
-	
+
 	public static final int FIELD_MAX_LENGTH = 100;
 
 	@Column(length = FIELD_MAX_LENGTH)
@@ -24,15 +24,10 @@ public class ExampleValueObject extends AbstractValueObject {
 	protected ExampleValueObject() {
 	}
 
-	public ExampleValueObject(String fieldA, String fieldB) {
-		this.fieldA = checkNotNull(fieldA);
-		this.fieldB = checkNotNull(fieldB);
-	}
-
-	public ExampleValueObject(String fieldA, String fieldB, String fieldC) {
-		this.fieldA = checkNotNull(fieldA);
-		this.fieldB = checkNotNull(fieldB);
-		this.fieldC = checkNotNull(fieldC);
+	public ExampleValueObject(Builder builder) {
+		this.fieldA = checkNotNull(builder.fieldA);
+		this.fieldB = checkNotNull(builder.fieldB);
+		this.fieldC = builder.fieldC;
 	}
 
 	public String getFieldA() {
@@ -71,11 +66,7 @@ public class ExampleValueObject extends AbstractValueObject {
 		}
 
 		public ExampleValueObject build() {
-			if (fieldC == null) {
-				return new ExampleValueObject(fieldA, fieldB);
-			} else {
-				return new ExampleValueObject(fieldA, fieldB, fieldC);
-			}
+			return new ExampleValueObject(this);
 		}
 
 	}

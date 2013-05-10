@@ -24,13 +24,13 @@ public class ExampleBootstrapListener implements ApplicationListener<BootstrapEv
 	@Transactional
 	public void onApplicationEvent(BootstrapEvent event) {
 		if (!examplesExist()) {
-			ExampleValueObject.Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("any value A").withFieldB(
-					"any value B");
+			ExampleEntity.Builder exampleEntityBuilder = new ExampleEntity.Builder();
+			ExampleValueObject.Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA(
+					"any value A").withFieldB("any value B");
 
 			for (int i = 0; i < 100; i++) {
-				ExampleEntity exampleEntity = new ExampleEntity("Example #" + i);
-				exampleEntity.setEmbeddedValueObject(exampleValueObjectBuilder.build());
-
+				ExampleEntity exampleEntity = exampleEntityBuilder.withName("Example #" + i)
+						.withEmbeddedValueObject(exampleValueObjectBuilder.build()).build();
 				exampleRepository.save(exampleEntity);
 			}
 		}

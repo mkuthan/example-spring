@@ -26,7 +26,12 @@
 	</beans>
 
 	<beans profile="test">
-		<jdbc:embedded-database id="dataSource" type="H2" />
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        	<property name="driverClass" value="org.h2.Driver"/>
+        	<property name="url" value="jdbc:h2:mem:test;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+        	<property name="username" value="sa"/>
+        	<property name="password" value=""/>
+    	</bean>
 	</beans>
 
 	<beans>

@@ -9,8 +9,8 @@ public abstract class AbstractApplicationService {
 	@Autowired
 	private EventPublisher eventPublisher;
 
-	public EventPublisher getEventPublisher() {
-		return eventPublisher;
+	protected <T> void publish(Event<T> event) {
+		eventPublisher.publish(event);
 	}
 
 }

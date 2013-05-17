@@ -1,6 +1,6 @@
 package example.infrastructure.jpa;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,7 +1,7 @@
 package example.ddd;
 
 public interface EventPublisher {
-	
-	void publish(Event event);
-	
+
+	<T> void publish(Event<T> event);
+
 }

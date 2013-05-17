@@ -1,6 +1,6 @@
 package example.infrastructure.events;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.Assertions.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.ddd.Event;
+import example.ddd.AbstractEvent;
 import example.ddd.EventListener;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-events.xml")
@@ -30,7 +30,7 @@ public class EventsTests extends AbstractTestNGSpringContextTests {
 	@Test
 	public void shouldReceiveSyncEvent() {
 		// given
-		TestEvent event = new TestEvent();
+		TestEvent event = new TestEvent("any payload");
 
 		// when
 		defaultEventPublisher.publish(event);
@@ -43,7 +43,7 @@ public class EventsTests extends AbstractTestNGSpringContextTests {
 	@Test
 	public void shouldReceiveAsyncEvent() throws InterruptedException {
 		// given
-		TestEvent event = new TestEvent();
+		TestEvent event = new TestEvent("any payload");
 
 		// when
 		defaultEventPublisher.publish(event);
@@ -103,9 +103,13 @@ public class EventsTests extends AbstractTestNGSpringContextTests {
 
 	}
 
-	public static class TestEvent implements Event {
+	public static class TestEvent extends AbstractEvent<String> {
 
 		private static final long serialVersionUID = 1L;
+
+		public TestEvent(String payload) {
+			super(payload);
+		}
 
 	}
 }

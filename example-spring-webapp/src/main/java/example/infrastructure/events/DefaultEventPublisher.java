@@ -1,6 +1,6 @@
 package example.infrastructure.events;
 
-import static com.google.common.collect.Sets.newHashSet;
+import static com.google.common.collect.Sets.*;
 
 import java.util.Set;
 
@@ -16,7 +16,7 @@ public class DefaultEventPublisher implements EventPublisher {
 	}
 
 	@Override
-	public void publish(Event event) {
+	public <T> void publish(Event<T> event) {
 		for (EventHandler handler : eventHandlers) {
 			if (handler.canHandle(event)) {
 				handler.handle(event);

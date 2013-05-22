@@ -380,45 +380,11 @@
 		<!-- ActiveMQ -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-core</artifactId>
+			<artifactId>activemq-broker</artifactId>
 			<version>${activemq.version}</version>
 			<scope>runtime</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.activemq</groupId>
-					<artifactId>activeio-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.activemq</groupId>
-					<artifactId>kahadb</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jasypt</groupId>
-					<artifactId>jasypt</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.activemq.protobuf</groupId>
-					<artifactId>activemq-protobuf</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-net</groupId>
-					<artifactId>commons-net</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.osgi</groupId>
-					<artifactId>org.osgi.core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.fusesource.mqtt-client</groupId>
-					<artifactId>mqtt-client</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.fusesource.fuse-extra</groupId>
-					<artifactId>fusemq-leveldb</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-spring</artifactId>
@@ -429,24 +395,12 @@
 					<groupId>org.apache.activemq</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>spring-osgi-core</artifactId>
-					<groupId>org.springframework.osgi</groupId>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
 				</exclusion>
 				<exclusion>
 					<artifactId>commons-pool</artifactId>
 					<groupId>commons-pool</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-spring</artifactId>
-			<version>3.11.1</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>

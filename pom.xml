@@ -43,7 +43,7 @@
 
 		<!-- essential web dependencies -->
 		<angularjs.version>1.1.5</angularjs.version>
-		<bootstrap.version>2.3.1-1</bootstrap.version>		
+		<bootstrap.version>2.3.1-1</bootstrap.version>
 		<jquery.version>1.9.1</jquery.version>
 
 		<!-- essential tests dependencies -->
@@ -165,9 +165,10 @@
 	<dependencies>
 		<!-- JEE -->
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-web-api</artifactId>
-			<version>6.0</version>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>1.0.0.Final</version>
+			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
 

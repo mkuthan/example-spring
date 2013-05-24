@@ -78,7 +78,7 @@
 
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat6-maven-plugin</artifactId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
 					<systemProperties>
 						<java.util.logging.manager>org.apache.juli.ClassLoaderLogManager</java.util.logging.manager>
@@ -112,7 +112,7 @@
 						<artifactId>logback-classic</artifactId>
 						<version>${logback.version}</version>
 					</dependency>
-					<!-- Tomcat 6 does not ship with JSTL implementation -->
+					<!-- Tomcat6 does not ship with JSTL -->
 					<dependency>
 						<groupId>javax.servlet</groupId>
 						<artifactId>jstl</artifactId>
@@ -147,19 +147,6 @@
 	</build>
 
 	<dependencies>
-		<!-- JEE -->
-		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>jta</artifactId>
-			<version>1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.jms</groupId>
-			<artifactId>jms-api</artifactId>
-			<version>1.1-rev-1</version>
-		</dependency>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -311,7 +298,7 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.5</version>
+			<version>1.8</version>
 		</dependency>
 
 		<dependency>
@@ -382,9 +369,8 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-broker</artifactId>
 			<version>${activemq.version}</version>
-			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-spring</artifactId>
@@ -458,7 +444,7 @@
 		<dependency>
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
-			<version>0.8.1</version>
+			<version>${jsonpath.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import example.application.TodoService;
 import example.ddd.EventPublisher;
 import example.domain.example.ExampleRepository;
-import example.domain.example.todo.TodoRepository;
+import example.domain.todo.TodoRepository;
 
 @Configuration
 public class WebTestConfiguration {

@@ -1,17 +1,12 @@
-package example.web.example.todo;
+package example.web.todo;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static com.google.common.collect.Lists.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
 
@@ -20,8 +15,8 @@ import org.springframework.http.MediaType;
 import org.testng.annotations.Test;
 
 import example.application.TodoService;
-import example.domain.example.todo.Todo;
-import example.domain.example.todo.TodoRepository;
+import example.domain.todo.Todo;
+import example.domain.todo.TodoRepository;
 import example.web.AbstractContollerTest;
 import example.web.RequestMappings;
 
@@ -68,7 +63,8 @@ public class TodoControllerTest extends AbstractContollerTest {
 		String title = "title";
 
 		// when & then
-		perform(post(RequestMappings.TODO, title).accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+		perform(post(RequestMappings.TODO).param("title", title).accept(MediaType.APPLICATION_JSON)).andExpect(
+				status().isCreated());
 
 		verify(todoService).add(eq(title));
 	}
@@ -82,7 +78,32 @@ public class TodoControllerTest extends AbstractContollerTest {
 		perform(delete(RequestMappings.TODO + "/{id}", id).accept(MediaType.APPLICATION_JSON)).andExpect(
 				status().isNoContent());
 
-		verify(todoRepository).delete(eq(id));
+		verify(todoService).delete(eq(id));
+	}
+
+	@Test
+	public void shouldUpdateStatusToDone() throws Exception {
+		// given
+		Long id = 1L;
+
+		// when & then
+		perform(put(RequestMappings.TODO + "/{id}/done", id).accept(MediaType.APPLICATION_JSON)).andExpect(
+				status().isNoContent());
+
+		verify(todoService).done(eq(id));
+	}
+
+	@Test
+	public void shouldUpdateTitle() throws Exception {
+		// given
+		Long id = 1L;
+		String title = "title";
+
+		// when & then
+		perform(put(RequestMappings.TODO + "/{id}/title", id).param("title", title).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+
+		verify(todoService).updateTitle(eq(id), eq(title));
 	}
 
 }

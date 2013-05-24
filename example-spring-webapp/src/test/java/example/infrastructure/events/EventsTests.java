@@ -14,7 +14,7 @@ import example.ddd.AbstractEvent;
 import example.ddd.EventListener;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-events.xml")
-@Test(groups = { TestGroups.INTEGRATION })
+@Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 @ActiveProfiles("test")
 public class EventsTests extends AbstractTestNGSpringContextTests {
 

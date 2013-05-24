@@ -1,12 +1,13 @@
 package example.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import example.ddd.AbstractApplicationService;
-import example.domain.example.todo.Todo;
-import example.domain.example.todo.TodoRepository;
+import example.domain.todo.Todo;
+import example.domain.todo.TodoRepository;
 
 @Component
 public class TodoService extends AbstractApplicationService {
@@ -21,17 +22,31 @@ public class TodoService extends AbstractApplicationService {
 	}
 
 	@Transactional
+	public void delete(Long id) {
+		Todo todo = findOne(id);
+		todoRepository.delete(todo);
+	}
+
+	@Transactional
 	public void updateTitle(Long id, String title) {
-		Todo todo = todoRepository.findOne(id);
+		Todo todo = findOne(id);
 		todo.updateTitle(title);
 		todoRepository.saveAndFlush(todo);
 	}
 
 	@Transactional
 	public void done(Long id) {
-		Todo todo = todoRepository.findOne(id);
+		Todo todo = findOne(id);
 		todo.done();
 		todoRepository.saveAndFlush(todo);
+	}
+
+	private Todo findOne(Long id) {
+		Todo todo = todoRepository.findOne(id);
+		if (todo == null) {
+			throw new ObjectRetrievalFailureException(Todo.class, id);
+		}
+		return todo;
 	}
 
 }

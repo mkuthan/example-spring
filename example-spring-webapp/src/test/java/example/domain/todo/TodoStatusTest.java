@@ -1,11 +1,13 @@
-package example.domain.example.todo;
+package example.domain.todo;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.domain.example.todo.Todo.Status;
+import example.domain.todo.Todo;
+import example.domain.todo.TodoIllegalStateException;
+import example.domain.todo.Todo.Status;
 
 @Test(groups = TestGroups.UNIT)
 public class TodoStatusTest {

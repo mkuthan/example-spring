@@ -1,4 +1,4 @@
-package example.web.example.todo;
+package example.web.todo;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import example.application.TodoService;
-import example.domain.example.todo.Todo;
-import example.domain.example.todo.TodoRepository;
+import example.domain.todo.Todo;
+import example.domain.todo.TodoRepository;
 import example.web.RequestMappings;
 
 @Controller
@@ -49,7 +49,7 @@ public class TodoController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
-		todoRepository.delete(id);
+		todoService.delete(id);
 	}
 
 	@RequestMapping(value = "/{id}/title", method = RequestMethod.PUT)

@@ -4,8 +4,8 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import example.domain.example.todo.Todo;
-import example.domain.example.todo.TodoRepository;
+import example.domain.todo.Todo;
+import example.domain.todo.TodoRepository;
 
 public class JpaTodoRepositoryTest extends AbstractJpaRepositoryTest {
 

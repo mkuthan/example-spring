@@ -21,7 +21,7 @@ import example.domain.shared.security.Account;
 import example.domain.shared.security.AccountProvider;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jpa.xml")
-@Test(groups = { TestGroups.INTEGRATION })
+@Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 @ActiveProfiles("test")
 public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
 

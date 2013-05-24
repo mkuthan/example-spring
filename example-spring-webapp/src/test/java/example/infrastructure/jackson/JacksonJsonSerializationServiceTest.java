@@ -20,7 +20,7 @@ import example.TestGroups;
 import example.domain.example.ExampleValueObject;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jackson.xml")
-@Test(groups = TestGroups.INTEGRATION)
+@Test(groups = TestGroups.INTEGRATION, singleThreaded = true)
 @ActiveProfiles("test")
 public class JacksonJsonSerializationServiceTest extends AbstractTestNGSpringContextTests {
 

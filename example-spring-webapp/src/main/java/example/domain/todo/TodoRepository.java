@@ -1,4 +1,4 @@
-package example.domain.example.todo;
+package example.domain.todo;
 
 import example.ddd.DomainRepository;
 

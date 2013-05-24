@@ -9,8 +9,8 @@ import com.google.common.collect.Lists;
 
 import example.bootstrap.BootstrapEvent;
 import example.bootstrap.BootstrapOrder;
-import example.domain.example.todo.Todo;
-import example.domain.example.todo.TodoRepository;
+import example.domain.todo.Todo;
+import example.domain.todo.TodoRepository;
 
 @Component
 public class TodoBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {

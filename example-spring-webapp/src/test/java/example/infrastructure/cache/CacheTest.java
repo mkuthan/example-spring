@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import example.TestGroups;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-cache.xml")
-@Test(groups = { TestGroups.INTEGRATION })
+@Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 @ActiveProfiles("test")
 public class CacheTest extends AbstractTestNGSpringContextTests {
 

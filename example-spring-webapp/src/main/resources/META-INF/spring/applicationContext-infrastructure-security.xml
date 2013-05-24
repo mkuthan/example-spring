@@ -13,6 +13,7 @@
 
 	<security:http entry-point-ref="authenticationEntryPoint" auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<security:intercept-url pattern="/webjars/**" access="permitAll" />
 		<security:intercept-url pattern="/login*" access="permitAll" />
 		<security:intercept-url pattern="/loggedOut" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />

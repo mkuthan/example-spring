@@ -14,7 +14,8 @@
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
-	<mvc:resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**" cache-period="${mvc.resourcesCachePeriod}" />
+	<mvc:resources mapping="/resources/**" location="/"  cache-period="${mvc.resourcesCachePeriod}" />
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
 
 	<mvc:default-servlet-handler />
 

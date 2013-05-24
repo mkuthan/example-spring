@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class TodoControllerTest extends AbstractContollerTest {
 		perform(get(RequestMappings.TODO).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.").value(hasSize(todos.size())))
 				.andExpect(jsonPath("$.[0].title").value(equalTo(todo1.getTitle())))
-				.andExpect(jsonPath("$.[1].title").value(equalTo(todo2.getTitle()))).andDo(print());
+				.andExpect(jsonPath("$.[1].title").value(equalTo(todo2.getTitle())));
 	}
 
 	@Test

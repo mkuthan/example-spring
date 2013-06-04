@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import example.TestGroups;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-date.xml")
-@Test(groups = TestGroups.INTEGRATION)
+@Test(groups = TestGroups.INTEGRATION, singleThreaded = true)
 @ActiveProfiles("test")
 public class DefaultDateTimeProviderTest extends AbstractTestNGSpringContextTests {
 

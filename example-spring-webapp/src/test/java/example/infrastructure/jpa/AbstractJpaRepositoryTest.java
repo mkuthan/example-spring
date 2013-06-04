@@ -21,13 +21,13 @@ import example.domain.shared.security.Account;
 import example.domain.shared.security.AccountProvider;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jpa.xml")
-@Test(groups = { TestGroups.INTEGRATION })
+@Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 @ActiveProfiles("test")
 public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
 
 	public static final DateTime AUDIT_DATE_TIME = new DateTime();
 
-	public static final Account AUDIT_ACCOUNT = new Account("ANY USER");
+	public static final Account AUDIT_ACCOUNT = new Account("any username", "any display name");
 
 	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME, AUDIT_ACCOUNT.getUsername(),
 			AUDIT_ACCOUNT.getUsername());

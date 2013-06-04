@@ -1,6 +1,6 @@
 package example.domain.shared.security;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -23,10 +23,13 @@ public class Account extends AbstractAggregateEntity {
 	private String username;
 
 	@Column(nullable = false)
-	private String password;
+	private String password = "";
 
 	@Column(nullable = false)
-	private Boolean enabled;
+	private Boolean enabled = Boolean.TRUE;
+
+	@Column(nullable = false)
+	private String displayName;
 
 	@Transient
 	@Autowired
@@ -35,10 +38,9 @@ public class Account extends AbstractAggregateEntity {
 	protected Account() {
 	}
 
-	public Account(String username) {
+	public Account(String username, String displayName) {
 		this.username = checkNotNull(username);
-		password = "";
-		enabled = Boolean.TRUE;
+		this.displayName = checkNotNull(displayName);
 	}
 
 	public void disable() {
@@ -59,6 +61,10 @@ public class Account extends AbstractAggregateEntity {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public String getDisplayName() {
+		return displayName;
 	}
 
 	public void updatePassword(String rawPassword) {

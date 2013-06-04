@@ -5,7 +5,7 @@
 <jsp:directive.attribute name="title" description="Page title" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="example-spring">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=8" >
 	<meta charset="utf-8">
@@ -18,8 +18,8 @@
 	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
-	<link href="${pageContext.request.contextPath}/resources/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="${pageContext.request.contextPath}/resources/styles/example-spring.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/webjars/bootstrap/2.3.1/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/resources/css/example-spring.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -38,7 +38,7 @@
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									<i class="icon-user icon-white"></i>
-									<sec:authentication property="principal.username" />
+									<c:out value="${loggedUser.displayName}" />
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
@@ -81,8 +81,11 @@
 	
 
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/webjars/angularjs/1.1.5/angular.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/webjars/bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers.js"></script>
 </body>
 
 </html>

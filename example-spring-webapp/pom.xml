@@ -27,6 +27,7 @@
 				<configuration>
 					<groups>${example.surefireTestGroups}</groups>
 					<excludedGroups>${example.surefireExcludedGroups}</excludedGroups>
+					<parallel>both</parallel>
 				</configuration>
 			</plugin>
 
@@ -389,6 +390,25 @@
 					<groupId>commons-pool</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- Web -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angularjs</artifactId>
+			<version>${angularjs.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${bootstrap.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
 		</dependency>
 
 		<!-- Tests -->

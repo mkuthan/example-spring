@@ -27,7 +27,7 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	public static final DateTime AUDIT_DATE_TIME = new DateTime();
 
-	public static final Account AUDIT_ACCOUNT = new Account("ANY USER");
+	public static final Account AUDIT_ACCOUNT = new Account("any username", "any display name");
 
 	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME, AUDIT_ACCOUNT.getUsername(),
 			AUDIT_ACCOUNT.getUsername());

@@ -17,16 +17,17 @@ import example.domain.shared.security.PasswordEncoder;
 @Listeners(MockitoTestNGListener.class)
 public class AccountTest {
 
-	private static final String ANY_USERNAME = "ANY USERNAME";
+	private static final String ANY_USERNAME = "any username";
+	private static final String ANY_DISPLAY_NAME = "any display name";
 	
-	private static final String RAW_PASSWORD = "ANY PASSWORD";
-	private static final String PASSWORD_HASH = "ANY PASSWORD HASH";
+	private static final String RAW_PASSWORD = "any password";
+	private static final String PASSWORD_HASH = "any password hash";
 
 	@Mock
 	private PasswordEncoder passwordEncoder;
 
 	@InjectMocks
-	private Account account = new Account(ANY_USERNAME);
+	private Account account = new Account(ANY_USERNAME, ANY_DISPLAY_NAME);
 
 	public void disable() {
 		// when

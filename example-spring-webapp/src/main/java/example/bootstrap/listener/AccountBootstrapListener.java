@@ -15,8 +15,8 @@ import example.domain.shared.security.AccountRepository;
 @Component
 public class AccountBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {
 
-	public static final String MARCIN = "marcin";
-	public static final String MAGDA = "magda";
+	public static final String USER = "user";
+	public static final String ADMIN = "admin";
 
 	@Autowired
 	private AccountRepository accountRepository;
@@ -24,9 +24,10 @@ public class AccountBootstrapListener implements ApplicationListener<BootstrapEv
 	@Override
 	public void onApplicationEvent(BootstrapEvent event) {
 		if (!accountsExist()) {
-			Account marcinAccount = new Account(MARCIN);
-			Account magdaAccount = new Account(MAGDA);
-			accountRepository.save(Lists.newArrayList(marcinAccount, magdaAccount));
+			Account user = new Account(USER, "Regular User");
+			Account admin = new Account(ADMIN, "Administrator");
+			accountRepository.save(Lists.newArrayList(user, admin));
+			accountRepository.flush();
 		}
 	}
 

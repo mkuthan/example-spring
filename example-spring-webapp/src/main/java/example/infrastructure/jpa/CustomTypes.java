@@ -7,7 +7,7 @@ import org.hibernate.annotations.TypeDefs;
 import org.joda.money.Money;
 import org.joda.time.DateTime;
 
-import example.domain.shared.json.JsonHolder;
+import example.shared.json.JsonHolder;
 
 @MappedSuperclass
 @TypeDefs({ @TypeDef(defaultForType = Money.class, typeClass = MoneyType.class),

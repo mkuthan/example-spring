@@ -4,9 +4,9 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import example.ddd.EventPublisher;
-import example.domain.shared.date.DateTimeProvider;
-import example.domain.shared.security.AccountProvider;
+import example.shared.date.DateTimeProvider;
+import example.shared.ddd.EventPublisher;
+import example.shared.security.AccountProvider;
 
 @Configuration
 public class JpaTestConfiguration {

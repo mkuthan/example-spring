@@ -40,44 +40,6 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-				<configuration>
-					<outxml>true</outxml>
-					<aspectLibraries>
-						<aspectLibrary>
-							<groupId>org.springframework</groupId>
-							<artifactId>spring-aspects</artifactId>
-						</aspectLibrary>
-					</aspectLibraries>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-					<!-- With the flag Java debugger works correctly with around advices -->
-					<XnoInline>true</XnoInline>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>test-compile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjrt</artifactId>
-						<version>${aspectj.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjtools</artifactId>
-						<version>${aspectj.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
-			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
@@ -167,12 +129,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
+			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
+			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -212,11 +174,11 @@
 			<version>${spring-data.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-aspects</artifactId>
-			<version>${spring-security.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.security</groupId> -->
+<!-- 			<artifactId>spring-security-aspects</artifactId> -->
+<!-- 			<version>${spring-security.version}</version> -->
+<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -332,17 +294,17 @@
 			<version>${guava.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.aspectj</groupId> -->
+<!-- 			<artifactId>aspectjrt</artifactId> -->
+<!-- 			<version>${aspectj.version}</version> -->
+<!-- 		</dependency> -->
 
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.aspectj</groupId> -->
+<!-- 			<artifactId>aspectjweaver</artifactId> -->
+<!-- 			<version>${aspectj.version}</version> -->
+<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

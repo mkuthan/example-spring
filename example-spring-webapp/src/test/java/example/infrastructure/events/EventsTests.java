@@ -9,98 +9,35 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+
 import example.TestGroups;
-import example.ddd.AbstractEvent;
-import example.ddd.EventListener;
+import example.shared.ddd.AbstractEvent;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-events.xml")
 @Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 @ActiveProfiles("test")
 public class EventsTests extends AbstractTestNGSpringContextTests {
 
-	@Autowired
-	private DefaultEventPublisher defaultEventPublisher;
+	private static final String ANY_PAYLOAD = "any payload";
 
 	@Autowired
-	private TestSyncEventListener testSyncEventListener;
+	private EventBus eventBus;
 
 	@Autowired
-	private TestAsyncEventListener testAsyncEventListener;
+	private TestEventSubscriber testEventSubscriber;
 
 	@Test
-	public void shouldReceiveSyncEvent() {
+	public void shouldReceiveEvent() {
 		// given
-		TestEvent event = new TestEvent("any payload");
+		TestEvent event = new TestEvent(ANY_PAYLOAD);
 
 		// when
-		defaultEventPublisher.publish(event);
+		eventBus.post(event);
 
 		// then
-		assertThat(testSyncEventListener.getEvent()).isEqualTo(event);
-		assertThat(testSyncEventListener.getThread()).isEqualTo(Thread.currentThread());
-	}
-
-	@Test
-	public void shouldReceiveAsyncEvent() throws InterruptedException {
-		// given
-		TestEvent event = new TestEvent("any payload");
-
-		// when
-		defaultEventPublisher.publish(event);
-
-		synchronized (testAsyncEventListener) {
-			testAsyncEventListener.wait(500);
-		}
-
-		// then
-		assertThat(testAsyncEventListener.getEvent()).isEqualTo(event);
-		assertThat(testAsyncEventListener.getThread()).isNotEqualTo(Thread.currentThread());
-	}
-
-	@Component
-	public static class TestSyncEventListener {
-
-		private TestEvent event;
-		private Thread thread;
-
-		@EventListener
-		public void sync(TestEvent event) {
-			this.event = event;
-			this.thread = Thread.currentThread();
-		}
-
-		public TestEvent getEvent() {
-			return event;
-		}
-
-		public Thread getThread() {
-			return thread;
-		}
-
-	}
-
-	@Component
-	public static class TestAsyncEventListener {
-
-		private volatile TestEvent event;
-		private volatile Thread thread;
-
-		@EventListener(async = true)
-		public synchronized void async(TestEvent event) {
-			this.event = event;
-			this.thread = Thread.currentThread();
-
-			notifyAll();
-		}
-
-		public TestEvent getEvent() {
-			return event;
-		}
-
-		public Thread getThread() {
-			return thread;
-		}
-
+		assertThat(testEventSubscriber.getEvent()).isEqualTo(event);
 	}
 
 	public static class TestEvent extends AbstractEvent<String> {
@@ -109,6 +46,22 @@ public class EventsTests extends AbstractTestNGSpringContextTests {
 
 		public TestEvent(String payload) {
 			super(payload);
+		}
+
+	}
+
+	@Component
+	public static class TestEventSubscriber {
+
+		private TestEvent event;
+
+		@Subscribe
+		public void subscribe(TestEvent event) {
+			this.event = event;
+		}
+
+		public TestEvent getEvent() {
+			return event;
 		}
 
 	}

@@ -5,9 +5,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import example.domain.shared.security.Account;
-import example.domain.shared.security.AccountProvider;
-import example.domain.shared.security.AccountRepository;
+import example.shared.security.Account;
+import example.shared.security.AccountProvider;
+import example.shared.security.AccountRepository;
 
 @Component
 public class DefaultAccountProvider implements AccountProvider {

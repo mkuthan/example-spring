@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import example.domain.shared.json.JsonSerializationException;
-import example.domain.shared.json.JsonSerializationService;
+import example.shared.json.JsonSerializationException;
+import example.shared.json.JsonSerializationService;
 
 @Component
 public class JacksonJsonSerializationService implements JsonSerializationService {

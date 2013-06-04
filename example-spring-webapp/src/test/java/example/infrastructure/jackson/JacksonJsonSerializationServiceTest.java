@@ -17,7 +17,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.domain.example.ExampleValueObject;
+import example.sample.domain.SampleValueObject;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jackson.xml")
 @Test(groups = TestGroups.INTEGRATION, singleThreaded = true)
@@ -29,7 +29,7 @@ public class JacksonJsonSerializationServiceTest extends AbstractTestNGSpringCon
 
 	@DataProvider
 	static final Object[][] objects() {
-		ExampleValueObject.Builder exampleValueObjectBuilder = new ExampleValueObject.Builder().withFieldA("FieldA")
+		SampleValueObject.Builder exampleValueObjectBuilder = new SampleValueObject.Builder().withFieldA("FieldA")
 				.withFieldB("FieldB").withFieldC("FieldC");
 
 		return new Object[][] { { exampleValueObjectBuilder.build() },

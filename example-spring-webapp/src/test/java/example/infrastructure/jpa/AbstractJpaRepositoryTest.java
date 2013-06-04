@@ -14,11 +14,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.ddd.Entity;
-import example.domain.shared.audit.Audit;
-import example.domain.shared.date.DateTimeProvider;
-import example.domain.shared.security.Account;
-import example.domain.shared.security.AccountProvider;
+import example.shared.audit.Audit;
+import example.shared.date.DateTimeProvider;
+import example.shared.ddd.Entity;
+import example.shared.security.Account;
+import example.shared.security.AccountProvider;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jpa.xml")
 @Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)

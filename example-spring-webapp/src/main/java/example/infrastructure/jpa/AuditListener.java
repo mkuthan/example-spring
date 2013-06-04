@@ -6,10 +6,10 @@ import javax.persistence.PreUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import example.domain.shared.audit.Auditable;
-import example.domain.shared.date.DateTimeProvider;
-import example.domain.shared.security.Account;
-import example.domain.shared.security.AccountProvider;
+import example.shared.audit.Auditable;
+import example.shared.date.DateTimeProvider;
+import example.shared.security.Account;
+import example.shared.security.AccountProvider;
 
 @Component
 public class AuditListener {

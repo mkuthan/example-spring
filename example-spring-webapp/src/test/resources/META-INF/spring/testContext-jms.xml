@@ -7,11 +7,11 @@
 
 	<context:property-placeholder location="classpath:/test-jms.properties" />
 
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jms.xml" />
+	<import resource="classpath:/META-INF/spring/infrastructure/applicationContext-common.xml" />
+	<import resource="classpath:/META-INF/spring/infrastructure/applicationContext-jms.xml" />
 
 	<!-- JMS message converter requires JSON serialization -->
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-jackson.xml" />
+	<import resource="classpath:/META-INF/spring/infrastructure/applicationContext-jackson.xml" />
 
 	<!-- queue -->
 	<amq:queue id="testQueue" physicalName="example.testQueue" />

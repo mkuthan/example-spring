@@ -2,10 +2,11 @@ package example.infrastructure.common;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import example.bootstrap.BootstrapEvent;
+import example.shared.bootstrap.BootstrapEvent;
 
 @Component
 public class ApplicationBootstrap implements ApplicationListener<ContextRefreshedEvent> {

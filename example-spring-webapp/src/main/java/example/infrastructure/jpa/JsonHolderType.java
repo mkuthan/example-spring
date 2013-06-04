@@ -13,8 +13,8 @@ import org.hibernate.usertype.CompositeUserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import example.domain.shared.json.JsonHolder;
-import example.domain.shared.json.JsonSerializationService;
+import example.shared.json.JsonHolder;
+import example.shared.json.JsonSerializationService;
 
 @Component
 public class JsonHolderType extends AbstractCustomType implements CompositeUserType {

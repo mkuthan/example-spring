@@ -1,4 +1,4 @@
-package example.infrastructure.web;
+package example.infrastructure.web.todo;
 
 import static com.google.common.collect.Lists.*;
 import static org.hamcrest.Matchers.*;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.testng.annotations.Test;
 
+import example.infrastructure.web.AbstractContollerTest;
 import example.todo.application.TodoService;
 import example.todo.domain.Todo;
 import example.todo.domain.TodoRepository;

@@ -8,7 +8,7 @@
 
 	<context:component-scan base-package="example.acceptance.steps" />
 
-	<import resource="classpath:/META-INF/spring/applicationContext-domain.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-todo.xml" />
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure.xml" />
 
 </beans>

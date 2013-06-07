@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<import resource="classpath:/META-INF/spring/infrastructure/applicationContext-common.xml" />
-	<import resource="classpath:/META-INF/spring/infrastructure/applicationContext-date.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-date.xml" />
 
 </beans>

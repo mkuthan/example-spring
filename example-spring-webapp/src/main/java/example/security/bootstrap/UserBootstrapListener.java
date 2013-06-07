@@ -1,4 +1,4 @@
-package example.shared.security;
+package example.security.bootstrap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -7,25 +7,27 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
 
+import example.security.domain.User;
+import example.security.domain.UserRepository;
 import example.shared.bootstrap.BootstrapEvent;
 import example.shared.bootstrap.BootstrapOrder;
 
 @Component
-public class AccountBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {
+public class UserBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {
 
 	public static final String USER = "user";
 	public static final String ADMIN = "admin";
 
 	@Autowired
-	private AccountRepository accountRepository;
+	private UserRepository userRepository;
 
 	@Override
 	public void onApplicationEvent(BootstrapEvent event) {
 		if (!accountsExist()) {
-			Account user = new Account(USER, "Regular User");
-			Account admin = new Account(ADMIN, "Administrator");
-			accountRepository.save(Lists.newArrayList(user, admin));
-			accountRepository.flush();
+			User user = new User(USER, "Regular User");
+			User admin = new User(ADMIN, "Administrator");
+			userRepository.save(Lists.newArrayList(user, admin));
+			userRepository.flush();
 		}
 	}
 
@@ -35,7 +37,7 @@ public class AccountBootstrapListener implements ApplicationListener<BootstrapEv
 	}
 
 	public boolean accountsExist() {
-		return accountRepository.count() > 0;
+		return userRepository.count() > 0;
 	}
 
 }

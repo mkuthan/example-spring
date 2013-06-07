@@ -1,9 +1,10 @@
-package example.infrastructure.jpa;
+package example.infrastructure.jpa.todo;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import example.infrastructure.jpa.AbstractJpaRepositoryTest;
 import example.todo.domain.Todo;
 import example.todo.domain.TodoRepository;
 

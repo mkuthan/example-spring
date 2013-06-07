@@ -84,13 +84,14 @@ public class JsonHolderType extends AbstractCustomType implements CompositeUserT
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
 			throws HibernateException, SQLException {
-		if (value == null) {
-			StringType.INSTANCE.set(st, null, index, session);
-			TextType.INSTANCE.set(st, null, index + 1, session);
-		} else {
-			JsonHolder jsonHolder = (JsonHolder) value;
+		JsonHolder jsonHolder = (JsonHolder) value;
+
+		if (jsonHolder != null && jsonHolder.getValue() != null) {
 			StringType.INSTANCE.set(st, jsonHolder.getValue().getClass().getName(), index, session);
 			TextType.INSTANCE.set(st, jsonSerializationService.toJson(jsonHolder.getValue()), index + 1, session);
+		} else {
+			StringType.INSTANCE.set(st, null, index, session);
+			TextType.INSTANCE.set(st, null, index + 1, session);
 		}
 	}
 

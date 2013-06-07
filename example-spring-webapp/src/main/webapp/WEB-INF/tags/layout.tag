@@ -38,7 +38,7 @@
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									<i class="icon-user icon-white"></i>
-									<c:out value="${loggedUser.displayName}" />
+									<c:out value="${loggedUserDisplayName}" />
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">

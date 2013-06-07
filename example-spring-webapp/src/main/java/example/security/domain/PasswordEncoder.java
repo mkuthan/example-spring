@@ -1,4 +1,4 @@
-package example.shared.security;
+package example.security.domain;
 
 import example.shared.ddd.DomainService;
 

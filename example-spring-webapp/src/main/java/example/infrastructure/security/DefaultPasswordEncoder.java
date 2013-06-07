@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import example.shared.security.PasswordEncoder;
+import example.security.domain.PasswordEncoder;
 
 @Component
 public class DefaultPasswordEncoder implements PasswordEncoder {

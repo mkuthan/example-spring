@@ -1,4 +1,4 @@
-package example.shared.security;
+package example.security.domain;
 
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -9,10 +9,12 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
+import example.security.domain.User;
+import example.security.domain.PasswordEncoder;
 
 @Test(groups = TestGroups.UNIT)
 @Listeners(MockitoTestNGListener.class)
-public class AccountTest {
+public class UserTest {
 
 	private static final String ANY_USERNAME = "any username";
 	private static final String ANY_DISPLAY_NAME = "any display name";
@@ -25,37 +27,37 @@ public class AccountTest {
 
 	public void disable() {
 		// given
-		Account account = new Account(ANY_USERNAME, ANY_DISPLAY_NAME);
+		User user = new User(ANY_USERNAME, ANY_DISPLAY_NAME);
 
 		// when
-		account.disable();
+		user.disable();
 
 		// then
-		assertThat(account.isEnabled()).isFalse();
+		assertThat(user.isEnabled()).isFalse();
 	}
 
 	public void enable() {
 		// given
-		Account account = new Account(ANY_USERNAME, ANY_DISPLAY_NAME);
+		User user = new User(ANY_USERNAME, ANY_DISPLAY_NAME);
 
 		// when
-		account.enable();
+		user.enable();
 
 		// then
-		assertThat(account.isEnabled()).isTrue();
+		assertThat(user.isEnabled()).isTrue();
 	}
 
 	public void updatePassword() {
 		// given
-		Account account = new Account(ANY_USERNAME, ANY_DISPLAY_NAME);
+		User user = new User(ANY_USERNAME, ANY_DISPLAY_NAME);
 
 		// given
 		when(passwordEncoder.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
 
 		// when
-		account.updatePassword(passwordEncoder, RAW_PASSWORD);
+		user.updatePassword(passwordEncoder, RAW_PASSWORD);
 
 		// then
-		assertThat(account.getPassword()).isEqualTo(PASSWORD_HASH);
+		assertThat(user.getPassword()).isEqualTo(PASSWORD_HASH);
 	}
 }

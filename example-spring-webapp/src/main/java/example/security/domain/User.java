@@ -1,4 +1,4 @@
-package example.shared.security;
+package example.security.domain;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -8,14 +8,12 @@ import javax.persistence.Entity;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.google.common.base.Objects;
-
 import example.shared.ddd.AbstractAggregateEntity;
 
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Account extends AbstractAggregateEntity {
+public class User extends AbstractAggregateEntity {
 
 	@Column(nullable = false, unique = true)
 	private String username;
@@ -29,10 +27,10 @@ public class Account extends AbstractAggregateEntity {
 	@Column(nullable = false)
 	private String displayName;
 
-	protected Account() {
+	protected User() {
 	}
 
-	public Account(String username, String displayName) {
+	public User(String username, String displayName) {
 		this.username = checkNotNull(username);
 		this.displayName = checkNotNull(displayName);
 	}
@@ -65,11 +63,6 @@ public class Account extends AbstractAggregateEntity {
 		checkNotNull(rawPassword);
 
 		password = passwordEncoder.encode(rawPassword);
-	}
-
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).addValue(username).toString();
 	}
 
 }

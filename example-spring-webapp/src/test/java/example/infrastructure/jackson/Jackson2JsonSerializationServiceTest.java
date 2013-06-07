@@ -1,6 +1,6 @@
 package example.infrastructure.jackson;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.Assertions.*;
 
 import java.math.BigDecimal;
 
@@ -17,24 +17,18 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.sample.domain.SampleValueObject;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jackson.xml")
 @Test(groups = TestGroups.INTEGRATION, singleThreaded = true)
 @ActiveProfiles("test")
-public class JacksonJsonSerializationServiceTest extends AbstractTestNGSpringContextTests {
+public class Jackson2JsonSerializationServiceTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
-	private JacksonJsonSerializationService service;
+	private Jackson2JsonSerializationService service;
 
 	@DataProvider
 	static final Object[][] objects() {
-		SampleValueObject.Builder exampleValueObjectBuilder = new SampleValueObject.Builder().withFieldA("FieldA")
-				.withFieldB("FieldB").withFieldC("FieldC");
-
-		return new Object[][] { { exampleValueObjectBuilder.build() },
-				{ exampleValueObjectBuilder.withFieldC(null).build() },
-				{ Money.of(CurrencyUnit.EUR, BigDecimal.ZERO) }, { new DateTime(DateTimeZone.UTC) },
+		return new Object[][] { { Money.of(CurrencyUnit.EUR, BigDecimal.ZERO) }, { new DateTime(DateTimeZone.UTC) },
 				{ new LocalDate() } };
 	}
 

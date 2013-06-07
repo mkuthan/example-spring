@@ -5,17 +5,17 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import example.sample.domain.SampleRepository;
+import example.todo.domain.TodoRepository;
 
 @Steps
-public class ExampleSteps {
+public class TodoSteps {
 
 	@Autowired
-	private SampleRepository sampleRepository;
+	private TodoRepository todoRepository;
 
 	@Given("a stock of symbol $symbol and a threshold of $threshold")
 	public void aStock(String symbol, double threshold) {
-		sampleRepository.findOne(-1L);
+		todoRepository.findOne(-1L);
 	}
 
 	@When("the stock is traded at $price")

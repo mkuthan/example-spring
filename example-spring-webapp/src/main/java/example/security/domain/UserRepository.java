@@ -1,4 +1,4 @@
-package example.shared.security;
+package example.security.domain;
 
 import javax.persistence.QueryHint;
 
@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.QueryHints;
 
 import example.shared.ddd.DomainRepository;
 
-public interface AccountRepository extends DomainRepository<Account> {
+public interface UserRepository extends DomainRepository<User> {
 
 	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
-	Account findByUsername(String username);
+	User findByUsername(String username);
 
 }

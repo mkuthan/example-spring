@@ -12,8 +12,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:/META-INF/spring/applicationContext-properties.xml,
-			classpath:/META-INF/spring/applicationContext-shared.xml,
-			classpath:/META-INF/spring/infrastructure/applicationContext.xml									
+			classpath:/META-INF/spring/applicationContext-infrastructure.xml									
 		</param-value>
 	</context-param>
 
@@ -64,39 +63,20 @@
 	</filter-mapping>
 
 	<servlet>
-		<servlet-name>sample-servlet</servlet-name>
+		<servlet-name>example-spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:/META-INF/spring/applicationContext-properties.xml, 
-				classpath:/META-INF/spring/applicationContext-sample.xml
+				classpath:/META-INF/spring/applicationContext.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>sample-servlet</servlet-name>
-		<url-pattern>/sample</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>todo-servlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>
-				classpath:/META-INF/spring/applicationContext-properties.xml, 
-				classpath:/META-INF/spring/applicationContext-todo.xml
-			</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>todo-servlet</servlet-name>
-		<url-pattern>/todo</url-pattern>
+		<servlet-name>example-spring</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<session-config>

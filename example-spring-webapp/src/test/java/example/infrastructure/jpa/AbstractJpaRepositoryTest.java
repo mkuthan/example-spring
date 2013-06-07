@@ -14,11 +14,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
+import example.security.domain.User;
+import example.security.domain.UserProvider;
 import example.shared.audit.Audit;
 import example.shared.date.DateTimeProvider;
 import example.shared.ddd.Entity;
-import example.shared.security.Account;
-import example.shared.security.AccountProvider;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jpa.xml")
 @Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
@@ -27,7 +27,7 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	public static final DateTime AUDIT_DATE_TIME = new DateTime();
 
-	public static final Account AUDIT_ACCOUNT = new Account("any username", "any display name");
+	public static final User AUDIT_ACCOUNT = new User("any username", "any display name");
 
 	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME, AUDIT_ACCOUNT.getUsername(),
 			AUDIT_ACCOUNT.getUsername());
@@ -39,7 +39,7 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 	private DateTimeProvider dateTimeProvider;
 
 	@Autowired
-	private AccountProvider accountProvider;
+	private UserProvider userProvider;
 
 	@BeforeClass
 	public void initializeDateProvider() {
@@ -48,7 +48,7 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	@BeforeClass
 	public void initializeAccountProvider() {
-		when(accountProvider.authenticated()).thenReturn(AUDIT_ACCOUNT);
+		when(userProvider.authenticated()).thenReturn(AUDIT_ACCOUNT);
 	}
 
 	protected <T extends Entity> T saveFlushAndClear(T entity) {

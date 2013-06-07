@@ -6,8 +6,8 @@
 
 	<context:property-placeholder location="classpath:/test-web.properties" />
 
-	<import resource="classpath:/META-INF/spring/infrastructure/applicationContext-common.xml" />
-	<import resource="classpath:/META-INF/spring/infrastructure/applicationContext-web.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-web.xml" />
 
 	<context:component-scan base-package="example" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />

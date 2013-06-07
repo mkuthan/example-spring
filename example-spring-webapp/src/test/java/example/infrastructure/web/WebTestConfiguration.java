@@ -4,8 +4,8 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import example.sample.domain.SampleRepository;
-import example.shared.security.AccountProvider;
+import example.infrastructure.jpa.TestRepository;
+import example.security.domain.UserProvider;
 import example.todo.application.TodoService;
 import example.todo.domain.TodoRepository;
 
@@ -13,13 +13,13 @@ import example.todo.domain.TodoRepository;
 public class WebTestConfiguration {
 
 	@Bean
-	public AccountProvider accountProvider() {
-		return Mockito.mock(AccountProvider.class);
+	public UserProvider userProvider() {
+		return Mockito.mock(UserProvider.class);
 	}
 
 	@Bean
-	public SampleRepository sampleRepository() {
-		return Mockito.mock(SampleRepository.class);
+	public TestRepository testRepository() {
+		return Mockito.mock(TestRepository.class);
 	}
 
 	@Bean

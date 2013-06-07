@@ -1,23 +1,22 @@
-package example.infrastructure.web;
+package example.security.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import example.shared.security.Account;
-import example.shared.security.AccountProvider;
+import example.security.domain.UserProvider;
 
 @Configuration
 public class WebConfiguration {
 
 	@Autowired
-	private AccountProvider accountProvider;
+	private UserProvider userProvider;
 
 	@Bean
 	@Scope("session")
-	public Account loggedUser() {
-		return accountProvider.authenticated();
+	public String loggedUserDisplayName() {
+		return userProvider.authenticated().getDisplayName();
 	}
 
 }

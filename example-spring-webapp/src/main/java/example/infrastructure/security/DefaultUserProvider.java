@@ -5,24 +5,24 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import example.shared.security.Account;
-import example.shared.security.AccountProvider;
-import example.shared.security.AccountRepository;
+import example.security.domain.User;
+import example.security.domain.UserProvider;
+import example.security.domain.UserRepository;
 
 @Component
-public class DefaultAccountProvider implements AccountProvider {
+public class DefaultUserProvider implements UserProvider {
 
 	@Autowired
-	private AccountRepository accountRepository;
+	private UserRepository userRepository;
 
 	@Override
-	public Account authenticated() {
+	public User authenticated() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null) {
 			return null;
 		}
 
-		return accountRepository.findByUsername(authentication.getName());
+		return userRepository.findByUsername(authentication.getName());
 	}
 
 }

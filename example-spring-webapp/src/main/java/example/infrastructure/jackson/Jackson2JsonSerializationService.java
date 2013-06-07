@@ -13,12 +13,12 @@ import example.shared.json.JsonSerializationException;
 import example.shared.json.JsonSerializationService;
 
 @Component
-public class JacksonJsonSerializationService implements JsonSerializationService {
+public class Jackson2JsonSerializationService implements JsonSerializationService {
 
 	private ObjectMapper objectMapper;
 
 	@Autowired
-	public JacksonJsonSerializationService(ObjectMapper objectMapper) {
+	public Jackson2JsonSerializationService(ObjectMapper objectMapper) {
 		this.objectMapper = checkNotNull(objectMapper);
 	}
 

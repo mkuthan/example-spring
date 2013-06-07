@@ -25,11 +25,11 @@
 	</mvc:interceptors>
 
 	<mvc:view-controller path="/" view-name="index" />
-	<mvc:view-controller path="/login" />
-	<mvc:view-controller path="/loggedOut" />
 	<mvc:view-controller path="/uncaughtException" />
 	<mvc:view-controller path="/resourceNotFound" />
 	<mvc:view-controller path="/dataAccessFailure" />
+	<mvc:view-controller path="/login" />
+	<mvc:view-controller path="/loggedOut" />
 
 	<bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource"
 		p:basenames="classpath:/messages" p:fallbackToSystemLocale="false" p:cacheSeconds="${mvc.resourcesCachePeriod}" />

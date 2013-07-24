@@ -2,8 +2,5 @@ package example.shared.ddd;
 
 import java.io.Serializable;
 
-public interface Event<T> extends Serializable {
-
-	T getPayload();
-
+public interface Event extends Serializable {
 }

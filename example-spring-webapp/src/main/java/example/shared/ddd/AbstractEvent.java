@@ -1,8 +1,8 @@
 package example.shared.ddd;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-public class AbstractEvent<T> implements Event<T> {
+public class AbstractEvent<T> implements Event {
 
 	private static final long serialVersionUID = 1L;
 
@@ -12,7 +12,6 @@ public class AbstractEvent<T> implements Event<T> {
 		this.payload = checkNotNull(payload);
 	}
 
-	@Override
 	public T getPayload() {
 		return payload;
 	}

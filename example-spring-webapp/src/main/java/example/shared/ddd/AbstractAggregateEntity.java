@@ -14,7 +14,7 @@ public class AbstractAggregateEntity extends AbstractEntity implements Aggregate
 		return this.entityVersion;
 	}
 
-	protected <T> void publish(Event<T> event) {
+	protected void publish(Event event) {
 		EventPublisher.publish(event);
 	}
 

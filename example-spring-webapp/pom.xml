@@ -171,14 +171,8 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring-data.version}</version>
+			<version>${spring-data-jpa.version}</version>
 		</dependency>
-
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.security</groupId> -->
-<!-- 			<artifactId>spring-security-aspects</artifactId> -->
-<!-- 			<version>${spring-security.version}</version> -->
-<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -190,6 +184,18 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-openid</artifactId>
+			<version>${spring-security.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -293,18 +299,6 @@
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
 		</dependency>
-
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.aspectj</groupId> -->
-<!-- 			<artifactId>aspectjrt</artifactId> -->
-<!-- 			<version>${aspectj.version}</version> -->
-<!-- 		</dependency> -->
-
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.aspectj</groupId> -->
-<!-- 			<artifactId>aspectjweaver</artifactId> -->
-<!-- 			<version>${aspectj.version}</version> -->
-<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

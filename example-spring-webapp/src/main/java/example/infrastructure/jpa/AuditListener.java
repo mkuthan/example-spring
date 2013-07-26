@@ -37,7 +37,7 @@ public class AuditListener {
 			Auditable auditable = (Auditable) o;
 
 			User authenticated = acountProvider.authenticated();
-			String modifier = (authenticated != null) ? authenticated.getUsername() : "N/A";
+			String modifier = (authenticated != null) ? authenticated.getEmail() : "N/A";
 
 			auditable.updateAudit(dateTimeProvider.now(), modifier);
 		}

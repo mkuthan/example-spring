@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import example.security.domain.User;
+import example.security.domain.UserIdentifier;
 import example.security.domain.UserProvider;
 import example.security.domain.UserRepository;
 
@@ -22,7 +23,7 @@ public class DefaultUserProvider implements UserProvider {
 			return null;
 		}
 
-		return userRepository.findByUsername(authentication.getName());
+		return userRepository.findByIdentifier(new UserIdentifier(authentication.getName()));
 	}
 
 }

@@ -1,9 +1,10 @@
 package example.security.domain;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -15,24 +16,58 @@ import example.shared.ddd.AbstractAggregateEntity;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends AbstractAggregateEntity {
 
+	@Embedded
+	private UserIdentifier identifier;
+
 	@Column(nullable = false, unique = true)
-	private String username;
+	private String email;
 
 	@Column(nullable = false)
-	private String password = "";
+	private String firstname;
+
+	@Column(nullable = false)
+	private String lastname;
+
+	@Column(nullable = false)
+	private String fullname;
 
 	@Column(nullable = false)
 	private Boolean enabled = Boolean.TRUE;
 
-	@Column(nullable = false)
-	private String displayName;
-
 	protected User() {
 	}
 
-	public User(String username, String displayName) {
-		this.username = checkNotNull(username);
-		this.displayName = checkNotNull(displayName);
+	protected User(Builder builder) {
+		this.identifier = checkNotNull(builder.identifier);
+		this.email = checkNotNull(builder.email);
+		this.firstname = checkNotNull(builder.firstname);
+		this.lastname = checkNotNull(builder.lastname);
+
+		if (builder.fullname != null) {
+			this.fullname = builder.fullname;
+		} else {
+			this.fullname = String.format("%s %s", firstname, lastname);
+		}
+	}
+
+	public UserIdentifier getIdentifier() {
+		return identifier;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public String getDisplayName() {
+		return String.format("%s %s", getFirstname(), getLastname());
 	}
 
 	public void disable() {
@@ -47,22 +82,46 @@ public class User extends AbstractAggregateEntity {
 		return enabled;
 	}
 
-	public String getUsername() {
-		return username;
-	}
+	public static class Builder {
 
-	public String getPassword() {
-		return password;
-	}
+		private UserIdentifier identifier;
 
-	public String getDisplayName() {
-		return displayName;
-	}
+		private String email;
 
-	public void updatePassword(PasswordEncoder passwordEncoder, String rawPassword) {
-		checkNotNull(rawPassword);
+		private String firstname;
 
-		password = passwordEncoder.encode(rawPassword);
+		private String lastname;
+
+		private String fullname;
+
+		public Builder withIdentifier(UserIdentifier identifier) {
+			this.identifier = identifier;
+			return this;
+		}
+
+		public Builder withEmail(String email) {
+			this.email = email;
+			return this;
+		}
+
+		public Builder withFirstname(String firstname) {
+			this.firstname = firstname;
+			return this;
+		}
+
+		public Builder withLastname(String lastname) {
+			this.lastname = lastname;
+			return this;
+		}
+
+		public Builder withFullname(String fullname) {
+			this.fullname = fullname;
+			return this;
+		}
+
+		public User build() {
+			return new User(this);
+		}
 	}
 
 }

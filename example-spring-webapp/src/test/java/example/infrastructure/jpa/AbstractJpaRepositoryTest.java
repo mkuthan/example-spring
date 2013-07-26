@@ -1,6 +1,6 @@
 package example.infrastructure.jpa;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 import example.security.domain.User;
+import example.security.domain.UserIdentifier;
 import example.security.domain.UserProvider;
 import example.shared.audit.Audit;
 import example.shared.date.DateTimeProvider;
@@ -27,10 +28,11 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	public static final DateTime AUDIT_DATE_TIME = new DateTime();
 
-	public static final User AUDIT_ACCOUNT = new User("any username", "any display name");
+	public static final User AUDIT_ACCOUNT = new User.Builder().withIdentifier(new UserIdentifier("any identifier"))
+			.withEmail("any@domain.com").withFirstname("any firstname").withLastname("any lastname").build();
 
-	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME, AUDIT_ACCOUNT.getUsername(),
-			AUDIT_ACCOUNT.getUsername());
+	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME, AUDIT_ACCOUNT.getEmail(),
+			AUDIT_ACCOUNT.getEmail());
 
 	@PersistenceContext
 	protected EntityManager entityManager;

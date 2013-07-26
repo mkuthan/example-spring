@@ -29,22 +29,21 @@
 					</div>
 	    		</c:if>
 	    		
-	    		<div class="control-group">
-	    			<label class="control-label" for="j_username">
-	    				<spring:message code="security_login_form_username_label" />
-	    			</label>
-	    			<div class="controls">
-	      				<input id="j_username" name="j_username" type="text" placeholder="${usernameMessage}" autofocus>
-	    			</div>
-	  			</div>
-	  			<div class="control-group">
-	    			<label class="control-label" for="j_password">
-	    				<spring:message code="security_login_form_password_label" />
-	    			</label>
-	    			<div class="controls">
-	      				<input id="j_password" name="j_password" type="password" placeholder="${passwordMessage}">
-	    			</div>
-	  			</div>
+				<div class="control-group">
+			    	<label class="control-label">Please select your account provider:</label>
+			        <div class="controls">
+			            <label class="radio">
+			                <input type="radio" name="openid_identifier" id="id_openid_google" value="https://www.google.com/accounts/o8/id"/>
+			                Google - https://www.google.com/accounts/o8/id
+			            </label>
+						               
+			            <label class="radio">
+			                <input type="radio" name="openid_identifier" id="id_openid_myopenid" value="__username__.myopenid.com"/>
+			                MyOpenID: <div class="input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.myopenid.com</span></div>
+			            </label>
+			        </div>
+			    </div>
+
 	  			<div class="control-group">
 	    			<div class="controls">
 	     	 			<button type="submit" class="btn btn-primary">

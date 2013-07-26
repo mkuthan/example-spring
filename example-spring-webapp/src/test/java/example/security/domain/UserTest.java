@@ -1,33 +1,23 @@
 package example.security.domain;
 
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.fest.assertions.Assertions.assertThat;
 
-import org.mockito.Mock;
-import org.mockito.testng.MockitoTestNGListener;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.security.domain.User;
-import example.security.domain.PasswordEncoder;
+import example.security.domain.User.Builder;
 
 @Test(groups = TestGroups.UNIT)
-@Listeners(MockitoTestNGListener.class)
 public class UserTest {
 
-	private static final String ANY_USERNAME = "any username";
-	private static final String ANY_DISPLAY_NAME = "any display name";
-
-	private static final String RAW_PASSWORD = "any password";
-	private static final String PASSWORD_HASH = "any password hash";
-
-	@Mock
-	private PasswordEncoder passwordEncoder;
+	private static final UserIdentifier ANY_IDENTIFIER = new UserIdentifier("any identifier");
+	private static final String ANY_EMAIL = "any@domain.com";
+	private static final String ANY_FIRSTNAME = "any firstname";
+	private static final String ANY_LASTNAME = "any lastname";
 
 	public void disable() {
 		// given
-		User user = new User(ANY_USERNAME, ANY_DISPLAY_NAME);
+		User user = createBuilder().build();
 
 		// when
 		user.disable();
@@ -38,7 +28,7 @@ public class UserTest {
 
 	public void enable() {
 		// given
-		User user = new User(ANY_USERNAME, ANY_DISPLAY_NAME);
+		User user = createBuilder().build();
 
 		// when
 		user.enable();
@@ -47,17 +37,8 @@ public class UserTest {
 		assertThat(user.isEnabled()).isTrue();
 	}
 
-	public void updatePassword() {
-		// given
-		User user = new User(ANY_USERNAME, ANY_DISPLAY_NAME);
-
-		// given
-		when(passwordEncoder.encode(RAW_PASSWORD)).thenReturn(PASSWORD_HASH);
-
-		// when
-		user.updatePassword(passwordEncoder, RAW_PASSWORD);
-
-		// then
-		assertThat(user.getPassword()).isEqualTo(PASSWORD_HASH);
+	private Builder createBuilder() {
+		return new Builder().withIdentifier(ANY_IDENTIFIER).withEmail(ANY_EMAIL).withFirstname(ANY_FIRSTNAME)
+				.withLastname(ANY_LASTNAME);
 	}
 }

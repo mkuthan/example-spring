@@ -9,6 +9,6 @@ import example.shared.ddd.DomainRepository;
 public interface UserRepository extends DomainRepository<User> {
 
 	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
-	User findByUsername(String username);
+	User findByIdentifier(UserIdentifier identifier);
 
 }

@@ -1,7 +1,7 @@
 package example.infrastructure.jpa;
 
-import static com.google.common.collect.Lists.*;
-import static org.fest.assertions.Assertions.*;
+import static com.google.common.collect.Lists.newArrayList;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ public class JpaTestRepositoryTest extends AbstractJpaRepositoryTest {
 	@Autowired
 	private TestRepository testRepository;
 
+	@Test
 	public void shouldSaveExample() {
 		// given
 		TestEntity example = new TestEntity(ANY_NAME);
@@ -55,13 +56,14 @@ public class JpaTestRepositoryTest extends AbstractJpaRepositoryTest {
 		// given
 		String name = "duplicate";
 
-		TestEntity exampleA = new TestEntity("duplicate");
-		TestEntity exampleB = new TestEntity("duplicate");
+		TestEntity exampleA = new TestEntity(name);
+		TestEntity exampleB = new TestEntity(name);
 
 		// when
 		testRepository.save(newArrayList(exampleA, exampleB));
 	}
 
+	@Test
 	public void shouldFindByName() {
 		// given
 		String name = "name";

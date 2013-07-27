@@ -13,6 +13,8 @@
 
 	<!-- <logger name="org.hibernate" level="DEBUG" /> -->
 
+	<!-- <logger name="org.openid4java" level="DEBUG" /> -->
+
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>

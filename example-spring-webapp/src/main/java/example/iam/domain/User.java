@@ -1,11 +1,18 @@
-package example.security.domain;
+package example.iam.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Cacheable;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -34,6 +41,10 @@ public class User extends AbstractAggregateEntity {
 	@Column(nullable = false)
 	private Boolean enabled = Boolean.TRUE;
 
+	@CollectionTable
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<RoleIdentifier> roles = new HashSet<>();
+
 	protected User() {
 	}
 
@@ -48,6 +59,8 @@ public class User extends AbstractAggregateEntity {
 		} else {
 			this.fullname = String.format("%s %s", firstname, lastname);
 		}
+
+		this.roles.addAll(builder.roles);
 	}
 
 	public UserIdentifier getIdentifier() {
@@ -66,8 +79,8 @@ public class User extends AbstractAggregateEntity {
 		return lastname;
 	}
 
-	public String getDisplayName() {
-		return String.format("%s %s", getFirstname(), getLastname());
+	public String getFullname() {
+		return fullname;
 	}
 
 	public void disable() {
@@ -82,6 +95,10 @@ public class User extends AbstractAggregateEntity {
 		return enabled;
 	}
 
+	public Set<RoleIdentifier> getRoles() {
+		return Collections.unmodifiableSet(roles);
+	}
+
 	public static class Builder {
 
 		private UserIdentifier identifier;
@@ -93,6 +110,8 @@ public class User extends AbstractAggregateEntity {
 		private String lastname;
 
 		private String fullname;
+
+		private Set<RoleIdentifier> roles = new HashSet<>();
 
 		public Builder withIdentifier(UserIdentifier identifier) {
 			this.identifier = identifier;
@@ -116,6 +135,11 @@ public class User extends AbstractAggregateEntity {
 
 		public Builder withFullname(String fullname) {
 			this.fullname = fullname;
+			return this;
+		}
+
+		public Builder addRole(RoleIdentifier role) {
+			this.roles.add(role);
 			return this;
 		}
 

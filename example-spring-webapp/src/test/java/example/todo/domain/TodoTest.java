@@ -5,7 +5,6 @@ import static org.fest.assertions.Assertions.assertThat;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.todo.domain.Todo;
 
 @Test(groups = TestGroups.UNIT)
 public class TodoTest {
@@ -25,12 +24,6 @@ public class TodoTest {
 		assertThat(todo.isDone()).isFalse();
 
 		assertThat(todo.getTitle()).isEqualTo(title);
-	}
-
-	@Test(expectedExceptions = NullPointerException.class)
-	public void shouldNotConstructTodoWithoutTitle() {
-		// when
-		new Todo(null);
 	}
 
 	@Test

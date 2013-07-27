@@ -14,12 +14,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.security.domain.User;
-import example.security.domain.UserIdentifier;
-import example.security.domain.UserProvider;
 import example.shared.audit.Audit;
 import example.shared.date.DateTimeProvider;
 import example.shared.ddd.Entity;
+import example.shared.security.AuthenticatedUserDetails;
+import example.shared.security.AuthenticatedUserDetailsProvider;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-jpa.xml")
 @Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
@@ -28,11 +27,10 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	public static final DateTime AUDIT_DATE_TIME = new DateTime();
 
-	public static final User AUDIT_ACCOUNT = new User.Builder().withIdentifier(new UserIdentifier("any identifier"))
-			.withEmail("any@domain.com").withFirstname("any firstname").withLastname("any lastname").build();
+	public static final AuthenticatedUserDetails AUDIT_USER_DETAILS = new TestUserDetails("any@domain.com");
 
-	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME, AUDIT_ACCOUNT.getEmail(),
-			AUDIT_ACCOUNT.getEmail());
+	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME,
+			AUDIT_USER_DETAILS.getEmail(), AUDIT_USER_DETAILS.getEmail());
 
 	@PersistenceContext
 	protected EntityManager entityManager;
@@ -41,7 +39,7 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 	private DateTimeProvider dateTimeProvider;
 
 	@Autowired
-	private UserProvider userProvider;
+	private AuthenticatedUserDetailsProvider authenticatedUserDetailsProvider;
 
 	@BeforeClass
 	public void initializeDateProvider() {
@@ -50,7 +48,7 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	@BeforeClass
 	public void initializeAccountProvider() {
-		when(userProvider.authenticated()).thenReturn(AUDIT_ACCOUNT);
+		when(authenticatedUserDetailsProvider.authenticated()).thenReturn(AUDIT_USER_DETAILS);
 	}
 
 	protected <T extends Entity> T saveFlushAndClear(T entity) {
@@ -63,6 +61,41 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 	protected void flushAndClear() {
 		entityManager.flush();
 		entityManager.clear();
+	}
+
+	private static class TestUserDetails implements AuthenticatedUserDetails {
+
+		private String email;
+
+		public TestUserDetails(String email) {
+			this.email = email;
+		}
+
+		@Override
+		public String getUsername() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public String getEmail() {
+			return email;
+		}
+
+		@Override
+		public String getFirstname() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public String getLastname() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public String getFullname() {
+			throw new UnsupportedOperationException();
+		}
+
 	}
 
 }

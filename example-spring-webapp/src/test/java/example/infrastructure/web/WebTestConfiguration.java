@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import example.infrastructure.jpa.TestRepository;
-import example.security.domain.UserProvider;
+import example.shared.security.AuthenticatedUserDetailsProvider;
 import example.todo.application.TodoService;
 import example.todo.domain.TodoRepository;
 
@@ -13,8 +13,8 @@ import example.todo.domain.TodoRepository;
 public class WebTestConfiguration {
 
 	@Bean
-	public UserProvider userProvider() {
-		return Mockito.mock(UserProvider.class);
+	public AuthenticatedUserDetailsProvider userProvider() {
+		return Mockito.mock(AuthenticatedUserDetailsProvider.class);
 	}
 
 	@Bean

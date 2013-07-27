@@ -1,4 +1,4 @@
-package example.security.domain;
+package example.iam.domain;
 
 import javax.persistence.QueryHint;
 

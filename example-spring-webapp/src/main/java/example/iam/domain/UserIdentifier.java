@@ -1,4 +1,4 @@
-package example.security.domain;
+package example.iam.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

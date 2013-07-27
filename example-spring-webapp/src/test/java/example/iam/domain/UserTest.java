@@ -1,11 +1,13 @@
-package example.security.domain;
+package example.iam.domain;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.security.domain.User.Builder;
+import example.iam.domain.User;
+import example.iam.domain.UserIdentifier;
+import example.iam.domain.User.Builder;
 
 @Test(groups = TestGroups.UNIT)
 public class UserTest {

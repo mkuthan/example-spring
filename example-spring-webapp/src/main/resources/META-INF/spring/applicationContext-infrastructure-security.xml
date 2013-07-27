@@ -16,13 +16,8 @@
 		<security:intercept-url pattern="/loggedOut" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 
-		<!--
-		<security:form-login login-processing-url="/resources/j_spring_security_check"
-			authentication-failure-url="/login?login_error=t" />
-		-->
-
 		<security:openid-login login-processing-url="/resources/j_spring_security_check" 
-			authentication-failure-url="/login?login_error=true" user-service-ref="userService">
+			authentication-failure-url="/login?login_error=true" user-service-ref="openIdUserDetailsService">
 			<security:attribute-exchange identifier-match="https://www.google.com/.*">
 				<security:openid-attribute name="email" type="http://axschema.org/contact/email" required="true"
 					count="1" />

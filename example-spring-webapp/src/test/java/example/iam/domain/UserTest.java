@@ -1,12 +1,13 @@
 package example.iam.domain;
 
+import static com.google.common.collect.Sets.newHashSet;
 import static org.fest.assertions.Assertions.assertThat;
+
+import java.util.Set;
 
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.iam.domain.User;
-import example.iam.domain.UserIdentifier;
 import example.iam.domain.User.Builder;
 
 @Test(groups = TestGroups.UNIT)
@@ -17,26 +18,68 @@ public class UserTest {
 	private static final String ANY_FIRSTNAME = "any firstname";
 	private static final String ANY_LASTNAME = "any lastname";
 
-	public void disable() {
+	public void shouldConstruct() {
 		// given
-		User user = createBuilder().build();
+		UserIdentifier identifier = new UserIdentifier("id");
+		String email = "email@domain.com";
+		String firstname = "John";
+		String lastname = "White";
+		String fullname = "John White";
+		Boolean enabled = Boolean.TRUE;
+		Set<RoleIdentifier> roles = newHashSet(new RoleIdentifier("role1"), new RoleIdentifier("role2"));
+
+		// when
+		User user = createBuilder().withIdentifier(identifier).withEmail(email).withFirstname(firstname)
+				.withLastname(lastname).withFullname(fullname).withEnabled(enabled).addRoles(roles).build();
+
+		// then
+		assertThat(user.getIdentifier()).isEqualTo(identifier);
+		assertThat(user.getEmail()).isEqualTo(email);
+		assertThat(user.getFirstname()).isEqualTo(firstname);
+		assertThat(user.getLastname()).isEqualTo(lastname);
+		assertThat(user.getFullname()).isEqualTo(fullname);
+		assertThat(user.isEnabled()).isEqualTo(enabled);
+		assertThat(user.getRoles()).isEqualTo(roles);
+	}
+
+	public void shouldDisable() {
+		// given
+		User user = createBuilder().withEnabled(Boolean.TRUE).build();
 
 		// when
 		user.disable();
 
 		// then
-		assertThat(user.isEnabled()).isFalse();
+		assertThat(user.isDisabled()).isTrue();
 	}
 
-	public void enable() {
+	@Test(expectedExceptions = IllegalStateException.class)
+	public void shouldNotDisableWhenDisabled() {
 		// given
-		User user = createBuilder().build();
+		User user = createBuilder().withEnabled(Boolean.FALSE).build();
+
+		// when
+		user.disable();
+	}
+
+	public void shouldEnable() {
+		// given
+		User user = createBuilder().withEnabled(Boolean.FALSE).build();
 
 		// when
 		user.enable();
 
 		// then
 		assertThat(user.isEnabled()).isTrue();
+	}
+
+	@Test(expectedExceptions = IllegalStateException.class)
+	public void shouldNotEnableWhenEnabled() {
+		// given
+		User user = createBuilder().withEnabled(Boolean.TRUE).build();
+
+		// when & then
+		user.enable();
 	}
 
 	private Builder createBuilder() {

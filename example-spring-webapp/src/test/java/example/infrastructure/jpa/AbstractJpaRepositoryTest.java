@@ -29,8 +29,8 @@ public abstract class AbstractJpaRepositoryTest extends AbstractTransactionalTes
 
 	public static final AuthenticatedUserDetails AUDIT_USER_DETAILS = new TestUserDetails("any@domain.com");
 
-	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_DATE_TIME,
-			AUDIT_USER_DETAILS.getEmail(), AUDIT_USER_DETAILS.getEmail());
+	public static final Audit EXPECTED_AUDIT = new Audit(AUDIT_DATE_TIME, AUDIT_USER_DETAILS.getEmail(),
+			AUDIT_DATE_TIME, AUDIT_USER_DETAILS.getEmail());
 
 	@PersistenceContext
 	protected EntityManager entityManager;

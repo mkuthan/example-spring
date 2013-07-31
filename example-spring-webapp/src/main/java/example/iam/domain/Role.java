@@ -2,6 +2,7 @@ package example.iam.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -17,6 +18,7 @@ import example.shared.ddd.AbstractAggregateEntity;
 public class Role extends AbstractAggregateEntity {
 
 	@Embedded
+	@AttributeOverride(name = RoleIdentifier.IDENTIFIER_PROPERTY, column = @Column(nullable = false, unique = true))
 	private RoleIdentifier identifier;
 
 	@Column(nullable = false)
@@ -34,16 +36,8 @@ public class Role extends AbstractAggregateEntity {
 		return identifier;
 	}
 
-	public void setIdentifier(RoleIdentifier identifier) {
-		this.identifier = identifier;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

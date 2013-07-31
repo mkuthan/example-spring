@@ -4,7 +4,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import example.shared.ddd.AbstractValueObject;
@@ -13,7 +12,8 @@ import example.shared.ddd.AbstractValueObject;
 @Access(AccessType.FIELD)
 public class RoleIdentifier extends AbstractValueObject {
 
-	@Column(nullable = false, unique = true)
+	public static final String IDENTIFIER_PROPERTY = "identifier";
+
 	private String identifier;
 
 	protected RoleIdentifier() {

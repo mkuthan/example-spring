@@ -34,7 +34,7 @@ public class TestEntity extends AbstractAggregateEntity implements Auditable {
 	private Money money;
 
 	@Embedded
-	private Audit audit = Audit.DEFAULT;
+	private Audit audit = Audit.NULL;
 
 	protected TestEntity() {
 	}

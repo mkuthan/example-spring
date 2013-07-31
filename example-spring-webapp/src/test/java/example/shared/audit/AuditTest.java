@@ -6,27 +6,27 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.shared.audit.Audit;
 
 @Test(groups = TestGroups.UNIT)
 public class AuditTest {
 
 	@Test
-	public void shouldUpdateDefaultInstance() {
+	public void shouldUpdateNullInstance() {
 		// given
 		DateTime now = new DateTime();
 		String creator = "creator";
 
+		Audit audit = Audit.NULL;
+
 		// when
-		Audit audit = Audit.DEFAULT.update(now, creator);
+		Audit updatedAudit = audit.update(now, creator);
 
 		// then
+		assertThat(updatedAudit.getCreator()).isEqualTo(creator);
+		assertThat(updatedAudit.getCreationDate()).isEqualTo(now);
 
-		assertThat(audit.getCreator()).isEqualTo(creator);
-		assertThat(audit.getModifier()).isEqualTo(creator);
-
-		assertThat(audit.getCreationDate()).isEqualTo(now);
-		assertThat(audit.getModificationDate()).isEqualTo(now);
+		assertThat(updatedAudit.getModifier()).isEqualTo(creator);
+		assertThat(updatedAudit.getModificationDate()).isEqualTo(now);
 	}
 
 	@Test
@@ -38,16 +38,17 @@ public class AuditTest {
 		DateTime modificationDate = new DateTime("2011-01-01");
 		String modifier = "modifier";
 
+		Audit audit = new Audit(creationDate, creator, creationDate, creator);
+
 		// when
-		Audit audit = Audit.DEFAULT.update(creationDate, creator).update(modificationDate, modifier);
+		Audit updatedAudit = audit.update(modificationDate, modifier);
 
 		// then
+		assertThat(updatedAudit.getCreator()).isEqualTo(creator);
+		assertThat(updatedAudit.getCreationDate()).isEqualTo(creationDate);
 
-		assertThat(audit.getCreator()).isEqualTo(creator);
-		assertThat(audit.getModifier()).isEqualTo(modifier);
-
-		assertThat(audit.getCreationDate()).isEqualTo(creationDate);
-		assertThat(audit.getModificationDate()).isEqualTo(modificationDate);
+		assertThat(updatedAudit.getModifier()).isEqualTo(modifier);
+		assertThat(updatedAudit.getModificationDate()).isEqualTo(modificationDate);
 	}
 
 }

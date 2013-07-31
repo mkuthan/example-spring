@@ -77,7 +77,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 		verify(listener1, timeout(RECEIVE_TIMEOUT).times(3)).handleMessage(eq(ANY_MESSAGE));
 		verify(listener2, timeout(RECEIVE_TIMEOUT).times(3)).handleMessage(eq(ANY_MESSAGE));
 
-		assertThat(stopwatch.stop().elapsedTime(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
+		assertThat(stopwatch.stop().elapsed(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
 	}
 
 	// TODO: fix test
@@ -98,7 +98,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 		JmsTestMessage testMessage2 = (JmsTestMessage) dlqJmsTemplate.receiveAndConvert();
 		assertThat(testMessage2).isEqualTo(ANY_MESSAGE);
 
-		assertThat(stopwatch.stop().elapsedTime(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
+		assertThat(stopwatch.stop().elapsed(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
 	}
 
 }

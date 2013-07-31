@@ -354,17 +354,17 @@
 			<artifactId>angularjs</artifactId>
 			<version>${angularjs.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angular-ui-bootstrap</artifactId>
+			<version>${angular-ui-bootstrap.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>${bootstrap.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>${jquery.version}</version>
 		</dependency>
 
 		<!-- Tests -->

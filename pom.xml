@@ -41,9 +41,9 @@
 		<spring-security.version>3.2.0.M2</spring-security.version>
 
 		<!-- essential web dependencies -->
-		<angularjs.version>1.1.5</angularjs.version>
-		<bootstrap.version>2.3.1-1</bootstrap.version>
-		<jquery.version>1.9.1</jquery.version>
+		<angularjs.version>1.1.5-1</angularjs.version>
+		<angular-ui-bootstrap.version>0.4.0</angular-ui-bootstrap.version>
+		<bootstrap.version>2.3.2</bootstrap.version>
 
 		<!-- essential tests dependencies -->
 		<festassert.version>1.4</festassert.version>

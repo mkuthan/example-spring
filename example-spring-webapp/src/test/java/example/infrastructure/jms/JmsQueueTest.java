@@ -67,7 +67,7 @@ public class JmsQueueTest extends AbstractJmsTest {
 		// then
 		verify(listener, timeout(RECEIVE_TIMEOUT).times(3)).handleMessage(eq(ANY_MESSAGE));
 
-		assertThat(stopwatch.stop().elapsedTime(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
+		assertThat(stopwatch.stop().elapsed(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
 	}
 
 	@Test(dependsOnMethods = "messageShouldBeRedelivered", timeOut = RECEIVE_TIMEOUT)
@@ -83,7 +83,7 @@ public class JmsQueueTest extends AbstractJmsTest {
 		JmsTestMessage testMessage = (JmsTestMessage) dlqJmsTemplate.receiveAndConvert();
 		assertThat(testMessage).isEqualTo(ANY_MESSAGE);
 
-		assertThat(stopwatch.stop().elapsedTime(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
+		assertThat(stopwatch.stop().elapsed(TimeUnit.MILLISECONDS)).isGreaterThan(expectedTotalRedeliveryTime);
 	}
 
 }

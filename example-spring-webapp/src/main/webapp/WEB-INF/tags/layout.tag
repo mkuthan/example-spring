@@ -2,7 +2,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<jsp:directive.attribute name="title" description="Page title" />
+<jsp:directive.attribute name="title" description="Page title" required="true" />
+<jsp:directive.attribute name="resources" description="Resources" required="false" fragment="true"/>
 
 <!DOCTYPE html>
 <html lang="en" ng-app="example-spring">
@@ -13,12 +14,10 @@
 
 	<title><spring:message code="application_name" /> - ${title}</title>
 
-	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-	<!--[if lt IE 9]>
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-
-	<link href="${pageContext.request.contextPath}/webjars/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/webjars/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/webjars/bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/webjars/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
 	<link href="${pageContext.request.contextPath}/resources/css/example-spring.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -79,11 +78,7 @@
 		</div>				
 	</footer>
 	
-
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/webjars/angularjs/1.1.5/angular.min.js"></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app.js"></script>
+    <jsp:invoke fragment="resources" />
 </body>
 
 </html>

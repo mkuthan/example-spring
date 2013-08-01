@@ -42,8 +42,10 @@
 
 		<!-- essential web dependencies -->
 		<angularjs.version>1.1.5-1</angularjs.version>
-		<angular-ui-bootstrap.version>0.4.0</angular-ui-bootstrap.version>
+		<angularui.version>0.4.0-1</angularui.version>
+		<angularui-bootstrap.version>0.4.0</angularui-bootstrap.version>
 		<bootstrap.version>2.3.2</bootstrap.version>
+		<fontawesome.version>3.2.1</fontawesome.version>
 
 		<!-- essential tests dependencies -->
 		<festassert.version>1.4</festassert.version>

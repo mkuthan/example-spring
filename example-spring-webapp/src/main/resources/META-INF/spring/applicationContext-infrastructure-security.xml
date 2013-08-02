@@ -9,14 +9,14 @@
 
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
 
+	<security:http pattern="/**" security="none" />
+
+	<!--
 	<security:http entry-point-ref="authenticationEntryPoint" auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/resources/**" access="permitAll" />
-		<security:intercept-url pattern="/webjars/**" access="permitAll" />
-		<security:intercept-url pattern="/login*" access="permitAll" />
-		<security:intercept-url pattern="/loggedOut" access="permitAll" />
+		<security:intercept-url pattern="/j_spring_security_check" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 
-		<security:openid-login login-processing-url="/resources/j_spring_security_check" 
+		<security:openid-login login-processing-url="/j_spring_security_check" 
 			authentication-failure-url="/login?login_error=true" user-service-ref="openIdUserDetailsService">
 			<security:attribute-exchange identifier-match="https://www.google.com/.*">
 				<security:openid-attribute name="email" type="http://axschema.org/contact/email" required="true"
@@ -34,10 +34,11 @@
 			</security:attribute-exchange>
 		</security:openid-login>
 
-		<security:logout logout-url="/resources/j_spring_security_logout" logout-success-url="/loggedOut" />
+		<security:logout logout-url="/j_spring_security_logout" logout-success-url="/loggedOut" />
 
 		<security:request-cache ref="authenticationRequestCache" />
 	</security:http>
+  	-->
 
 	<security:authentication-manager />
 

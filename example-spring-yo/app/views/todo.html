@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="span8 offset2">
+		<h2>My Todos</h2>
+		
+		<div class="form-inline" ng-repeat="todo in todos">
+			<input type="text" ng-model="todo"> 
+			<a ng-click="done($index)" class="btn"> 
+				<i class="icon-ok"></i>
+			</a>
+			<a ng-click="remove($index)" class="btn"> 
+				<i class="icon-trash"></i>
+			</a>
+		</div>
+		
+		<form ng-submit="addTodo()" class="form-inline">
+			<input ng-model="todo" type="text" placeholder="New action to do"> <input type="submit"
+				class="btn btn-primary" value="Add">
+		</form>
+	</div>
+</div>

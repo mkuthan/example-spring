@@ -9,7 +9,7 @@ angular.module('exampleSpringApp').controller('TodoCtrl', function($scope) {
   };
 
   $scope.done = function(index) {
-    
+    $scope.todos.splice(index,1);
   };
   
   $scope.remove = function(index) {

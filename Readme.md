@@ -4,9 +4,7 @@ Collects best practices of the JEE applications based on Spring Framework and An
 The showcase borrows also many concepts from another platforms and languages. 
 Focuses on developer productivity, even if Java and JEE are not well suited for rapid development.
 
-The application is deployed on CloudBees platform:
-
-http://example-spring.mkuthan.cloudbees.net/
+[![Build Status](https://mkuthan.ci.cloudbees.com/job/Example%20Spring/badge/icon)](https://mkuthan.ci.cloudbees.com/job/Example%20Spring/)
 
 # Key Acronyms
 

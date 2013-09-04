@@ -5,7 +5,7 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import example.todo.domain.TodoRepository;
+import example.domain.todo.domain.TodoRepository;
 
 @Steps
 public class TodoSteps {

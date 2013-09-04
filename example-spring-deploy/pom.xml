@@ -39,11 +39,11 @@
 							<overlays>
 								<overlay>
 									<groupId>${project.groupId}</groupId>
-									<artifactId>example-spring-webapp</artifactId>
+									<artifactId>example-spring-core</artifactId>
 								</overlay>
 								<overlay>
 									<groupId>${project.groupId}</groupId>
-									<artifactId>example-spring-yo</artifactId>
+									<artifactId>example-spring-ui</artifactId>
 								</overlay>
 							</overlays>
 						</configuration>
@@ -64,7 +64,7 @@
 			<dependencies>
 				<dependency>
 					<groupId>${project.groupId}</groupId>
-					<artifactId>example-spring-webapp</artifactId>
+					<artifactId>example-spring-core</artifactId>
 					<version>${project.version}</version>
 					<type>war</type>
 					<scope>runtime</scope>
@@ -72,7 +72,7 @@
 				
 				<dependency>
 					<groupId>${project.groupId}</groupId>
-					<artifactId>example-spring-yo</artifactId>
+					<artifactId>example-spring-ui</artifactId>
 					<version>${project.version}</version>
 					<type>war</type>
 					<scope>runtime</scope>

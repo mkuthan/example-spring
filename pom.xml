@@ -56,6 +56,10 @@
 		<testng.version>6.8.5</testng.version>
 	</properties>
 
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
+
 	<build>
 		<pluginManagement>
 			<plugins>

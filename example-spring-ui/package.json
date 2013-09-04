@@ -2,7 +2,7 @@
   "name": "examplespring",
   "version": "0.0.0",
   "dependencies": {
-    "grunt-karma": "~0.4.5"
+    "grunt-karma": "~0.4.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -29,8 +29,7 @@
     "grunt-google-cdn": "~0.2.0",
     "grunt-ngmin": "~0.0.2",
     "grunt-connect-proxy": "~0.1.5",
-    "phantomjs": "~1.9.1-0",
-    "grunt-contrib-compass": "0.5.0"
+    "phantomjs": "~1.9.1-0"
   },
   "engines": {
     "node": ">=0.8.0"

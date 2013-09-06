@@ -25,7 +25,6 @@ public class TodoController {
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	List<Todo> list() {
-		System.out.println("DUPA");
 		return todoService.findAll();
 	}
 

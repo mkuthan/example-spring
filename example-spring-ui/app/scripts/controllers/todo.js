@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('exampleSpringApp').controller('TodoCtrl', function($scope) {
-  $scope.todos = [ 'action 1', 'action 2', 'action 3' ];
+angular.module('exampleSpringApp').controller('TodoCtrl', function($scope, Todos) {
+  $scope.todos = Todos.query();
 
   $scope.addTodo = function() {
     $scope.todos.push($scope.todo);

@@ -81,7 +81,7 @@
 						<logback.ContextSelector>JNDI</logback.ContextSelector>
 					</systemProperties>
 					<contextFile>${basedir}/src/main/config/tomcat/context.xml</contextFile>
-					<path>example-spring</path>
+					<path>/example-spring</path>
 				</configuration>
 				<dependencies>
 					<dependency>

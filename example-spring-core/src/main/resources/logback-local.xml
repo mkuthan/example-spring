@@ -8,8 +8,9 @@
 
 	<logger name="example" level="DEBUG" />
 
-	<!-- <logger name="org.springframework.web" level="DEBUG" /> -->
+	<!-- <logger name="org.springframework" level="DEBUG" /> -->
 	<!-- <logger name="org.springframework.security" level="DEBUG" /> -->
+	<!-- <logger name="org.springframework.web" level="DEBUG" /> -->
 
 	<!-- <logger name="org.hibernate" level="DEBUG" /> -->
 

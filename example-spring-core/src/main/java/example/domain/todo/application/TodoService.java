@@ -1,5 +1,7 @@
 package example.domain.todo.application;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,20 @@ public class TodoService {
 
 	@Autowired
 	private TodoRepository todoRepository;
+
+	@Transactional(readOnly = true)
+	public Todo findOne(Long id) {
+		Todo todo = todoRepository.findOne(id);
+		if (todo == null) {
+			throw new ObjectRetrievalFailureException(Todo.class, id);
+		}
+		return todo;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Todo> findAll() {
+		return todoRepository.findAll();
+	}
 
 	@Transactional
 	public void add(String title) {
@@ -38,14 +54,6 @@ public class TodoService {
 		Todo todo = findOne(id);
 		todo.done();
 		todoRepository.saveAndFlush(todo);
-	}
-
-	private Todo findOne(Long id) {
-		Todo todo = todoRepository.findOne(id);
-		if (todo == null) {
-			throw new ObjectRetrievalFailureException(Todo.class, id);
-		}
-		return todo;
 	}
 
 }

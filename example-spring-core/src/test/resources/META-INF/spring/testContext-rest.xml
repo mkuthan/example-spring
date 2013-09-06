@@ -7,7 +7,6 @@
 	<context:property-placeholder location="classpath:/test-web.properties" />
 
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-web.xml" />
 
 	<import resource="classpath:/META-INF/spring/applicationContext-rest.xml" />
 

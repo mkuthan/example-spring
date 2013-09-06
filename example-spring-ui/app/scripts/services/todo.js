@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('exampleSpringApp').factory('Todos', function($resource) {
+angular.module('ExampleSpringApp').factory('Todos', function($resource) {
   return $resource('/api/todos/:todoId', {
     todoId : '@id'
   }, {

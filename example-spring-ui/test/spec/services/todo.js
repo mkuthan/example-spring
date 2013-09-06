@@ -3,7 +3,7 @@
 describe('Service: todo', function () {
 
   // load the service's module
-  beforeEach(module('exampleSpringApp'));
+  beforeEach(module('ExampleSpringApp'));
 
   // instantiate service
   var todo;

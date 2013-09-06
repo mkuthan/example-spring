@@ -1,4 +1,4 @@
-// Generated on 2013-08-02 using generator-angular 0.3.1
+// Generated on 2013-09-06 using generator-angular 0.4.0
 'use strict';
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
@@ -15,8 +15,8 @@ var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
-  // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('load-grunt-tasks')(grunt);
+  require('time-grunt')(grunt);
 
   // configurable paths
   var yeomanConfig = {
@@ -41,7 +41,11 @@ module.exports = function (grunt) {
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['compass:server']
+        tasks: ['compass:server', 'autoprefixer']
+      },
+      styles: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        tasks: ['copy:styles', 'autoprefixer']
       },
       livereload: {
         options: {
@@ -49,10 +53,21 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+          '.tmp/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      }
+    },
+    autoprefixer: {
+      options: ['last 1 version'],
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/styles/',
+          src: '{,*/}*.css',
+          dest: '.tmp/styles/'
+        }]
       }
     },
     connect: {
@@ -131,6 +146,10 @@ module.exports = function (grunt) {
       ]
     },
     coffee: {
+      options: {
+        sourceMap: true,
+        sourceRoot: ''
+      },
       dist: {
         files: [{
           expand: true,
@@ -278,20 +297,29 @@ module.exports = function (grunt) {
             'generated/*'
           ]
         }]
+      },
+      styles: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/styles',
+        dest: '.tmp/styles/',
+        src: '{,*/}*.css'
       }
     },
     concurrent: {
       server: [
         'coffee:dist',
-        'compass:server'
+        'compass:server',
+        'copy:styles'
       ],
       test: [
         'coffee',
-        'compass'
+        'compass',
+        'copy:styles'
       ],
       dist: [
         'coffee',
         'compass:dist',
+        'copy:styles',
         'imagemin',
         'svgmin',
         'htmlmin'
@@ -337,6 +365,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'concurrent:server',
+      'autoprefixer',
       'configureProxies',
       'connect:livereload',
       'open',
@@ -347,6 +376,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
+    'autoprefixer',
     'connect:test',
     'karma'
   ]);
@@ -355,8 +385,9 @@ module.exports = function (grunt) {
     'clean:dist',
     'useminPrepare',
     'concurrent:dist',
+    'autoprefixer',
     'concat',
-    'copy',
+    'copy:dist',
     'cdnify',
     'ngmin',
     'cssmin',

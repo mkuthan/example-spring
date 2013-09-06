@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('exampleSpringApp')
+angular.module('ExampleSpringApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

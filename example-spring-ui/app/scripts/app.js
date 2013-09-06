@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('exampleSpringApp', [])
+angular.module('ExampleSpringApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

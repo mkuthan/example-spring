@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('exampleSpringApp').controller('TodoCtrl', function($scope, Todos) {
+angular.module('ExampleSpringApp').controller('TodoCtrl', function($scope, Todos) {
   $scope.todos = Todos.query();
 
   $scope.addTodo = function() {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ExampleSpringApp').controller('TodoCtrl', function($scope, Todos) {
+angular.module('ExampleSpringApp').controller('TodoCtrl', [ '$scope', 'Todos', function($scope, Todos) {
   $scope.todos = Todos.query();
 
   $scope.addTodo = function() {
@@ -9,10 +9,10 @@ angular.module('ExampleSpringApp').controller('TodoCtrl', function($scope, Todos
   };
 
   $scope.done = function(index) {
-    $scope.todos.splice(index,1);
+    $scope.todos.splice(index, 1);
   };
-  
+
   $scope.remove = function(index) {
-    $scope.todos.splice(index,1);
+    $scope.todos.splice(index, 1);
   };
-});
+} ]);

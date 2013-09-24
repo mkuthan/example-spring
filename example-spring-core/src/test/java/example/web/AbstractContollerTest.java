@@ -1,4 +1,4 @@
-package example.rest;
+package example.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@ContextConfiguration("classpath:/META-INF/spring/testContext-rest.xml")
+@ContextConfiguration("classpath:/META-INF/spring/testContext-web.xml")
 @Test(groups = { TestGroups.INTEGRATION })
 @ActiveProfiles("test")
 @WebAppConfiguration

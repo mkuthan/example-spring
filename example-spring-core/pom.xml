@@ -85,6 +85,11 @@
 				</configuration>
 				<dependencies>
 					<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>jstl</artifactId>
+						<version>1.2</version>
+					</dependency>
+					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
 						<version>${mysql.version}</version>

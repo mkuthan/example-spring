@@ -1,4 +1,4 @@
-package example.rest;
+package example.web;
 
 import java.util.List;
 

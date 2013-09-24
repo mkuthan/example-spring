@@ -1,4 +1,4 @@
-package example.rest;
+package example.web;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 
 import example.domain.todo.application.TodoService;
 import example.domain.todo.domain.Todo;
+import example.web.RequestMappings;
 
 public class TodoControllerTest extends AbstractContollerTest {
 

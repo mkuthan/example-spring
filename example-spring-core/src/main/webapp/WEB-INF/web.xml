@@ -50,14 +50,14 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:/META-INF/spring/applicationContext-rest.xml
+				classpath:/META-INF/spring/applicationContext-web.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>example-spring</servlet-name>
-		<url-pattern>/api/*</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>30</session-timeout>

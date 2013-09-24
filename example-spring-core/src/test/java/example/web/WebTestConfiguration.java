@@ -1,4 +1,4 @@
-package example.rest;
+package example.web;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import example.domain.todo.domain.TodoRepository;
 import example.infrastructure.jpa.TestRepository;
 
 @Configuration
-public class RestTestConfiguration {
+public class WebTestConfiguration {
 
 	@Bean
 	public AuthenticatedUserDetailsProvider userProvider() {

@@ -8,6 +8,6 @@
 
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
 
-	<import resource="classpath:/META-INF/spring/applicationContext-rest.xml" />
+	<import resource="classpath:/META-INF/spring/applicationContext-web.xml" />
 
 </beans>

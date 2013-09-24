@@ -12,8 +12,20 @@
 			<bean class="org.springframework.data.web.PageableArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
+	
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
 
 	<mvc:default-servlet-handler />
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" >
+		<property name="basename" value="classpath:messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="fallbackToSystemLocale" value="false" />
+	</bean>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

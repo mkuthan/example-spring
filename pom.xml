@@ -43,7 +43,6 @@
 		<jodatime.version>2.3</jodatime.version>
 		<logback.version>1.0.13</logback.version>
 		<mysql.version>5.1.21</mysql.version>
-		<servlet.version>3.0.1</servlet.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<spring.version>3.2.4.RELEASE</spring.version>
 		<spring-data-jpa.version>1.4.0.RC1</spring-data-jpa.version>

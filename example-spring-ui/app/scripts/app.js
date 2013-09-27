@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ExampleSpringApp', ['ngResource'])
+angular.module('ExampleSpringApp', ['ngResource', 'pascalprecht.translate'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

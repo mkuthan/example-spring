@@ -1,15 +1,15 @@
 package example.infrastructure.jpa.iam;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.testng.annotations.Test;
 
+import example.EntitiesAssert;
 import example.EntityAssert;
-import example.domain.iam.model.RoleIdentifier;
+import example.domain.iam.model.Group;
 import example.domain.iam.model.User;
 import example.domain.iam.model.User.Builder;
 import example.domain.iam.model.UserIdentifier;
@@ -17,14 +17,6 @@ import example.domain.iam.model.UserRepository;
 import example.infrastructure.jpa.AbstractJpaRepositoryTest;
 
 public class JpaUserRepositoryTest extends AbstractJpaRepositoryTest {
-
-	private static final UserIdentifier ANY_IDENTIFIER = new UserIdentifier("any user");
-	private static final String ANY_EMAIL = "any@domain.com";
-	private static final String ANY_FIRSTNAME = "any firstname";
-	private static final String ANY_LASTNAME = "any lastname";
-	private static final String ANY_FULLNAME = "any fullname";
-	private static final Boolean ANY_ENABLED = Boolean.TRUE;
-	private static final RoleIdentifier ANY_ROLE = new RoleIdentifier("any role");
 
 	@Autowired
 	private UserRepository userRepository;
@@ -42,22 +34,23 @@ public class JpaUserRepositoryTest extends AbstractJpaRepositoryTest {
 		// then
 		EntityAssert.assertThat(savedUser).isManaged();
 
-		assertThat(savedUser.getIdentifier()).isEqualTo(ANY_IDENTIFIER);
-		assertThat(savedUser.getEmail()).isEqualTo(ANY_EMAIL);
-		assertThat(savedUser.getFirstname()).isEqualTo(ANY_FIRSTNAME);
-		assertThat(savedUser.getLastname()).isEqualTo(ANY_LASTNAME);
-		assertThat(savedUser.getFullname()).isEqualTo(ANY_FULLNAME);
-		assertThat(savedUser.isEnabled()).isEqualTo(ANY_ENABLED);
-		assertThat(savedUser.getRoles()).isEqualTo(newHashSet(ANY_ROLE));
+		assertThat(savedUser.getIdentifier()).isEqualTo(user.getIdentifier());
+		assertThat(savedUser.getEmail()).isEqualTo(user.getEmail());
+		assertThat(savedUser.getFirstname()).isEqualTo(user.getFirstname());
+		assertThat(savedUser.getLastname()).isEqualTo(user.getLastname());
+		assertThat(savedUser.getFullname()).isEqualTo(user.getFullname());
+		assertThat(savedUser.isEnabled()).isEqualTo(user.isEnabled());
+		EntitiesAssert.assertThat(savedUser.getGroups()).containsOnly(user.getGroups());
 	}
 
 	@Test(expectedExceptions = DataIntegrityViolationException.class)
 	public void shouldNotSaveDuplicates() {
 		// given
 		UserIdentifier identifier = new UserIdentifier("duplicate");
+		Builder builder = createBuilder().withIdentifier(identifier);
 
-		User user1 = createBuilder().withIdentifier(identifier).build();
-		User user2 = createBuilder().withIdentifier(identifier).build();
+		User user1 = builder.build();
+		User user2 = builder.build();
 
 		// when
 		userRepository.save(newArrayList(user1, user2));
@@ -74,12 +67,17 @@ public class JpaUserRepositoryTest extends AbstractJpaRepositoryTest {
 		User user = userRepository.findByIdentifier(identifier);
 
 		// then
-		EntityAssert.assertThat(user).hasSameIdentity(expectedUser);
+		EntityAssert.assertThat(user).isEqualTo(expectedUser);
 	}
 
 	private Builder createBuilder() {
-		return new Builder().withIdentifier(ANY_IDENTIFIER).withEmail(ANY_EMAIL).withFirstname(ANY_FIRSTNAME)
-				.withLastname(ANY_LASTNAME).withFullname(ANY_FULLNAME).withEnabled(ANY_ENABLED).addRole(ANY_ROLE);
+		return new Builder().withIdentifier(new UserIdentifier("any user")).withEmail("any@domain.com")
+				.withFirstname("any firstname").withLastname("any lastname").withFullname("any fullname")
+				.withEnabled(Boolean.TRUE).withGroups(createPersistedGroup("group 1"), createPersistedGroup("group 2"));
+	}
+
+	private Group createPersistedGroup(String name) {
+		return saveFlushAndClear(new Group.Builder().withName(name).build());
 	}
 
 }

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
 import org.springframework.stereotype.Component;
 
-import example.domain.iam.model.RoleIdentifier;
+import example.domain.iam.model.Group;
 import example.domain.iam.model.User;
 import example.domain.iam.model.UserIdentifier;
 import example.domain.iam.model.UserRepository;
@@ -33,10 +33,8 @@ public class OpenIdUserDetailsService implements AuthenticationUserDetailsServic
 		}
 
 		Builder builder = new Builder().withAuthenticationToken(token);
-		if (user != null) {
-			for (RoleIdentifier role : user.getRoles()) {
-				builder.addGrantedAuthority(new SimpleGrantedAuthority(role.getIdentifier()));
-			}
+		for (Group group : user.effectiveGroups()) {
+			builder.addGrantedAuthority(new SimpleGrantedAuthority(group.getName()));
 		}
 
 		return builder.build();

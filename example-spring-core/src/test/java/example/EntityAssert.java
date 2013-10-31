@@ -14,7 +14,7 @@ public class EntityAssert extends GenericAssert<EntityAssert, Entity> {
 		super(EntityAssert.class, actual);
 	}
 
-	public EntityAssert hasSameIdentity(Entity entity) {
+	public EntityAssert isEqualTo(Entity entity) {
 		org.fest.assertions.Assertions.assertThat(actual.getEntityId()).isEqualTo(entity.getEntityId());
 
 		return this;

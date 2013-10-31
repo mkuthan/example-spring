@@ -75,7 +75,7 @@ public class JpaTestRepositoryTest extends AbstractJpaRepositoryTest {
 		List<TestEntity> examples = testRepository.findByName(name);
 
 		// then
-		EntitiesAssert.assertThat(examples).containsWithSameIdentity(expectedExample);
+		EntitiesAssert.assertThat(examples).contains(expectedExample);
 	}
 
 }

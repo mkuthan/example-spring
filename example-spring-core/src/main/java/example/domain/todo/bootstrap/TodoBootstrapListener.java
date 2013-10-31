@@ -28,7 +28,7 @@ public class TodoBootstrapListener implements ApplicationListener<BootstrapEvent
 
 	@Override
 	public int getOrder() {
-		return BootstrapOrder.TODO;
+		return BootstrapOrder.TODO_TODO;
 	}
 
 	public boolean todosExist() {

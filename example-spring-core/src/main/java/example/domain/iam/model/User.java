@@ -2,6 +2,7 @@ package example.domain.iam.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.Sets.newHashSet;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -45,8 +46,8 @@ public class User extends AbstractAggregateEntity {
 	private Boolean enabled;
 
 	@CollectionTable
-	@ElementCollection(fetch = FetchType.EAGER)
-	private Set<RoleIdentifier> roles = new HashSet<>();
+	@ElementCollection(fetch = FetchType.LAZY)
+	private Set<Group> groups = new HashSet<>();
 
 	protected User() {
 	}
@@ -69,7 +70,11 @@ public class User extends AbstractAggregateEntity {
 			this.enabled = Boolean.TRUE;
 		}
 
-		this.roles.addAll(builder.roles);
+		if (builder.groups != null) {
+			for (Group group : builder.groups) {
+				addGroup(group);
+			}
+		}
 	}
 
 	public UserIdentifier getIdentifier() {
@@ -110,8 +115,21 @@ public class User extends AbstractAggregateEntity {
 		return !enabled;
 	}
 
-	public Set<RoleIdentifier> getRoles() {
-		return Collections.unmodifiableSet(roles);
+	public Set<Group> getGroups() {
+		return Collections.unmodifiableSet(groups);
+	}
+
+	public Set<Group> effectiveGroups() {
+		Set<Group> effectiveGroups = newHashSet(groups);
+		for (Group group : groups) {
+			effectiveGroups.addAll(group.effectiveGroups());
+		}
+		return effectiveGroups;
+	}
+
+	public void addGroup(Group group) {
+		checkNotNull(group);
+		groups.add(group);
 	}
 
 	public static class Builder {
@@ -128,7 +146,7 @@ public class User extends AbstractAggregateEntity {
 
 		private Boolean enabled;
 
-		private Set<RoleIdentifier> roles = new HashSet<>();
+		private Set<Group> groups;
 
 		public Builder withIdentifier(UserIdentifier identifier) {
 			this.identifier = identifier;
@@ -160,13 +178,12 @@ public class User extends AbstractAggregateEntity {
 			return this;
 		}
 
-		public Builder addRole(RoleIdentifier role) {
-			this.roles.add(role);
-			return this;
+		public Builder withGroups(Group... group) {
+			return withGroups(newHashSet(group));
 		}
 
-		public Builder addRoles(Set<RoleIdentifier> roles) {
-			this.roles.addAll(roles);
+		public Builder withGroups(Set<Group> groups) {
+			this.groups = groups;
 			return this;
 		}
 

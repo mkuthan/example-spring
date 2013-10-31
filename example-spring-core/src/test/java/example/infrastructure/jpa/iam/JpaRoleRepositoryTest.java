@@ -7,61 +7,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.testng.annotations.Test;
 
+import example.EntitiesAssert;
 import example.EntityAssert;
-import example.domain.iam.model.Role;
-import example.domain.iam.model.RoleIdentifier;
-import example.domain.iam.model.RoleRepository;
+import example.domain.iam.model.Group;
+import example.domain.iam.model.Group.Builder;
+import example.domain.iam.model.GroupRepository;
 import example.infrastructure.jpa.AbstractJpaRepositoryTest;
 
 public class JpaRoleRepositoryTest extends AbstractJpaRepositoryTest {
 
-	private static final RoleIdentifier ANY_IDENTIFIER = new RoleIdentifier("any role");
-	private static final String ANY_NAME = "any role name";
-
 	@Autowired
-	private RoleRepository roleRepository;
+	private GroupRepository groupRepository;
 
 	public void shouldSave() {
 		// given
-		Role role = new Role(ANY_IDENTIFIER, ANY_NAME);
+		Group group = createBuilder().build();
 
 		// when
-		Role savedRole = roleRepository.save(role);
+		Group savedGroup = groupRepository.save(group);
 		flushAndClear();
 
-		savedRole = roleRepository.findOne(savedRole.getEntityId());
+		savedGroup = groupRepository.findOne(savedGroup.getEntityId());
 
 		// then
-		EntityAssert.assertThat(savedRole).isManaged();
+		EntityAssert.assertThat(savedGroup).isManaged();
 
-		assertThat(savedRole.getIdentifier()).isEqualTo(ANY_IDENTIFIER);
-		assertThat(savedRole.getName()).isEqualTo(ANY_NAME);
+		assertThat(savedGroup.getName()).isEqualTo(group.getName());
+		EntitiesAssert.assertThat(savedGroup.getSubGroups()).containsOnly(group.getSubGroups());
 	}
 
 	@Test(expectedExceptions = DataIntegrityViolationException.class)
 	public void shouldNotSaveDuplicates() {
 		// given
-		RoleIdentifier identifier = new RoleIdentifier("duplicate");
+		String name = "duplicate";
 
-		Role role1 = new Role(identifier, ANY_NAME);
-		Role role2 = new Role(identifier, ANY_NAME);
+		Group group1 = createBuilder().withName(name).build();
+		Group group2 = createBuilder().withName(name).build();
 
 		// when
-		roleRepository.save(newArrayList(role1, role2));
+		groupRepository.save(newArrayList(group1, group2));
 	}
 
 	@Test
-	public void shouldFindByIdentifier() {
+	public void shouldFindByName() {
 		// given
-		RoleIdentifier identifier = new RoleIdentifier("identifier");
+		String name = "name";
 
-		Role expectedRole = saveFlushAndClear(new Role(identifier, ANY_NAME));
+		Group expectedGroup = saveFlushAndClear(createBuilder().withName(name).build());
 
 		// when
-		Role role = roleRepository.findByIdentifier(identifier);
+		Group group = groupRepository.findByName(name);
 
 		// then
-		EntityAssert.assertThat(role).hasSameIdentity(expectedRole);
+		EntityAssert.assertThat(group).isEqualTo(expectedGroup);
+	}
+
+	public Builder createBuilder() {
+		return new Builder().withName("any name").withSubGroups(new Builder().withName("sub group 1").build(),
+				new Builder().withName("sub group 2").build());
 	}
 
 }

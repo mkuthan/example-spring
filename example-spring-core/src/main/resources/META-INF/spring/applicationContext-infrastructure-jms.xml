@@ -29,6 +29,13 @@
 				</amq:policyEntries>
 			</amq:policyMap>
 		</amq:destinationPolicy>
+		<amq:systemUsage>
+			<amq:systemUsage>
+				<amq:memoryUsage>
+					<amq:memoryUsage limit="${jms.memoryUsage}" />
+				</amq:memoryUsage>
+			</amq:systemUsage>
+		</amq:systemUsage>
 	</amq:broker>
 
 	<bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="amqBroker">

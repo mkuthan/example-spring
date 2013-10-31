@@ -2,6 +2,8 @@ package example.infrastructure.jpa;
 
 import org.hibernate.cfg.ImprovedNamingStrategy;
 
+import com.google.common.base.Strings;
+
 public class FixedPrefixNamingStrategy extends ImprovedNamingStrategy {
 
 	private static final long serialVersionUID = 1L;
@@ -18,9 +20,11 @@ public class FixedPrefixNamingStrategy extends ImprovedNamingStrategy {
 	@Override
 	public String collectionTableName(String ownerEntity, String ownerEntityTable, String associatedEntity,
 			String associatedEntityTable, String propertyName) {
-		return TABLE_PREFIX
-				+ super.collectionTableName(ownerEntity, ownerEntityTable, associatedEntity, associatedEntityTable,
-						propertyName);
+		if (!Strings.isNullOrEmpty(associatedEntity) && !Strings.isNullOrEmpty(associatedEntityTable)) {
+			return TABLE_PREFIX + tableName(ownerEntityTable) + "_" + super.tableName(associatedEntityTable);
+		} else {
+			return TABLE_PREFIX + tableName(ownerEntityTable) + "_" + super.propertyToColumnName(propertyName);
+		}
 	}
 
 	@Override

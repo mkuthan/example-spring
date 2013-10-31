@@ -40,7 +40,7 @@ public class Auditor {
 	}
 
 	private AuditIdentity getModifier() {
-		Optional<AuthenticatedUser> authenticatedUser = authenticatedUserProvider.authenticated();
+		Optional<AuthenticatedUser> authenticatedUser = authenticatedUserProvider.authenticatedUser();
 		AuditIdentity modifer = AuditIdentity.NOT_AVAILABLE;
 		if (authenticatedUser.isPresent()) {
 			modifer = new AuditIdentity(authenticatedUser.get().getUsername(), authenticatedUser.get().getFullname());

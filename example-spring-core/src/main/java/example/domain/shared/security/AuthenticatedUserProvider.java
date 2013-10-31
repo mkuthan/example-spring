@@ -4,6 +4,6 @@ import com.google.common.base.Optional;
 
 public interface AuthenticatedUserProvider {
 
-	Optional<AuthenticatedUser> authenticated();
+	Optional<AuthenticatedUser> authenticatedUser();
 
 }

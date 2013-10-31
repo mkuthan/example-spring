@@ -13,7 +13,7 @@ import example.domain.shared.security.AuthenticatedUserProvider;
 public class OpenIdUserProvider implements AuthenticatedUserProvider {
 
 	@Override
-	public Optional<AuthenticatedUser> authenticated() {
+	public Optional<AuthenticatedUser> authenticatedUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null) {
 			return Optional.absent();

@@ -1,7 +1,9 @@
 package example.domain.shared.security;
 
+import com.google.common.base.Optional;
+
 public interface AuthenticatedUserProvider {
 
-	AuthenticatedUser authenticated();
+	Optional<AuthenticatedUser> authenticated();
 
 }

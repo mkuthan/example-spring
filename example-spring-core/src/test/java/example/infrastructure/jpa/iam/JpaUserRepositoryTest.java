@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.testng.annotations.Test;
 
-import example.Assertions;
+import example.EntityAssert;
 import example.domain.iam.model.RoleIdentifier;
 import example.domain.iam.model.User;
+import example.domain.iam.model.User.Builder;
 import example.domain.iam.model.UserIdentifier;
 import example.domain.iam.model.UserRepository;
-import example.domain.iam.model.User.Builder;
 import example.infrastructure.jpa.AbstractJpaRepositoryTest;
 
 public class JpaUserRepositoryTest extends AbstractJpaRepositoryTest {
@@ -40,7 +40,7 @@ public class JpaUserRepositoryTest extends AbstractJpaRepositoryTest {
 		savedUser = userRepository.findOne(savedUser.getEntityId());
 
 		// then
-		assertThat(savedUser.isManaged()).isTrue();
+		EntityAssert.assertThat(savedUser).isManaged();
 
 		assertThat(savedUser.getIdentifier()).isEqualTo(ANY_IDENTIFIER);
 		assertThat(savedUser.getEmail()).isEqualTo(ANY_EMAIL);
@@ -74,7 +74,7 @@ public class JpaUserRepositoryTest extends AbstractJpaRepositoryTest {
 		User user = userRepository.findByIdentifier(identifier);
 
 		// then
-		Assertions.assertThat(user).hasSameIdentity(expectedUser);
+		EntityAssert.assertThat(user).hasSameIdentity(expectedUser);
 	}
 
 	private Builder createBuilder() {

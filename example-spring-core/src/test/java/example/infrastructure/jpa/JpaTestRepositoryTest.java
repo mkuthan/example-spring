@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.testng.annotations.Test;
 
-import example.Assertions;
+import example.AuditableAssert;
+import example.EntitiesAssert;
+import example.EntityAssert;
 
 public class JpaTestRepositoryTest extends AbstractJpaRepositoryTest {
 
@@ -41,8 +43,8 @@ public class JpaTestRepositoryTest extends AbstractJpaRepositoryTest {
 		flushAndClear();
 
 		// then
-		assertThat(savedExample.isManaged()).isTrue();
-		assertThat(savedExample.getAudit()).isEqualTo(EXPECTED_AUDIT);
+		EntityAssert.assertThat(savedExample).isManaged();
+		AuditableAssert.assertThat(savedExample).hasAudit(EXPECTED_AUDIT);
 
 		assertThat(savedExample.getName()).isEqualTo(ANY_NAME);
 		assertThat(savedExample.getTestValueObjectEmbedded()).isEqualTo(ANY_VALUE_OBJECT);
@@ -73,7 +75,7 @@ public class JpaTestRepositoryTest extends AbstractJpaRepositoryTest {
 		List<TestEntity> examples = testRepository.findByName(name);
 
 		// then
-		Assertions.assertThat(examples).containsWithSameIdentity(expectedExample);
+		EntitiesAssert.assertThat(examples).containsWithSameIdentity(expectedExample);
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.testng.annotations.Test;
 
-import example.Assertions;
+import example.EntityAssert;
 import example.domain.iam.model.Role;
 import example.domain.iam.model.RoleIdentifier;
 import example.domain.iam.model.RoleRepository;
@@ -32,7 +32,7 @@ public class JpaRoleRepositoryTest extends AbstractJpaRepositoryTest {
 		savedRole = roleRepository.findOne(savedRole.getEntityId());
 
 		// then
-		assertThat(savedRole.isManaged()).isTrue();
+		EntityAssert.assertThat(savedRole).isManaged();
 
 		assertThat(savedRole.getIdentifier()).isEqualTo(ANY_IDENTIFIER);
 		assertThat(savedRole.getName()).isEqualTo(ANY_NAME);
@@ -61,7 +61,7 @@ public class JpaRoleRepositoryTest extends AbstractJpaRepositoryTest {
 		Role role = roleRepository.findByIdentifier(identifier);
 
 		// then
-		Assertions.assertThat(role).hasSameIdentity(expectedRole);
+		EntityAssert.assertThat(role).hasSameIdentity(expectedRole);
 	}
 
 }

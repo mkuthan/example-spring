@@ -4,8 +4,8 @@ import org.joda.time.DateTime;
 
 public interface Auditable {
 
-	Audit getAudit();
+	void updateAudit(DateTime modificationDate, AuditIdentity modifier);
 
-	void updateAudit(DateTime now, String modifier);
+	Audit getAudit();
 
 }

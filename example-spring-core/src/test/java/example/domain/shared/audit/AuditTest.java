@@ -6,7 +6,6 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.domain.shared.audit.Audit;
 
 @Test(groups = TestGroups.UNIT)
 public class AuditTest {
@@ -15,7 +14,7 @@ public class AuditTest {
 	public void shouldUpdateNullInstance() {
 		// given
 		DateTime now = new DateTime();
-		String creator = "creator";
+		AuditIdentity creator = new AuditIdentity("creator", "creator");
 
 		Audit audit = Audit.NULL;
 
@@ -34,10 +33,10 @@ public class AuditTest {
 	public void shouldUpdateExistingInstance() {
 		// given
 		DateTime creationDate = new DateTime("2010-01-01");
-		String creator = "creator";
+		AuditIdentity creator = new AuditIdentity("creator", "creator");
 
 		DateTime modificationDate = new DateTime("2011-01-01");
-		String modifier = "modifier";
+		AuditIdentity modifier = new AuditIdentity("modifier", "modifier");
 
 		Audit audit = new Audit(creationDate, creator, creationDate, creator);
 

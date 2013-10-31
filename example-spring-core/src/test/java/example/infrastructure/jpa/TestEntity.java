@@ -1,6 +1,6 @@
 package example.infrastructure.jpa;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -11,6 +11,7 @@ import org.joda.money.Money;
 import org.joda.time.DateTime;
 
 import example.domain.shared.audit.Audit;
+import example.domain.shared.audit.AuditIdentity;
 import example.domain.shared.audit.Auditable;
 import example.domain.shared.ddd.AbstractAggregateEntity;
 import example.domain.shared.json.JsonHolder;
@@ -85,7 +86,7 @@ public class TestEntity extends AbstractAggregateEntity implements Auditable {
 	}
 
 	@Override
-	public void updateAudit(DateTime now, String modifier) {
+	public void updateAudit(DateTime now, AuditIdentity modifier) {
 		audit = audit.update(now, modifier);
 	}
 

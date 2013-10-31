@@ -10,15 +10,15 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import example.domain.shared.json.JsonSerializationException;
-import example.domain.shared.json.JsonSerializationService;
+import example.domain.shared.json.JsonSerializer;
 
 @Component
-public class Jackson2JsonSerializationService implements JsonSerializationService {
+public class Jackson2JsonSerializer implements JsonSerializer {
 
 	private ObjectMapper objectMapper;
 
 	@Autowired
-	public Jackson2JsonSerializationService(ObjectMapper objectMapper) {
+	public Jackson2JsonSerializer(ObjectMapper objectMapper) {
 		this.objectMapper = checkNotNull(objectMapper);
 	}
 

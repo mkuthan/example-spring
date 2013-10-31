@@ -5,13 +5,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import example.domain.shared.security.AuthenticatedUserDetailsProvider;
+import example.domain.shared.security.AuthenticatedUserProvider;
 
 @Configuration
 public class WebConfiguration {
 
 	@Autowired
-	private AuthenticatedUserDetailsProvider userProvider;
+	private AuthenticatedUserProvider userProvider;
 
 	@Bean
 	@Scope("session")

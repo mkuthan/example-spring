@@ -4,20 +4,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import example.domain.shared.security.AuthenticatedUserDetails;
-import example.domain.shared.security.AuthenticatedUserDetailsProvider;
+import example.domain.shared.security.AuthenticatedUser;
+import example.domain.shared.security.AuthenticatedUserProvider;
 
 @Component
-public class OpenIdUserDetailsProvider implements AuthenticatedUserDetailsProvider {
+public class OpenIdUserProvider implements AuthenticatedUserProvider {
 
 	@Override
-	public AuthenticatedUserDetails authenticated() {
+	public AuthenticatedUser authenticated() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null) {
 			return null;
 		}
 
-		return (AuthenticatedUserDetails) authentication.getDetails();
+		return (AuthenticatedUser) authentication.getDetails();
 	}
 
 }

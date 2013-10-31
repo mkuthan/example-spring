@@ -1,6 +1,6 @@
 package example.domain.shared.json;
 
-public interface JsonSerializationService {
+public interface JsonSerializer {
 
 	<T> String toJson(T object) throws JsonSerializationException;
 

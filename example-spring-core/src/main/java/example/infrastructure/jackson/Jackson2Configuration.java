@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
+import example.infrastructure.jackson.money.MoneyModule;
+
 @Configuration
 public class Jackson2Configuration {
 

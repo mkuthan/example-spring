@@ -1,6 +1,6 @@
 package example.domain.shared.security;
 
-public interface AuthenticatedUserDetails {
+public interface AuthenticatedUser {
 
 	String getUsername();
 

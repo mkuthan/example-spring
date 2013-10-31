@@ -9,7 +9,7 @@ import example.domain.shared.date.DateTimeProvider;
 public class DefaultDateTimeProvider implements DateTimeProvider {
 
 	@Override
-	public DateTime now() {
+	public DateTime currentDateTime() {
 		return new DateTime();
 	}
 

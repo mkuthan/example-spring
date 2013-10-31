@@ -5,14 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import example.domain.shared.date.DateTimeProvider;
-import example.domain.shared.security.AuthenticatedUserDetailsProvider;
+import example.domain.shared.security.AuthenticatedUserProvider;
 
 @Configuration
 public class JpaTestConfiguration {
 
 	@Bean
-	public AuthenticatedUserDetailsProvider userAuthenticatedUserDetailsProvider() {
-		return Mockito.mock(AuthenticatedUserDetailsProvider.class);
+	public AuthenticatedUserProvider userAuthenticatedUserDetailsProvider() {
+		return Mockito.mock(AuthenticatedUserProvider.class);
 	}
 
 	@Bean

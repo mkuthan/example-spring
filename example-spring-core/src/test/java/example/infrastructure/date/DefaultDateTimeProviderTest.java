@@ -20,7 +20,7 @@ public class DefaultDateTimeProviderTest extends AbstractTestNGSpringContextTest
 
 	@Test
 	public void shouldNotBeNull() {
-		assertThat(defaultDateTimeProvider.now()).isNotNull();
+		assertThat(defaultDateTimeProvider.currentDateTime()).isNotNull();
 	}
 	
 }

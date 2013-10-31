@@ -1,4 +1,4 @@
-package example.infrastructure.jackson;
+package example.infrastructure.jackson.money;
 
 import java.io.IOException;
 

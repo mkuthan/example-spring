@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 
 import example.domain.shared.audit.Auditable;
 import example.domain.shared.date.DateTimeProvider;
-import example.domain.shared.security.AuthenticatedUserDetails;
-import example.domain.shared.security.AuthenticatedUserDetailsProvider;
+import example.domain.shared.security.AuthenticatedUser;
+import example.domain.shared.security.AuthenticatedUserProvider;
 
 @Component
 public class AuditListener {
 
 	private static DateTimeProvider dateTimeProvider;
 
-	private static AuthenticatedUserDetailsProvider authenticatedUserDetailsProvider;
+	private static AuthenticatedUserProvider authenticatedUserProvider;
 
 	@edu.umd.cs.findbugs.annotations.SuppressWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
 	@Autowired
@@ -26,8 +26,8 @@ public class AuditListener {
 
 	@edu.umd.cs.findbugs.annotations.SuppressWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
 	@Autowired
-	public void setUserProvider(AuthenticatedUserDetailsProvider authenticatedUserDetailsProvider) {
-		AuditListener.authenticatedUserDetailsProvider = authenticatedUserDetailsProvider;
+	public void setUserProvider(AuthenticatedUserProvider authenticatedUserProvider) {
+		AuditListener.authenticatedUserProvider = authenticatedUserProvider;
 	}
 
 	@PrePersist
@@ -36,10 +36,10 @@ public class AuditListener {
 		if (o instanceof Auditable) {
 			Auditable auditable = (Auditable) o;
 
-			AuthenticatedUserDetails userDetails = authenticatedUserDetailsProvider.authenticated();
+			AuthenticatedUser userDetails = authenticatedUserProvider.authenticated();
 			String modifier = (userDetails != null) ? userDetails.getEmail() : "N/A";
 
-			auditable.updateAudit(dateTimeProvider.now(), modifier);
+			auditable.updateAudit(dateTimeProvider.currentDateTime(), modifier);
 		}
 	}
 }

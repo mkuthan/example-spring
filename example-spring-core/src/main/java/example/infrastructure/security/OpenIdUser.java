@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.openid.OpenIDAttribute;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
 
-import example.domain.shared.security.AuthenticatedUserDetails;
+import example.domain.shared.security.AuthenticatedUser;
 
-public class OpenIdUserDetails implements UserDetails, AuthenticatedUserDetails {
+public class OpenIdUser implements UserDetails, AuthenticatedUser {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class OpenIdUserDetails implements UserDetails, AuthenticatedUserDetails 
 
 	private List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-	protected OpenIdUserDetails(Builder builder) {
+	protected OpenIdUser(Builder builder) {
 		this.username = checkNotNull(builder.username);
 		this.email = checkNotNull(builder.email);
 		this.firstname = checkNotNull(builder.firstname);
@@ -164,8 +164,8 @@ public class OpenIdUserDetails implements UserDetails, AuthenticatedUserDetails 
 			return this;
 		}
 
-		public OpenIdUserDetails build() {
-			return new OpenIdUserDetails(this);
+		public OpenIdUser build() {
+			return new OpenIdUser(this);
 		}
 	}
 

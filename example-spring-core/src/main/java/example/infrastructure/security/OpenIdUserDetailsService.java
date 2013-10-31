@@ -12,7 +12,7 @@ import example.domain.iam.model.RoleIdentifier;
 import example.domain.iam.model.User;
 import example.domain.iam.model.UserIdentifier;
 import example.domain.iam.model.UserRepository;
-import example.infrastructure.security.OpenIdUserDetails.Builder;
+import example.infrastructure.security.OpenIdUser.Builder;
 
 @Component
 public class OpenIdUserDetailsService implements AuthenticationUserDetailsService<OpenIDAuthenticationToken> {

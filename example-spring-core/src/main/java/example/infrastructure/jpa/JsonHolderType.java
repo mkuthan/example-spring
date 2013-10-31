@@ -14,17 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import example.domain.shared.json.JsonHolder;
-import example.domain.shared.json.JsonSerializationService;
+import example.domain.shared.json.JsonSerializer;
 
 @Component
 public class JsonHolderType extends AbstractCustomType implements CompositeUserType {
 
-	private static JsonSerializationService jsonSerializationService;
+	private static JsonSerializer jsonSerializer;
 
 	@edu.umd.cs.findbugs.annotations.SuppressWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
 	@Autowired
-	void setJsonSerializationService(JsonSerializationService jsonSerializationService) {
-		JsonHolderType.jsonSerializationService = jsonSerializationService;
+	void setJsonSerializationService(JsonSerializer jsonSerializer) {
+		JsonHolderType.jsonSerializer = jsonSerializer;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class JsonHolderType extends AbstractCustomType implements CompositeUserT
 		case 0:
 			return jsonHolder.getValue().getClass().getName();
 		case 1:
-			return jsonSerializationService.toJson(jsonHolder.getValue());
+			return jsonSerializer.toJson(jsonHolder.getValue());
 		default:
 			throw new HibernateException("Invalid property index [" + propertyIndex + "]");
 		}
@@ -75,7 +75,7 @@ public class JsonHolderType extends AbstractCustomType implements CompositeUserT
 		if (type == null && data == null) {
 			return null;
 		} else {
-			Object json = jsonSerializationService.fromJson(data, type);
+			Object json = jsonSerializer.fromJson(data, type);
 			return JsonHolder.of(json);
 		}
 	}
@@ -88,7 +88,7 @@ public class JsonHolderType extends AbstractCustomType implements CompositeUserT
 
 		if (jsonHolder != null && jsonHolder.getValue() != null) {
 			StringType.INSTANCE.set(st, jsonHolder.getValue().getClass().getName(), index, session);
-			TextType.INSTANCE.set(st, jsonSerializationService.toJson(jsonHolder.getValue()), index + 1, session);
+			TextType.INSTANCE.set(st, jsonSerializer.toJson(jsonHolder.getValue()), index + 1, session);
 		} else {
 			StringType.INSTANCE.set(st, null, index, session);
 			TextType.INSTANCE.set(st, null, index + 1, session);

@@ -21,10 +21,10 @@ import example.TestGroups;
 @ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-jackson.xml")
 @Test(groups = TestGroups.INTEGRATION, singleThreaded = true)
 @ActiveProfiles("test")
-public class Jackson2JsonSerializationServiceTest extends AbstractTestNGSpringContextTests {
+public class Jackson2JsonSerializerTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
-	private Jackson2JsonSerializationService service;
+	private Jackson2JsonSerializer service;
 
 	@DataProvider
 	static final Object[][] objects() {

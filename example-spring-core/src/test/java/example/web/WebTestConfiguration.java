@@ -4,7 +4,7 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import example.domain.shared.security.AuthenticatedUserDetailsProvider;
+import example.domain.shared.security.AuthenticatedUserProvider;
 import example.domain.todo.application.TodoService;
 import example.domain.todo.domain.TodoRepository;
 import example.infrastructure.jpa.TestRepository;
@@ -13,8 +13,8 @@ import example.infrastructure.jpa.TestRepository;
 public class WebTestConfiguration {
 
 	@Bean
-	public AuthenticatedUserDetailsProvider userProvider() {
-		return Mockito.mock(AuthenticatedUserDetailsProvider.class);
+	public AuthenticatedUserProvider userProvider() {
+		return Mockito.mock(AuthenticatedUserProvider.class);
 	}
 
 	@Bean

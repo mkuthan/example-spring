@@ -15,23 +15,23 @@ public class EventPublisher {
 
 	private static EventBus eventBus;
 
-	private static List<EventListener<? extends Event>> listeners = new CopyOnWriteArrayList<EventListener<? extends Event>>();
+	private static List<EventListener<? extends Event<?>>> listeners = new CopyOnWriteArrayList<EventListener<? extends Event<?>>>();
 
 	@edu.umd.cs.findbugs.annotations.SuppressWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
 	@Autowired
-	public void setEventBus(EventBus eventBus) {
+	public EventPublisher(EventBus eventBus) {
 		EventPublisher.eventBus = eventBus;
 	}
 
-	public static void addEventListener(EventListener<? extends Event> listener) {
+	public static void addEventListener(EventListener<? extends Event<?>> listener) {
 		listeners.add(checkNotNull(listener));
 	}
 
-	public static void removeEventListener(EventListener<? extends Event> listener) {
+	public static void removeEventListener(EventListener<? extends Event<?>> listener) {
 		listeners.remove(checkNotNull(listener));
 	}
 
-	public static void publish(Event event) {
+	public static void publish(Event<?> event) {
 		if (eventBus != null) {
 			eventBus.post(event);
 		}
@@ -39,7 +39,7 @@ public class EventPublisher {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static void fireEventPublished(Event event) {
+	private static void fireEventPublished(Event<?> event) {
 		for (EventListener listener : listeners) {
 			listener.listen(event);
 		}

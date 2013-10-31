@@ -4,6 +4,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 @MappedSuperclass
 public abstract class AbstractEntity implements Entity {
 
@@ -20,6 +23,16 @@ public abstract class AbstractEntity implements Entity {
 	public boolean isManaged() {
 		// Access entityId property directly to avoid entity loading from database
 		return this.entityId != null;
+	}
+
+	@Override
+	public String toString() {
+		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+		// Access entityId property directly to avoid entity loading from database
+		if (entityId != null) {
+			sb.append("id", entityId);
+		}
+		return sb.toString();
 	}
 
 }

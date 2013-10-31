@@ -3,6 +3,9 @@ package example.domain.shared.ddd;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 @MappedSuperclass
 public class AbstractAggregateEntity extends AbstractEntity implements AggregateEntity {
 
@@ -14,7 +17,16 @@ public class AbstractAggregateEntity extends AbstractEntity implements Aggregate
 		return this.entityVersion;
 	}
 
-	protected void publish(Event event) {
+	@Override
+	public String toString() {
+		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString());
+		if (entityVersion != null) {
+			sb.append("version", entityVersion);
+		}
+		return sb.toString();
+	}
+
+	protected void publish(Event<?> event) {
 		EventPublisher.publish(event);
 	}
 

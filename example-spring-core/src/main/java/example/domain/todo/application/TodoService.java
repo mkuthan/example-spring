@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectRetrievalFailureException;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import example.domain.shared.ddd.AbstractApplicationService;
+import example.domain.shared.ddd.ApplicationService;
 import example.domain.todo.domain.Todo;
 import example.domain.todo.domain.TodoRepository;
 
-@Component
-public class TodoService {
+@ApplicationService
+public class TodoService extends AbstractApplicationService {
 
 	@Autowired
 	private TodoRepository todoRepository;
@@ -32,7 +33,7 @@ public class TodoService {
 
 	@Transactional
 	public void add(String title) {
-		Todo todo = new Todo("title");
+		Todo todo = new Todo(title);
 		todoRepository.saveAndFlush(todo);
 	}
 

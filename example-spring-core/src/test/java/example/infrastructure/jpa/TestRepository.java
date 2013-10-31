@@ -2,9 +2,9 @@ package example.infrastructure.jpa;
 
 import java.util.List;
 
-import example.domain.shared.ddd.DomainRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TestRepository extends DomainRepository<TestEntity> {
+public interface TestRepository extends JpaRepository<TestEntity, Long> {
 
 	List<TestEntity> findByName(String name);
 

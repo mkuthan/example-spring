@@ -62,7 +62,7 @@ public class JmsQueueTest extends AbstractJmsTest {
 		doThrow(new RuntimeException("#1")).doThrow(new RuntimeException("#2")).doNothing().when(listener)
 				.handleMessage(eq(ANY_MESSAGE));
 
-		Stopwatch stopwatch = new Stopwatch().start();
+		Stopwatch stopwatch = Stopwatch.createStarted();
 
 		// when
 		jmsTemplate.convertAndSend(ANY_MESSAGE);
@@ -78,7 +78,7 @@ public class JmsQueueTest extends AbstractJmsTest {
 		// given (always throws exception)
 		doThrow(new RuntimeException()).when(listener).handleMessage(eq(ANY_MESSAGE));
 
-		Stopwatch stopwatch = new Stopwatch().start();
+		Stopwatch stopwatch = Stopwatch.createStarted();
 
 		// when
 		jmsTemplate.convertAndSend(ANY_MESSAGE);

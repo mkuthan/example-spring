@@ -69,7 +69,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 		doThrow(new RuntimeException("#1")).doThrow(new RuntimeException("#2")).doNothing().when(listener2)
 				.handleMessage(eq(ANY_MESSAGE));
 
-		Stopwatch stopwatch = new Stopwatch().start();
+		Stopwatch stopwatch = Stopwatch.createStarted();
 
 		// when
 		jmsTemplate.convertAndSend(ANY_MESSAGE);
@@ -82,13 +82,13 @@ public class JmsTopicTest extends AbstractJmsTest {
 	}
 
 	// TODO: fix test
-	@Test(dependsOnMethods = "messageShouldBeRedelivered", timeOut = RECEIVE_TIMEOUT, enabled = false)
+	@Test(dependsOnMethods = "messageShouldBeRedelivered", timeOut = RECEIVE_TIMEOUT, enabled=false)
 	public void messageShouldBeInDlqAfterRedeliveries() {
 		// given (always throws exception)
 		doThrow(new RuntimeException()).when(listener1).handleMessage(eq(ANY_MESSAGE));
 		doThrow(new RuntimeException()).when(listener2).handleMessage(eq(ANY_MESSAGE));
 
-		Stopwatch stopwatch = new Stopwatch().start();
+		Stopwatch stopwatch = Stopwatch.createStarted();
 
 		// when
 		jmsTemplate.convertAndSend(ANY_MESSAGE);

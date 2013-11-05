@@ -15,7 +15,7 @@ public class TodoSteps {
 
 	@Given("a stock of symbol $symbol and a threshold of $threshold")
 	public void aStock(String symbol, double threshold) {
-		todoRepository.findOne(-1L);
+		todoRepository.load(-1L);
 	}
 
 	@When("the stock is traded at $price")

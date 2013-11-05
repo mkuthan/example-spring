@@ -1,6 +1,6 @@
 package example.domain.todo.domain;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +24,7 @@ public class Todo extends AbstractAggregateEntity {
 	protected Todo() {
 	}
 
+	@Deprecated
 	public Todo(String title) {
 		this.title = checkNotNull(title);
 	}

@@ -1,28 +1,30 @@
-package example.domain.todo.bootstrap;
+package example.domain.todo.application;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Lists;
-
 import example.domain.shared.bootstrap.BootstrapEvent;
 import example.domain.shared.bootstrap.BootstrapOrder;
-import example.domain.todo.domain.Todo;
+import example.domain.todo.domain.TodoFactory;
 import example.domain.todo.domain.TodoRepository;
 
 @Component
-public class TodoBootstrapListener implements ApplicationListener<BootstrapEvent>, Ordered {
+public class TodoBootstrap implements ApplicationListener<BootstrapEvent>, Ordered {
 
 	@Autowired
 	private TodoRepository todoRepository;
 
+	private TodoFactory todoFactory;
+
 	@Override
 	public void onApplicationEvent(BootstrapEvent event) {
 		if (!todosExist()) {
-			todoRepository.save(Lists.newArrayList(new Todo("Remember the milk"), new Todo("Clean the carpet")));
-			todoRepository.flush();
+			todoRepository.saveAll(newArrayList(todoFactory.create("Remember the milk"),
+					todoFactory.create("Clean the carpet")));
 		}
 	}
 

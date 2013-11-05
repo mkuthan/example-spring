@@ -23,6 +23,9 @@ public class EventsTests extends AbstractTestNGSpringContextTests {
 	private static final String ANY_PAYLOAD = "any payload";
 
 	@Autowired
+	private EventPublisher eventPublisher;
+
+	@Autowired
 	private TestEventSubscriber testEventSubscriber;
 
 	@Test
@@ -31,7 +34,7 @@ public class EventsTests extends AbstractTestNGSpringContextTests {
 		TestEvent event = new TestEvent(ANY_PAYLOAD);
 
 		// when
-		EventPublisher.publish(event);
+		eventPublisher.publish(event);
 
 		// then
 		assertThat(testEventSubscriber.getEvent()).isEqualTo(event);

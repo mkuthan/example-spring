@@ -1,4 +1,4 @@
-package example.infrastructure.jpa;
+package example.infrastructure.jpa.types;
 
 import java.io.Serializable;
 

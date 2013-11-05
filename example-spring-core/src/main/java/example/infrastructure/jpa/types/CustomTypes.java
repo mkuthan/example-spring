@@ -1,4 +1,4 @@
-package example.infrastructure.jpa;
+package example.infrastructure.jpa.types;
 
 import javax.persistence.MappedSuperclass;
 

@@ -1,4 +1,4 @@
-package example.infrastructure.jpa;
+package example.infrastructure.jpa.types;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

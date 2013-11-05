@@ -24,7 +24,7 @@ import example.domain.todo.domain.Todo;
 import example.web.RequestMappings;
 
 public class TodoControllerTest extends AbstractContollerTest {
-
+	
 	@Autowired
 	private TodoService todoService;
 

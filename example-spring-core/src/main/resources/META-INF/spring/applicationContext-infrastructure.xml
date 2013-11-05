@@ -8,8 +8,8 @@
 	<import resource="applicationContext-infrastructure-date.xml" />
 	<import resource="applicationContext-infrastructure-events.xml" />
 	<import resource="applicationContext-infrastructure-jackson.xml" />
-	<import resource="applicationContext-infrastructure-jpa.xml" />
 	<import resource="applicationContext-infrastructure-jms.xml" />
 	<import resource="applicationContext-infrastructure-jmx.xml" />
+	<import resource="applicationContext-infrastructure-jpa.xml" />
 	<import resource="applicationContext-infrastructure-security.xml" />
 </beans>

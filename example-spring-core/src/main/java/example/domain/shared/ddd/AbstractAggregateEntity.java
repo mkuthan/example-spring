@@ -1,16 +1,22 @@
 package example.domain.shared.ddd;
 
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @MappedSuperclass
 public class AbstractAggregateEntity extends AbstractEntity implements AggregateEntity {
 
 	@Version
 	private Integer entityVersion;
+
+	@Autowired
+	@Transient
+	private EventPublisher eventPublisher;
 
 	@Override
 	public Integer getEntityVersion() {
@@ -27,7 +33,7 @@ public class AbstractAggregateEntity extends AbstractEntity implements Aggregate
 	}
 
 	protected void publish(Event<?> event) {
-		EventPublisher.publish(event);
+		eventPublisher.publish(event);
 	}
 
 }

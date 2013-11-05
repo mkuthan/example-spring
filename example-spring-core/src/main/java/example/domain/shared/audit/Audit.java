@@ -42,7 +42,7 @@ public class Audit extends AbstractValueObject {
 	protected Audit() {
 	}
 
-	public Audit(DateTime creationDate, AuditIdentity creator, DateTime modificationDate, AuditIdentity modifier) {
+	protected Audit(DateTime creationDate, AuditIdentity creator, DateTime modificationDate, AuditIdentity modifier) {
 		this.creationDate = checkNotNull(creationDate);
 		this.creator = checkNotNull(creator);
 		this.modificationDate = checkNotNull(modificationDate);

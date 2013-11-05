@@ -1,7 +1,7 @@
 package example.domain.todo.domain;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import example.domain.shared.ddd.Repository;
 
-public interface TodoRepository extends JpaRepository<Todo, Long> {
+public interface TodoRepository extends Repository<Todo, Long> {
 
 }

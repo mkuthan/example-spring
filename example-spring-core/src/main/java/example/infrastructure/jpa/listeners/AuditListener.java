@@ -1,4 +1,4 @@
-package example.infrastructure.jpa;
+package example.infrastructure.jpa.listeners;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;

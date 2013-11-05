@@ -6,7 +6,5 @@
 
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-events.xml" />
-
-	<bean class="example.domain.shared.ddd.EventPublisher" />
 	
 </beans>

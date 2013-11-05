@@ -6,7 +6,7 @@
 	<persistence-unit-metadata>
 		<persistence-unit-defaults>
 			<entity-listeners>
-				<entity-listener class="example.infrastructure.jpa.AuditListener" />
+				<entity-listener class="example.infrastructure.jpa.listeners.AuditListener" />
 			</entity-listeners>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>

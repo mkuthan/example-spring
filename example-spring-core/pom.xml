@@ -14,6 +14,8 @@
 	<packaging>war</packaging>
 
 	<properties>
+		<example.metaModelDirectory>${project.basedir}/src/metamodel</example.metaModelDirectory>
+
 		<!-- Only unit tests enabled by default, integration and performance tests are disabled (m-surefire-p) -->
 		<example.surefireTestGroups>unit</example.surefireTestGroups>
 	</properties>
@@ -55,7 +57,6 @@
 
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<groups>${example.surefireTestGroups}</groups>
@@ -64,11 +65,52 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<attachClasses>true</attachClasses>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-banned-dependencies</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<bannedDependencies>
+									<searchTransitive>true</searchTransitive>
+									<excludes>
+										<exclude>commons-logging:commons-logging</exclude>
+									</excludes>
+								</bannedDependencies>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${example.metaModelDirectory}</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
@@ -116,31 +158,138 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>enforce-banned-dependencies</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<bannedDependencies>
-									<searchTransitive>true</searchTransitive>
-									<excludes>
-										<exclude>commons-logging:commons-logging</exclude>
-									</excludes>
-								</bannedDependencies>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>generate-metamodel</id>
+
+			<properties>
+				<example.commandPrefix>C</example.commandPrefix>
+				<example.queryPrefix>Q</example.queryPrefix>
+
+				<example.metaModelDatabase>metadata</example.metaModelDatabase>
+			</properties>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<configuration>
+							<excludeDefaultDirectories>true</excludeDefaultDirectories>
+							<filesets>
+								<fileset>
+									<directory>${example.metaModelDirectory}</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</fileset>
+								<fileset>
+									<directory>${project.build.directory}</directory>
+									<includes>
+										<include>${example.metaModelDatabase}.h2.db</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>com.mysema.maven</groupId>
+						<artifactId>maven-apt-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>process</goal>
+								</goals>
+								<phase>generate-sources</phase>
+								<configuration>
+									<outputDirectory>${example.metaModelDirectory}</outputDirectory>
+									<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+									<options>
+										<querydsl.prefix>${example.commandPrefix}</querydsl.prefix>
+									</options>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.mysema.querydsl</groupId>
+								<artifactId>querydsl-apt</artifactId>
+								<version>${querydsl.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+
+					<plugin>
+						<groupId>com.googlecode.flyway</groupId>
+						<artifactId>flyway-maven-plugin</artifactId>
+						<configuration>
+							<driver>org.h2.Driver</driver>
+							<url>jdbc:h2:${project.build.directory}/${example.metaModelDatabase}</url>
+							<user>sa</user>
+							<password>sa</password>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>migrate</goal>
+								</goals>
+								<phase>generate-sources</phase>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.h2database</groupId>
+								<artifactId>h2</artifactId>
+								<version>${h2.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+
+					<plugin>
+						<groupId>com.mysema.querydsl</groupId>
+						<artifactId>querydsl-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>export</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<jdbcDriver>org.h2.Driver</jdbcDriver>
+							<jdbcUrl>jdbc:h2:${project.build.directory}/${example.metaModelDatabase}</jdbcUrl>
+							<jdbcUser>sa</jdbcUser>
+							<jdbcPassword>sa</jdbcPassword>
+							<schemaPattern>PUBLIC</schemaPattern>
+							<targetFolder>${example.metaModelDirectory}</targetFolder>
+							<namePrefix>${example.queryPrefix}</namePrefix>
+							<packageName>example.application.query</packageName>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>ch.qos.logback</groupId>
+								<artifactId>logback-classic</artifactId>
+								<version>${logback.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>com.mysema.querydsl</groupId>
+								<artifactId>querydsl-sql-codegen</artifactId>
+								<version>${querydsl.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>com.h2database</groupId>
+								<artifactId>h2</artifactId>
+								<version>${h2.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<!-- JEE -->
@@ -299,6 +448,19 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
+		</dependency>
+
+		<!-- QueryDsl -->
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+			<version>${querydsl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-sql</artifactId>
+			<version>${querydsl.version}</version>
 		</dependency>
 
 		<!-- Logging -->

@@ -4,6 +4,7 @@
 
 	<import resource="applicationContext-infrastructure-common.xml" />
 
+	<import resource="applicationContext-infrastructure-bootstrap.xml" />
 	<import resource="applicationContext-infrastructure-cache.xml" />
 	<import resource="applicationContext-infrastructure-date.xml" />
 	<import resource="applicationContext-infrastructure-events.xml" />

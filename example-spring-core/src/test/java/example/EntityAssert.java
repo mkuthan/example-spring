@@ -1,27 +1,25 @@
 package example;
 
-import org.fest.assertions.GenericAssert;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.assertj.core.api.AbstractAssert;
 
 import example.domain.shared.ddd.Entity;
 
-public class EntityAssert extends GenericAssert<EntityAssert, Entity> {
-
-	public static EntityAssert assertThat(Entity actual) {
-		return new EntityAssert(actual);
-	}
+public class EntityAssert extends AbstractAssert<EntityAssert, Entity> {
 
 	public EntityAssert(Entity actual) {
-		super(EntityAssert.class, actual);
+		super(actual, EntityAssert.class);
 	}
 
 	public EntityAssert isEqualTo(Entity entity) {
-		org.fest.assertions.Assertions.assertThat(actual.getEntityId()).isEqualTo(entity.getEntityId());
+		assertThat(actual.getEntityId()).isEqualTo(entity.getEntityId());
 
 		return this;
 	}
 
 	public EntityAssert isManaged() {
-		org.fest.assertions.Assertions.assertThat(actual.isManaged());
+		assertThat(actual.isManaged());
 
 		return this;
 	}

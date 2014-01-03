@@ -39,18 +39,15 @@
 		<hibernate.version>4.2.5.Final</hibernate.version>
 		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
 		<jackson.version>2.2.3</jackson.version>
-		<jodamoney.version>0.9</jodamoney.version>
-		<jodatime.version>2.3</jodatime.version>
 		<logback.version>1.0.13</logback.version>
 		<mysql.version>5.1.21</mysql.version>
 		<querydsl.version>3.2.4</querydsl.version>
 		<slf4j.version>1.7.5</slf4j.version>
-		<spring.version>3.2.4.RELEASE</spring.version>
-		<spring-data-jpa.version>1.4.2.RELEASE</spring-data-jpa.version>
-		<spring-security.version>3.2.0.M2</spring-security.version>
+		<spring.version>4.0.0.RELEASE</spring.version>
+		<spring-security.version>3.2.0.RELEASE</spring-security.version>
 
 		<!-- essential tests dependencies -->
-		<festassert.version>1.4</festassert.version>
+		<assertj.version>1.5.0</assertj.version>
 		<hamcrest.version>1.3</hamcrest.version>
 		<jbehave.version>3.8</jbehave.version>
 		<jsonpath.version>0.9.1</jsonpath.version>
@@ -136,6 +133,25 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-bom</artifactId>
+				<version>${spring-security.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<profiles>
 		<profile>

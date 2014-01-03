@@ -5,6 +5,5 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-common.xml" />
-	<import resource="classpath:/META-INF/spring/applicationContext-infrastructure-events.xml" />
-	
+
 </beans>

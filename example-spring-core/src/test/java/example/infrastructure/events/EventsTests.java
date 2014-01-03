@@ -1,6 +1,6 @@
 package example.infrastructure.events;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import example.TestGroups;
 import example.domain.shared.ddd.AbstractEvent;
 import example.domain.shared.ddd.EventPublisher;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-events.xml")
+@ContextConfiguration(classes = EventsConfig.class)
 @Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 @ActiveProfiles("test")
 public class EventsTests extends AbstractTestNGSpringContextTests {

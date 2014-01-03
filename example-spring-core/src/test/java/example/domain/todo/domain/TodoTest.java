@@ -1,11 +1,10 @@
 package example.domain.todo.domain;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.testng.annotations.Test;
 
 import example.TestGroups;
-import example.domain.todo.domain.Todo;
 
 @Test(groups = TestGroups.UNIT)
 public class TodoTest {

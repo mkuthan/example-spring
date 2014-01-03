@@ -1,10 +1,17 @@
 package example.infrastructure.cache;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,7 +21,7 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/testContext-infrastructure-cache.xml")
+@ContextConfiguration(classes = { CacheConfig.class })
 @Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 @ActiveProfiles("test")
 public class CacheTest extends AbstractTestNGSpringContextTests {
@@ -46,6 +53,16 @@ public class CacheTest extends AbstractTestNGSpringContextTests {
 		testFascadeService.sayHello(ANY_NAME);
 
 		verifyZeroInteractions(testCachedService);
+	}
+
+	@Configuration
+	public static class Config {
+
+		@Bean
+		public TestCachedService testCachedService() {
+			return Mockito.mock(TestCachedService.class);
+		}
+
 	}
 
 	@Component

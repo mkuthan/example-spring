@@ -1,10 +1,12 @@
 package example.infrastructure.jms;
 
+import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
-import com.google.common.base.Objects;
+public class JmsTestMessage implements Serializable {
 
-public class JmsTestMessage {
+	private static final long serialVersionUID = 1L;
 
 	private UUID uuid = UUID.randomUUID();
 
@@ -27,7 +29,7 @@ public class JmsTestMessage {
 		}
 
 		JmsTestMessage other = (JmsTestMessage) obj;
-		return Objects.equal(uuid, other.uuid);
+		return Objects.equals(uuid, other.uuid);
 	}
 
 	@Override
@@ -37,6 +39,6 @@ public class JmsTestMessage {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).addValue(uuid).toString();
+		return uuid.toString();
 	}
 }

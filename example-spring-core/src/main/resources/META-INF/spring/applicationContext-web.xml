@@ -6,12 +6,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="example.web" />
-
-	<mvc:annotation-driven>
-		<mvc:argument-resolvers>
-			<bean class="org.springframework.data.web.PageableArgumentResolver" />
-		</mvc:argument-resolvers>
-	</mvc:annotation-driven>
 	
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />

@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 
 import example.TestGroups;
 
-@Test(groups = { TestGroups.PERFORMANCE })
 public class JmsPerformanceTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();
@@ -30,12 +29,12 @@ public class JmsPerformanceTest extends AbstractJmsTest {
 	@Qualifier("testPerformanceListener")
 	private JmsTestListener listener;
 
-	@Test(invocationCount = NO_OF_MESSAGES, threadPoolSize = NO_OF_PRODUCERS)
+	@Test(groups = { TestGroups.SLOW }, invocationCount = NO_OF_MESSAGES, threadPoolSize = NO_OF_PRODUCERS)
 	public void shouldSendMessages() {
 		jmsTemplate.convertAndSend(ANY_MESSAGE);
 	}
 
-	@Test(dependsOnMethods = "shouldSendMessages")
+	@Test(groups = { TestGroups.SLOW }, dependsOnMethods = "shouldSendMessages")
 	public void shouldHandleMessages() {
 		verify(listener, timeout(RECEIVE_TIMEOUT).times(NO_OF_MESSAGES)).handleMessage(eq(ANY_MESSAGE));
 	}

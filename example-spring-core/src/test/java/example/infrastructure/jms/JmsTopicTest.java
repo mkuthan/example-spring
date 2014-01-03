@@ -1,6 +1,6 @@
 package example.infrastructure.jms;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.reset;
@@ -20,7 +20,6 @@ import com.google.common.base.Stopwatch;
 
 import example.TestGroups;
 
-@Test(groups = { TestGroups.INTEGRATION }, singleThreaded = true)
 public class JmsTopicTest extends AbstractJmsTest {
 
 	private static final JmsTestMessage ANY_MESSAGE = new JmsTestMessage();
@@ -61,7 +60,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 		verify(listener2, timeout(RECEIVE_TIMEOUT).times(1)).handleMessage(eq(ANY_MESSAGE));
 	}
 
-	@Test(dependsOnMethods = "listenersShouldHandleMessage")
+	@Test(groups = { TestGroups.SLOW }, dependsOnMethods = "listenersShouldHandleMessage")
 	public void messageShouldBeRedelivered() {
 		// given (first & second calls: throws exception, third call: handles message)
 		doThrow(new RuntimeException("#1")).doThrow(new RuntimeException("#2")).doNothing().when(listener1)
@@ -82,7 +81,7 @@ public class JmsTopicTest extends AbstractJmsTest {
 	}
 
 	// TODO: fix test
-	@Test(dependsOnMethods = "messageShouldBeRedelivered", timeOut = RECEIVE_TIMEOUT, enabled=false)
+	@Test(groups = { TestGroups.SLOW }, dependsOnMethods = "messageShouldBeRedelivered", timeOut = RECEIVE_TIMEOUT, enabled = false)
 	public void messageShouldBeInDlqAfterRedeliveries() {
 		// given (always throws exception)
 		doThrow(new RuntimeException()).when(listener1).handleMessage(eq(ANY_MESSAGE));

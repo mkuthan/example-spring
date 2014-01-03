@@ -32,19 +32,18 @@ The best of the beast tools for testing: TestNG, Mockito and FestAssert are the 
 * JPA2 (Hibernate) as a persistence.
 * QueryDsl for typesafe SQL and JPQL.
 * Guava as a swiss army knife.
-* JodaTime where SDK sucks together with JodaMoney younger brother.
 * SLF4J together with Logback where SDK sucks.
 * JBehave for doing BDD not test scripts.
 * TestNG for testing on steroids, no more JUnit. 
 * Mockito the best library for mocking, developed by Polish guy!
-* FestAssert for super fluent assertions API.
+* AssertJ for super fluent assertions API.
 
 ## UI
 * AngularJS as JS MVC platform.
 * TwitterBootstrap give a good support for developer with strong server side background (like me).
 * Grunt based build system.
 * Karma & Jasmine for continuous testing.
-* Nodejs everywhere. 
+* Nodejs everywhere.
 
 ## Runtime
 

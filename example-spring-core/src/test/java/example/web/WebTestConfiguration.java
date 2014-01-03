@@ -4,10 +4,11 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import example.domain.shared.ddd.EventPublisher;
 import example.domain.shared.security.AuthenticatedUserProvider;
 import example.domain.todo.application.TodoService;
+import example.domain.todo.domain.TodoFactory;
 import example.domain.todo.domain.TodoRepository;
-import example.infrastructure.jpa.TestRepository;
 
 @Configuration
 public class WebTestConfiguration {
@@ -18,8 +19,8 @@ public class WebTestConfiguration {
 	}
 
 	@Bean
-	public TestRepository testRepository() {
-		return Mockito.mock(TestRepository.class);
+	public EventPublisher eventPublisher() {
+		return Mockito.mock(EventPublisher.class);
 	}
 
 	@Bean
@@ -30,5 +31,10 @@ public class WebTestConfiguration {
 	@Bean
 	public TodoService todoService() {
 		return Mockito.mock(TodoService.class);
+	}
+
+	@Bean
+	public TodoFactory todoFactory() {
+		return Mockito.mock(TodoFactory.class);
 	}
 }
